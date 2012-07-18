@@ -9,11 +9,7 @@
 #define PARTICLES_HH
 
 #include <stdlib.h>
-
-namespace Objects
-{
-namespace Particles
-{
+#include <string>
 
 struct Particle
 {
@@ -101,27 +97,39 @@ private:
     }
 
 public:
+    Emitter(GLuint texture,
+            int min_life_length, int max_life_length,
+            float min_x_pos, float max_x_pos,
+            float min_y_pos, float max_y_pos,
+            float min_velocity_x, float max_velocity_x,
+            float min_velocity_y, float max_velocity_y,
+            float min_acceleration_x, float max_acceleration_x,
+            float min_acceleration_y,float max_acceleration_y,
+            float min_rotate_velocity, float max_rotate_velocity,
+            float min_width, float max_width,
+            float min_width_change, float max_width_change,
+            float min_height, float max_height,
+            float min_height_change, float max_height_change);
+    Emitter(std::string filename);
     int spawn_rate;
     unsigned int particles_per_spawn;
     //! preemptively simulate cycles so particle system appears to have been running for a while
     int pre_pump_cycles;
-    Objects::Particles::Particle& emit();
+    Particle& emit();
 };
 
 
 class ParticleSystem
 {
 protected:
-    std::vector<Objects::Particles::Emitter> emitters;
-    std::vector<Objects::Particles::Particle> particles;
+    std::vector<Emitter> emitters;
+    std::vector<Particle> particles;
     unsigned int loop;
 public:
     ParticleSystem();
-    void update(bool draw);
-    //void draw();
-    void addEmitter(Objects::Particles::Emitter& emitter);
+    void update();
+    void draw();
+    void addEmitter(Emitter& emitter);
 };
 
-}
-}
 #endif /*PARTICLES_HH*/
