@@ -62,14 +62,23 @@ Emitter::Emitter(std::string image_filename,
 
     Graphics::Image image(image_filename, false, false);
     texture = image.getTexture();
+    loop = 1;
+
+    // preemptively pump a number of cycles so it looks as though the emitters been running for some time
+    for(int cycle = 0; cycle != pre_pump_cycles; ++cycle)
+    {
+        particles.push_back(this->emit());
+        this->update();
+    }
 }
 
 // TODO: Load an emitter from a file
 Emitter::Emitter(std::string filename)
 {
+    loop = 1;
 }
 
-Particle& Emitter::emit()
+Particle Emitter::emit()
 {
     // initialise a particle using the info from the emitter
     Particle current_particle;
@@ -93,33 +102,18 @@ Particle& Emitter::emit()
     current_particle.height = getRandRangef(min_height, max_height);
     current_particle.height_change = getRandRangef(min_height_change, max_height_change);
 
-    // get a reference to the particle
-    Particle& current_particle_ref = current_particle;
-    return current_particle_ref;
+    return current_particle;
 }
 
-/*----------------------- PARTICLESYSTEM ---------------------------*/
-
-// Constructor
-ParticleSystem::ParticleSystem()
+void Emitter::update()
 {
-    loop = 1;
-}
-
-// Update the positions of the particles, drawing them if bool==true
-void ParticleSystem::update()
-{
-    // emit any particles that need to be emitted
-    for(unsigned int i = 0; i<emitters.size(); ++i)
+    // if it's time to emit particles
+    if(loop%spawn_rate==0)
     {
-        Emitter& current_emitter = emitters[i];
-        if(loop%current_emitter.spawn_rate==0)
+        // emit particles_per_spawn number of particles
+        for(unsigned int particle_number = 0; particle_number < particles_per_spawn; ++particle_number)
         {
-            for (unsigned int particle_number = 0; particle_number < current_emitter.particles_per_spawn; ++particle_number)
-            {
-                Particle current_particle = current_emitter.emit();
-                particles.push_back(current_particle);
-            }
+            particles.push_back(this->emit());
         }
     }
 
@@ -150,14 +144,15 @@ void ParticleSystem::update()
             particles.erase(current_particle);
         }
     }
-    loop += 1;
+    ++loop;
 
     // reset loop
     if(loop==1001)
         loop = 1;
+
 }
 
-void ParticleSystem::draw()
+void Emitter::draw()
 {
     for(std::vector<Particle>::iterator current_particle = particles.begin();
     current_particle != particles.end(); ++current_particle)
@@ -168,16 +163,4 @@ void ParticleSystem::draw()
                                           current_particle->width,
                                           current_particle->height);
     }
-}
-
-void ParticleSystem::addEmitter(Emitter& emitter)
-{
-    // preemptively pump a number of cycles so it looks as though the emitters been running for some time
-    std::cout << emitter.pre_pump_cycles;
-    for(int cycle = 0; cycle != emitter.pre_pump_cycles; ++cycle)
-    {
-        particles.push_back(emitter.emit());
-        this->update();
-    }
-    emitters.push_back(emitter);
 }

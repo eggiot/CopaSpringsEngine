@@ -38,23 +38,20 @@ void testParticleEngine()
                   0.0001, 0.001, 10.0f/(float)window_width, 10.0f/(float)window_width,
                   0.0001, 0.001);
 
-    Emitter rain("test/rain.png", 1, 10, 100, 100, 10000, 0.0, 1.0, 1.0, 1.0,
+    Emitter rain("test/rain.png", 1, 10, 10, 100, 10000, 0.0, 1.0, 1.0, 1.0,
                  -0.001, -0.001, -0.03, -0.03, 0.0, 0.0, 0.0, 0.0, 0.001, 0.004,
                  15.0f/(float)window_width, 15.0f/(float)window_width,
                  0.0, 0.0, 15.0f/(float)window_width, 15.0f/(float)window_width,
                  0.0, 0.0);
 
-    // initialise a particle system
-    ParticleSystem psystem1;
-    psystem1.addEmitter(smoke);
-    psystem1.addEmitter(rain);
-
     bool quit = false;
     while(quit == false)
     {
         glClear(GL_COLOR_BUFFER_BIT);
-        psystem1.update();
-        psystem1.draw();
+        smoke.update();
+        rain.update();
+        smoke.draw();
+        rain.draw();
         chimney.draw(0.475, 0.0, 61/(float)window_width, 61/(float)window_height);
         SDL_GL_SwapBuffers();
         window.sleep(framerate);

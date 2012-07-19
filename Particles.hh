@@ -83,6 +83,8 @@ private:
     float min_width_change, max_width_change;
     float min_height, max_height;
     float min_height_change, max_height_change;
+    int loop;
+    std::vector<Particle> particles;
 
         /*! \brief Get random floating point number within a range
 
@@ -121,21 +123,9 @@ public:
     unsigned int particles_per_spawn;
     //! preemptively simulate cycles so particle system appears to have been running for a while
     int pre_pump_cycles;
-    Particle& emit();
-};
-
-
-class ParticleSystem
-{
-protected:
-    std::vector<Emitter> emitters;
-    std::vector<Particle> particles;
-    unsigned int loop;
-public:
-    ParticleSystem();
+    Particle emit();
     void update();
     void draw();
-    void addEmitter(Emitter& emitter);
 };
 
 /*--------------------------------------*/
