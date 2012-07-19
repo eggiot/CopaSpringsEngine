@@ -35,6 +35,9 @@ struct Particle
     float rotate_velocity;
     int life_length;
     float background_colour[4];
+
+    void update();
+    void draw();
 };
 
 /*! \brief A particle emitter.

@@ -15,6 +15,33 @@
 #include <stdlib.h>
 #include <memory.h>
 #include <iostream>
+/*----------------------- PARTICLE ---------------------------*/
+
+void Particle::update()
+{
+    //update particle
+    // move the particle through its velocity
+    x += velocity_x;
+    y += velocity_y;
+
+    // reduce its life length
+    life_length -= 1;
+
+    // accelerate / decelerate the particle
+    velocity_x += acceleration_x;
+    velocity_y += acceleration_y;
+
+    // rotate and resize
+    rotate += rotate_velocity;
+    width += width_change;
+    height += height_change;
+}
+
+void Particle::draw()
+{
+    Graphics::Utils::drawTexturedQuad(texture, x, y, width, height);
+}
+
 /*----------------------- EMITTER ---------------------------*/
 
 Emitter::Emitter(std::string image_filename,
@@ -122,22 +149,7 @@ void Emitter::update()
     for(std::vector<Particle>::iterator current_particle = particles.begin();
     current_particle < particles.end(); ++current_particle)
     {
-        //update particle
-        // move the particle through its velocity
-        current_particle->x += current_particle->velocity_x;
-        current_particle->y += current_particle->velocity_y;
-
-        // reduce its life length
-        current_particle->life_length -= 1;
-
-        // accelerate / decelerate the particle
-        current_particle->velocity_x += current_particle->acceleration_x;
-        current_particle->velocity_y += current_particle->acceleration_y;
-
-        // rotate and resize
-        current_particle->rotate += current_particle->rotate_velocity;
-        current_particle->width += current_particle->width_change;
-        current_particle->height += current_particle->height_change;
+        current_particle->update();
 
         if(current_particle->life_length < 0)
         {
@@ -157,10 +169,6 @@ void Emitter::draw()
     for(std::vector<Particle>::iterator current_particle = particles.begin();
     current_particle != particles.end(); ++current_particle)
     {
-        Graphics::Utils::drawTexturedQuad(current_particle->texture,
-                                          current_particle->x,
-                                          current_particle->y,
-                                          current_particle->width,
-                                          current_particle->height);
+        current_particle->draw();
     }
 }

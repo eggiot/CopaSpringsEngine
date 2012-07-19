@@ -32,7 +32,7 @@ void testParticleEngine()
 
 
     // initialise two emitters - this will be done through config files
-    Emitter smoke("test/dust.png", 1, 50, 10, 10, 100, 0.5, 0.5, 0.0, 0.0,
+    Emitter smoke("test/dust.png", 1, 50, 100, 10, 100, 0.5, 0.5, 0.0, 0.0,
                   -0.0001, 0.0001, 0.01, 0.01, -0.000001, 0.000001, -0.000001,0.000001,
                   0.001, 0.004, 10.0f/(float)window_width, 10.0f/(float)window_width,
                   0.0001, 0.001, 10.0f/(float)window_width, 10.0f/(float)window_width,
@@ -51,8 +51,9 @@ void testParticleEngine()
         smoke.update();
         rain.update();
         smoke.draw();
-        rain.draw();
         chimney.draw(0.475, 0.0, 61/(float)window_width, 61/(float)window_height);
+        rain.draw();
+
         SDL_GL_SwapBuffers();
         window.sleep(framerate);
     }
