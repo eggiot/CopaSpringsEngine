@@ -11,6 +11,11 @@
 #include "Image.hh"
 /***********************************/
 
+Graphics::Image::Image(std::string filename, bool flip_horizontal, bool flip_vertical)
+{
+    this->load(filename, flip_horizontal, flip_vertical);
+}
+
 void Graphics::Image::load(std::string filename, bool flip_horizontal, bool flip_vertical)
 {
     fipImage fip_image_data;

@@ -18,6 +18,11 @@ protected:
     int width, height, bpp;
     char* image_data;
 public:
+    // constructors
+    Image() { }
+    Image(std::string filename, bool flip_horizontal, bool flip_vertical);
+
+    // load an image from a filename
     void load(std::string filename, bool flip_horizontal, bool flip_vertical);
     char* getPixels();
     int getWidth();

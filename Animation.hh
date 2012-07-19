@@ -15,8 +15,6 @@
 #include <string>
 /*--------------------------------------*/
 
-namespace Graphics
-{
 /*! \class AnimationFrame Animation.hh "Animation.hh"
  \brief An animation frame
 
@@ -32,9 +30,6 @@ protected:
 
     //! The number of engine loops that have elapsed.
     unsigned int elapsed_engine_loops;
-
-    //! the image to be displayed.
-    Graphics::Image image;
 
     //! the OpenGL texture ID associated with this frame.
     GLuint texture;
@@ -58,7 +53,7 @@ class Animation
 {
 protected:
     //! A queue of animation frames in chronological order
-    std::queue<Graphics::AnimationFrame> blit_queue;
+    std::queue<AnimationFrame> blit_queue;
 
     //! Is the animation to be looped or played through once?
     bool loopable;
@@ -67,12 +62,11 @@ protected:
     // TODO (eliot#2#): only temporary - animation loading will eventually be handled by the level loader
     std::string anim_filename;
 public:
-    void addFrame(Graphics::AnimationFrame frame);
+    void addFrame(AnimationFrame frame);
     bool load(std::string filename, bool loop);
     void draw(float x, float y, float width, float height);
     void reload();
 };
-}
 
 /*--------------------------------------*/
 #endif /*ANIMATION_HH*/

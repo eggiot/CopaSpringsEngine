@@ -97,7 +97,8 @@ private:
     }
 
 public:
-    Emitter(GLuint texture,
+    Emitter(std::string image_filename,
+            int spawn_rate, int particles_per_spawn, int pre_pump_cycles,
             int min_life_length, int max_life_length,
             float min_x_pos, float max_x_pos,
             float min_y_pos, float max_y_pos,

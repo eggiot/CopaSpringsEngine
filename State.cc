@@ -7,26 +7,15 @@
 
 // include engine headers
 #include "Animation.hh"
+#include "State.hh"
 
-namespace Objects
-{
-class State
-{
-protected:
-    Graphics::Animation animation;
-public:
-    void setAnimation(Graphics::Animation new_animation);
-    Graphics::Animation& getAnimation();
-};
-}
-
-void Objects::State::setAnimation(Graphics::Animation new_animation)
+void Objects::State::setAnimation(Animation new_animation)
 {
     animation = new_animation;
 }
 
-Graphics::Animation& Objects::State::getAnimation()
+Animation& Objects::State::getAnimation()
 {
-    Graphics::Animation& animation_reference = animation;
+    Animation& animation_reference = animation;
     return animation_reference;
 }

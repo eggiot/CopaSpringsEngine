@@ -6,6 +6,7 @@
  */
 
 // include engine headers
+#include "Window.hh"
 #include "Graphics.hh"
 
 // include graphics headers
@@ -15,27 +16,6 @@
 // include standard library headers
 #include <string>
 
-namespace Graphics
-{
-
-/*! \class Window Window.hh "Window.hh"
- \brief A generic window
-
- A generic window class that acts much as a wrapper for SDL's windowing system. */
-
-class Window
-{
-protected:
-    //! The SDL surface on which everything will be displayed
-    SDL_Surface* screen;
-
-public:
-    Window(int width, int height, std::string title);
-    void sleep(int msecs);
-    void resize(int width, int height);
-};
-}
-
 /*! \brief Window constructor
 
 The constructor for the Window class.
@@ -44,7 +24,7 @@ The constructor for the Window class.
 \param height The height of the window in pixels.
 \param title The title to display in the window's title bar. */
 
-Graphics::Window::Window(int width, int height, std::string title)
+Window::Window(int width, int height, std::string title)
 {
     SDL_Init(SDL_INIT_EVERYTHING);
     screen = SDL_SetVideoMode( width, height, 32, SDL_OPENGL | SDL_HWSURFACE);
@@ -64,7 +44,7 @@ Causes the window to sleep, thus preventing the window from updating the display
 
 \param msecs The number of milliseconds to make the window sleep. */
 
-void Graphics::Window::sleep(int msecs)
+void Window::sleep(int msecs)
 {
     SDL_Delay(msecs);
 }
@@ -80,7 +60,7 @@ First I'll have to create the engine!!
 \param new_width The width in pixels of the resized window.
 \param new_height The height in pixels of the resized window. */
 
-void Graphics::Window::resize(int new_width, int new_height)
+void Window::resize(int new_width, int new_height)
 {
     // prevent window from being too small
     if(new_width < 100)

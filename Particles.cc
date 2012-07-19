@@ -8,6 +8,7 @@
 // include engine headers
 #include "Graphics.hh"
 #include "Sprites.hh"
+#include "Image.hh"
 #include "Particles.hh"
 
 // include graphics headers
@@ -21,7 +22,8 @@
 
 /*----------------------- EMITTER ---------------------------*/
 
-Emitter::Emitter(GLuint texture,
+Emitter::Emitter(std::string image_filename,
+                 int spawn_rate, int particles_per_spawn, int pre_pump_cycles,
                  int min_life_length, int max_life_length,
                  float min_x_pos, float max_x_pos,
                  float min_y_pos, float max_y_pos,
@@ -35,6 +37,9 @@ Emitter::Emitter(GLuint texture,
                  float min_height, float max_height,
                  float min_height_change, float max_height_change)
 {
+    this->pre_pump_cycles = pre_pump_cycles;
+    this->spawn_rate = spawn_rate;
+    this->particles_per_spawn = particles_per_spawn;
     this->min_life_length = min_life_length;
     this->max_life_length = max_life_length;
     this->min_x_pos = min_x_pos;
@@ -59,6 +64,9 @@ Emitter::Emitter(GLuint texture,
     this->max_height = max_height;
     this->min_height_change = min_height_change;
     this->max_height_change = max_height_change;
+
+    Graphics::Image image(image_filename, false, false);
+    texture = Graphics::Utils::loadTexture(image);
 }
 
 // TODO: Load an emitter from a file
@@ -169,10 +177,17 @@ void ParticleSystem::draw()
 
 void ParticleSystem::addEmitter(Emitter& emitter)
 {
+    std::cout << "Preemptively pumping cycle: ";
     // preemptively pump a number of cycles so it looks as though the emitters been running for some time
-    for(int cycle = 0; cycle < emitter.pre_pump_cycles; ++cycle)
+    //std::cout << emitter.pre_pump_cycles;
+    std::cout << emitter.pre_pump_cycles;
+    for(int cycle = 0; cycle != emitter.pre_pump_cycles; ++cycle)
     {
         particles.push_back(emitter.emit());
+        this->update();
     }
+    std::cout <<std::endl << "Done preemptively pumping cycles" << std::endl;
+    std::cout << "Adding emitter" << std::endl;
     emitters.push_back(emitter);
+    std::cout << "Done adding emitter" << std::endl;
 }

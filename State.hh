@@ -16,10 +16,10 @@ namespace Objects
 class State
 {
 protected:
-    Graphics::Animation animation;
+    Animation animation;
 public:
-    void setAnimation(Graphics::Animation new_animation);
-    Graphics::Animation& getAnimation();
+    void setAnimation(Animation new_animation);
+    Animation& getAnimation();
 };
 }
 

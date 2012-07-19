@@ -14,18 +14,21 @@
 // include standard library headers
 #include <string>
 
-namespace Graphics
-{
+/*! \class Window Window.hh "Window.hh"
+ \brief A generic window
+
+ A generic window class that acts much as a wrapper for SDL's windowing system. */
+
 class Window
 {
-    protected:
-        SDL_Surface* screen;
+protected:
+    //! The SDL surface on which everything will be displayed
+    SDL_Surface* screen;
 
-    public:
-        Window(int width, int height, std::string title);
-        void sleep(int msecs);
-        void resize(int width, int height);
+public:
+    Window(int width, int height, std::string title);
+    void sleep(int msecs);
+    void resize(int width, int height);
 };
-}
 
 #endif /*WINDOW.HH*/
