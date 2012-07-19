@@ -1,11 +1,9 @@
-/*
+/*----------------------------------------
  * test.cc
  *
  *  Created on: 16 Aug 2011
  *      Author: Eliot J. Walker
- */
-
-// include engine headers
+ ---------------------------------------*/
 #include "Window.hh"
 #include "Graphics.hh"
 #include "Image.hh"
@@ -13,14 +11,13 @@
 #include "Sprites.hh"
 #include "State.hh"
 #include "Particles.hh"
-
-// include graphics headers
+/*--------------------------------------*/
 #include <SDL/SDL.h>
-
-// include standard library
+/*--------------------------------------*/
 #include <queue>
 #include <iostream>
 #include <math.h>
+/*--------------------------------------*/
 
 void testParticleEngine()
 {
@@ -34,46 +31,23 @@ void testParticleEngine()
     AnimationFrame chimney("test/chimney.png", 1, false, false);
 
 
-    // initialise two emitters
-    Emitter smoke("test/dust.png",
-                  1, 10, 10,
-                  10, 100,
-                  0.5, 0.5,
-                  0.0, 0.0,
-                  0.001, 0.001,
-                  0.01, 0.01,
-                  -0.000001, 0.000001,
-                  -0.000001,0.000001,
-                  0.001, 0.004,
-                  10.0f/(float)window_width, 10.0f/(float)window_width,
-                  0.0001, 0.001,
-                  10.0f/(float)window_width, 10.0f/(float)window_width,
+    // initialise two emitters - this will be done through config files
+    Emitter smoke("test/dust.png", 1, 50, 10, 10, 100, 0.5, 0.5, 0.0, 0.0,
+                  -0.0001, 0.0001, 0.01, 0.01, -0.000001, 0.000001, -0.000001,0.000001,
+                  0.001, 0.004, 10.0f/(float)window_width, 10.0f/(float)window_width,
+                  0.0001, 0.001, 10.0f/(float)window_width, 10.0f/(float)window_width,
                   0.0001, 0.001);
 
-    Emitter rain("test/rain.png",
-                 1, 10, 100,
-                 100, 10000,
-                 0.0, 1.0,
-                 1.0, 1.0,
-                 -0.001, -0.001,
-                 -0.03, -0.03,
-                 0.0, 0.0,
-                 0.0, 0.0,
-                 0.001, 0.004,
+    Emitter rain("test/rain.png", 1, 10, 100, 100, 10000, 0.0, 1.0, 1.0, 1.0,
+                 -0.001, -0.001, -0.03, -0.03, 0.0, 0.0, 0.0, 0.0, 0.001, 0.004,
                  15.0f/(float)window_width, 15.0f/(float)window_width,
-                 0.0, 0.0,
-                 15.0f/(float)window_width, 15.0f/(float)window_width,
+                 0.0, 0.0, 15.0f/(float)window_width, 15.0f/(float)window_width,
                  0.0, 0.0);
 
     // initialise a particle system
-
-    std::cout << "ParticleSystem psystem1;" << std::endl;
     ParticleSystem psystem1;
-    std::cout << "psystem1.addEmitter(smoke)" << std::endl;
     psystem1.addEmitter(smoke);
-    std::cout << "psystem1.addEmitter(rain)" << std::endl;
     psystem1.addEmitter(rain);
-    std::cout << std::endl << "Added emitters" << std::endl;
 
     bool quit = false;
     while(quit == false)

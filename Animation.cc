@@ -15,7 +15,7 @@
 #include <string>
 #include <stdio.h>
 /*--------------------------------------*/
-
+/*----------------------- ANIMATIONFRAME ---------------------------*/
 AnimationFrame::AnimationFrame(std::string image_filename, unsigned int engine_loops, bool flip_horizontal, bool flip_vertical)
 {
     num_engine_loops = engine_loops;
@@ -23,7 +23,7 @@ AnimationFrame::AnimationFrame(std::string image_filename, unsigned int engine_l
 
     // loading the image and texture
     Graphics::Image image(image_filename, flip_horizontal, flip_vertical);
-    texture = Graphics::Utils::loadTexture(image);
+    texture = image.getTexture();
 }
 
 void AnimationFrame::draw(float x, float y, float width, float height)
@@ -47,6 +47,8 @@ bool AnimationFrame::checkIfOver()
     // has the frame been displayed for the specified length of time?
     return elapsed_engine_loops > num_engine_loops;
 }
+
+/*----------------------- ANIMATION ---------------------------*/
 
 void Animation::addFrame(AnimationFrame frame)
 {
@@ -87,8 +89,6 @@ bool Animation::load(std::string filename, bool loop)
 
     return true;
 }
-
-
 
 void Animation::draw(float x, float y, float width, float height)
 {

@@ -1,25 +1,20 @@
-/*
+/*---------------------------------------
  * Particles.cc
  *
  *  Created on: 23 Aug 2011
  *      Author: Eliot J. Walker
- */
-
-// include engine headers
+ *---------------------------------------*/
 #include "Graphics.hh"
 #include "Sprites.hh"
 #include "Image.hh"
 #include "Particles.hh"
-
-// include graphics headers
+/*--------------------------------------*/
 #include <GL/gl.h>
-
-// include standard library headers
+/*--------------------------------------*/
 #include <vector>
 #include <stdlib.h>
 #include <memory.h>
 #include <iostream>
-
 /*----------------------- EMITTER ---------------------------*/
 
 Emitter::Emitter(std::string image_filename,
@@ -66,7 +61,7 @@ Emitter::Emitter(std::string image_filename,
     this->max_height_change = max_height_change;
 
     Graphics::Image image(image_filename, false, false);
-    texture = Graphics::Utils::loadTexture(image);
+    texture = image.getTexture();
 }
 
 // TODO: Load an emitter from a file
@@ -177,17 +172,12 @@ void ParticleSystem::draw()
 
 void ParticleSystem::addEmitter(Emitter& emitter)
 {
-    std::cout << "Preemptively pumping cycle: ";
     // preemptively pump a number of cycles so it looks as though the emitters been running for some time
-    //std::cout << emitter.pre_pump_cycles;
     std::cout << emitter.pre_pump_cycles;
     for(int cycle = 0; cycle != emitter.pre_pump_cycles; ++cycle)
     {
         particles.push_back(emitter.emit());
         this->update();
     }
-    std::cout <<std::endl << "Done preemptively pumping cycles" << std::endl;
-    std::cout << "Adding emitter" << std::endl;
     emitters.push_back(emitter);
-    std::cout << "Done adding emitter" << std::endl;
 }

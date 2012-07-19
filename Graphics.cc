@@ -76,39 +76,3 @@ void Graphics::Utils::initGL(int window_width, int window_height)
     glColor4f(1.0f,1.0f,1.0f, 1.0f);
     glTranslatef(0.0f,0.0f,0.0f);
 }
-
-GLuint Graphics::Utils::loadTexture(Graphics::Image& image)
-{
-    GLuint texture_id;
-    glGenTextures(1, &texture_id);
-    glBindTexture(GL_TEXTURE_2D, texture_id);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    // if the image has no alpha channel
-    if(image.getBPP()==24)
-    {
-        // generate texture
-        glTexImage2D(GL_TEXTURE_2D, 0, 3,
-                    image.getWidth(), image.getHeight(),
-                    0, GL_BGR, GL_UNSIGNED_BYTE, image.getPixels());
-    }
-
-    // if the image has an alpha channel
-    else if(image.getBPP()==32)
-    {
-        // generate the texture
-        glTexImage2D(GL_TEXTURE_2D, 0, 4,
-                    image.getWidth(), image.getHeight(),
-                    0, GL_BGRA, GL_UNSIGNED_BYTE, image.getPixels());
-    }
-
-    // some other number of bits per pixel
-    else
-    {
-        return 0;
-    }
-
-
-    return texture_id;
-}

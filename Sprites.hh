@@ -1,19 +1,18 @@
-/*
+/*---------------------------------------
  * Sprites.hh
  *
  *  Created on: 18 Aug 2011
  *      Author: Eliot J. Walker
- */
+ *---------------------------------------*/
 #ifndef SPRITES_HH
 #define SPRITES_HH
-
-// include engine headers
+/*--------------------------------------*/
 #include "Animation.hh"
 #include "State.hh"
-
-// include standard library headers
+/*--------------------------------------*/
 #include <string>
 #include <map>
+/*--------------------------------------*/
 
 namespace Objects
 {
@@ -40,4 +39,5 @@ public:
 };
 }
 
+/*--------------------------------------*/
 #endif /*SPRITES_HH*/

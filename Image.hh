@@ -7,6 +7,8 @@
 #ifndef IMAGE_HH
 #define IMAGE_HH
 /*--------------------------------------*/
+#include <GL/gl.h>
+/*--------------------------------------*/
 #include <string>
 /*--------------------------------------*/
 
@@ -28,6 +30,7 @@ public:
     int getWidth();
     int getHeight();
     int getBPP();
+    GLuint getTexture();
 };
 }
 

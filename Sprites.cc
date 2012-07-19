@@ -1,20 +1,18 @@
-/*
+/*---------------------------------------
  * Sprites.cc
  *
  *  Created on: 18 Aug 2011
  *      Author: Eliot J. Walker
- */
-
-// include engine headers
+ *---------------------------------------*/
 #include "Animation.hh"
 #include "State.hh"
 #include "Sprites.hh"
-
-// include standard library headers
+/*--------------------------------------*/
 #include <map>
 #include <string>
 #include <stdio.h>
 #include <iostream>
+/*--------------------------------------*/
 
 Objects::Sprite::Sprite(float x_pos, float y_pos, float w, float h, Objects::State idle_state)
 {

@@ -3,6 +3,10 @@
  *
  *  Created on: 16 Aug 2011
  *      Author: Eliot J. Walker
+ *
+ *  Defines:
+ *      AnimationFrame
+ *      Animation
  *---------------------------------------*/
 #ifndef ANIMATION_HH
 #define ANIMATION_HH

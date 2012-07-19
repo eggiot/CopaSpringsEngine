@@ -1,13 +1,12 @@
-/*
+/*---------------------------------------
  * State.cc
  *
  *  Created on: 21 Aug 2011
  *      Author: Eliot J. Walker
- */
-
-// include engine headers
+ *---------------------------------------*/
 #include "Animation.hh"
 #include "State.hh"
+/*--------------------------------------*/
 
 void Objects::State::setAnimation(Animation new_animation)
 {

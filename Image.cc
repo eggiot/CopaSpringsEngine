@@ -1,15 +1,15 @@
-/***********************************
+/*---------------------------------------
  * Image.cc
  *
  *  Created on: 16 Aug 2011
  *      Author: Eliot J. Walker
- ***********************************/
+ *---------------------------------------*/
 #include <FreeImagePlus.h>
-/***********************************/
+/*--------------------------------------*/
 #include <string>
-/***********************************/
+/*--------------------------------------*/
 #include "Image.hh"
-/***********************************/
+/*--------------------------------------*/
 
 Graphics::Image::Image(std::string filename, bool flip_horizontal, bool flip_vertical)
 {
@@ -55,4 +55,40 @@ int Graphics::Image::getHeight()
 int Graphics::Image::getBPP()
 {
     return bpp;
+}
+
+GLuint Graphics::Image::getTexture()
+{
+    GLuint texture_id;
+    glGenTextures(1, &texture_id);
+    glBindTexture(GL_TEXTURE_2D, texture_id);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    // if the image has no alpha channel
+    if(this->bpp==24)
+    {
+        // generate texture
+        glTexImage2D(GL_TEXTURE_2D, 0, 3,
+                    this->width, this->height,
+                    0, GL_BGR, GL_UNSIGNED_BYTE, this->image_data);
+    }
+
+    // if the image has an alpha channel
+    else if(this->bpp==32)
+    {
+        // generate the texture
+        glTexImage2D(GL_TEXTURE_2D, 0, 4,
+                    this->width, this->width,
+                    0, GL_BGRA, GL_UNSIGNED_BYTE, this->image_data);
+    }
+
+    // some other number of bits per pixel
+    else
+    {
+        return 0;
+    }
+
+
+    return texture_id;
 }

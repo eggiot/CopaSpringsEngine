@@ -1,15 +1,20 @@
-/*
+/*---------------------------------------
  * Particles.hh
  *
  *  Created on: 23 Aug 2011
  *      Author: Eliot J. Walker
- */
-
+ *
+ *  Defines:
+ *      Particle
+ *      Emitter
+ *      ParticleSystem
+ *---------------------------------------*/
 #ifndef PARTICLES_HH
 #define PARTICLES_HH
-
+/*--------------------------------------*/
 #include <stdlib.h>
 #include <string>
+/*--------------------------------------*/
 
 struct Particle
 {
@@ -133,4 +138,5 @@ public:
     void addEmitter(Emitter& emitter);
 };
 
+/*--------------------------------------*/
 #endif /*PARTICLES_HH*/
