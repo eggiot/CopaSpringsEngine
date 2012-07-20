@@ -12,6 +12,7 @@
 #include "State.hh"
 #include "Particles.hh"
 #include "Layer.hh"
+#include "Engine.hh"
 /*--------------------------------------*/
 #include <SDL/SDL.h>
 /*--------------------------------------*/
@@ -46,16 +47,17 @@ void testParticleEngineAndLayers()
     Layer layer2;
     layer2.addEmitter(rain);
 
+    Engine engine;
+    engine.addLayer(layer);
+    engine.addLayer(layer2);
+
     bool quit = false;
     while(quit == false)
     {
         glClear(GL_COLOR_BUFFER_BIT);
-        smoke.update();
-        layer.update();
-        layer2.update();
-        layer.draw();
+        engine.update();
+        engine.draw();
         chimney.draw(0.475, 0.0, 61/(float)window_width, 61/(float)window_height);
-        layer2.draw();
         SDL_GL_SwapBuffers();
         window.sleep(framerate);
     }

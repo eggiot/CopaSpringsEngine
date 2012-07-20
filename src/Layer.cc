@@ -42,6 +42,8 @@ void Layer::update()
 
 }
 
+// TODO: draw half of the particles, then draw the sprites,
+// then draw the remaining particles
 void Layer::draw()
 {
     // draw sprites
