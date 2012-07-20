@@ -31,11 +31,12 @@ void testParticleEngineAndLayers()
     AnimationFrame chimney("test/chimney.png", 1, false, false);
 
     // initialise two emitters - this will be done through config files
-    Emitter smoke("test/dust.png", 1, 50, 100, 10, 100, 0.5, 0.5, 0.0, 0.0,
+    /*Emitter smoke("test/dust.png", 1, 50, 100, 10, 100, 0.5, 0.5, 0.0, 0.0,
                   -0.0001, 0.0001, 0.01, 0.01, -0.000001, 0.000001, -0.000001,0.000001,
                   0.001, 0.004, 10.0f/(float)window_width, 10.0f/(float)window_width,
                   0.0001, 0.001, 10.0f/(float)window_width, 10.0f/(float)window_width,
-                  0.0001, 0.001);
+                  0.0001, 0.001);*/
+    Emitter smoke("test/smoke_emitter.config");
 
     Emitter rain("test/rain.png", 1, 10, 10, 100, 10000, 0.0, 1.0, 1.0, 1.0,
                  -0.001, -0.001, -0.03, -0.03, 0.0, 0.0, 0.0, 0.0, 0.001, 0.004,

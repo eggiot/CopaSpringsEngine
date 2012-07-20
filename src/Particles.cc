@@ -8,6 +8,7 @@
 #include "Sprites.hh"
 #include "Image.hh"
 #include "Particles.hh"
+#include "utils/ConfigFile.hh"
 /*--------------------------------------*/
 #include <GL/gl.h>
 /*--------------------------------------*/
@@ -59,33 +60,33 @@ Emitter::Emitter(std::string image_filename,
                  float min_height, float max_height,
                  float min_height_change, float max_height_change)
 {
-    this->pre_pump_cycles = pre_pump_cycles;
-    this->spawn_rate = spawn_rate;
+    this->pre_pump_cycles     = pre_pump_cycles;
+    this->spawn_rate          = spawn_rate;
     this->particles_per_spawn = particles_per_spawn;
-    this->min_life_length = min_life_length;
-    this->max_life_length = max_life_length;
-    this->min_x_pos = min_x_pos;
-    this->max_x_pos = max_x_pos;
-    this->min_y_pos = min_y_pos;
-    this->max_y_pos = max_y_pos;
-    this->min_velocity_x = min_velocity_x;
-    this->max_velocity_x = max_velocity_x;
-    this->min_velocity_y = min_velocity_y;
-    this->max_velocity_y = max_velocity_y;
-    this->min_acceleration_x = min_acceleration_x;
-    this->max_acceleration_x = max_acceleration_x;
-    this->min_acceleration_y = min_acceleration_y;
-    this->max_acceleration_y = max_acceleration_y;
+    this->min_life_length     = min_life_length;
+    this->max_life_length     = max_life_length;
+    this->min_x_pos           = min_x_pos;
+    this->max_x_pos           = max_x_pos;
+    this->min_y_pos           = min_y_pos;
+    this->max_y_pos           = max_y_pos;
+    this->min_velocity_x      = min_velocity_x;
+    this->max_velocity_x      = max_velocity_x;
+    this->min_velocity_y      = min_velocity_y;
+    this->max_velocity_y      = max_velocity_y;
+    this->min_acceleration_x  = min_acceleration_x;
+    this->max_acceleration_x  = max_acceleration_x;
+    this->min_acceleration_y  = min_acceleration_y;
+    this->max_acceleration_y  = max_acceleration_y;
     this->min_rotate_velocity = min_rotate_velocity;
     this->max_rotate_velocity = max_rotate_velocity;
-    this->min_width = min_width;
-    this->max_width = max_width;
-    this->min_width_change = min_width_change;
-    this->max_width_change = max_width_change;
-    this->min_height = min_height;
-    this->max_height = max_height;
-    this->min_height_change = min_height_change;
-    this->max_height_change = max_height_change;
+    this->min_width           = min_width;
+    this->max_width           = max_width;
+    this->min_width_change    = min_width_change;
+    this->max_width_change    = max_width_change;
+    this->min_height          = min_height;
+    this->max_height          = max_height;
+    this->min_height_change   = min_height_change;
+    this->max_height_change   = max_height_change;
 
     image.load(image_filename, false, false);
     loop = 1;
@@ -101,7 +102,49 @@ Emitter::Emitter(std::string image_filename,
 // TODO: Load an emitter from a file
 Emitter::Emitter(std::string filename)
 {
+    ConfigFile config(filename);
+
+    this->pre_pump_cycles      = config.getValue("pre_pump_cycles");
+    this->spawn_rate           = config.getValue("spawn_rate");
+    this->particles_per_spawn  = config.getValue("particles_per_spawn");
+    this->min_life_length      = config.getValue("min_life_length");
+    this->max_life_length      = config.getValue("max_life_length");
+    this->min_x_pos            = config.getValue("min_x_pos");
+    this->max_x_pos            = config.getValue("max_x_pos");
+    this->min_y_pos            = config.getValue("min_y_pos");
+    this->max_y_pos            = config.getValue("max_y_pos");
+    this->min_velocity_x       = config.getValue("min_velocity_x");
+    this->max_velocity_x       = config.getValue("max_velocity_x");
+    this->min_velocity_y       = config.getValue("min_velocity_y");
+    this->max_velocity_y       = config.getValue("max_velocity_y");
+    this->min_acceleration_x   = config.getValue("min_acceleration_x");
+    this->max_acceleration_x   = config.getValue("max_acceleration_x");
+    this->min_acceleration_y   = config.getValue("min_acceleration_y");
+    this->max_acceleration_y   = config.getValue("max_acceleration_y");
+    this->min_rotate_velocity  = config.getValue("min_rotate_velocity");
+    this->max_rotate_velocity  = config.getValue("max_rotate_velocity");
+    this->min_width            = config.getValue("min_width");
+    this->max_width            = config.getValue("max_width");
+    this->min_width_change     = config.getValue("min_width_change");
+    this->max_width_change     = config.getValue("max_width_change");
+    this->min_height           = config.getValue("min_height");
+    this->max_height           = config.getValue("max_height");
+    this->min_height_change    = config.getValue("min_height_change");
+    this->max_height_change    = config.getValue("max_height_change");
+    std::string image_filename = config.getValue("image_filename");
+
+    std::cout << image.getTexture() << std::endl;
+
+    image.load(image_filename, false, false);
+    std::cout << image.getTexture() << std::endl;
     loop = 1;
+
+    // preemptively pump a number of cycles so it looks as though the emitters been running for some time
+    for(int cycle = 0; cycle != pre_pump_cycles; ++cycle)
+    {
+        particles.push_back(this->emit());
+        this->update();
+    }
 }
 
 Particle Emitter::emit()
