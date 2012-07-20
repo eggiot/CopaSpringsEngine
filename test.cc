@@ -206,8 +206,8 @@ void demoParticles_Animation()
 
 int main()
 {
-    //testParticleEngine();
-    testAnimatedSprites_StatesVelocity();
+    testParticleEngine();
+    //testAnimatedSprites_StatesVelocity();
     //demoParticles_Animation();
     return 0;
 }
