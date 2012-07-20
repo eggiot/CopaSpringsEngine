@@ -20,16 +20,14 @@ AnimationFrame::AnimationFrame(std::string image_filename, unsigned int engine_l
 {
     num_engine_loops = engine_loops;
     elapsed_engine_loops = 0;
-
     // loading the image and texture
-    Graphics::Image image(image_filename, flip_horizontal, flip_vertical);
-    texture = image.getTexture();
+    image.load(image_filename, flip_horizontal, flip_vertical);
 }
 
 void AnimationFrame::draw(float x, float y, float width, float height)
 {
     // draw the frame
-    Graphics::Utils::drawTexturedQuad(texture, x, y, width, height);
+    Graphics::Utils::drawTexturedQuad(image.getTexture(), x, y, width, height);
 
     // this AnimationFrame has now been drawn for one more engine loop, so
     // increment the number of elapsed engine loops
@@ -81,9 +79,8 @@ bool Animation::load(std::string filename, bool loop)
     {
         // get info about the frame
         sscanf(buffer, "%s %i %i %i\n", image_path, &num_engine_loops, &flip_horizontal, &flip_vertical);
-
         // create a frame from this information and add it to the blit queue
-        blit_queue.push(AnimationFrame(image_path, num_engine_loops, flip_horizontal==1, flip_vertical==1)); //TODO: temporarily prevents flipping
+        this->addFrame(AnimationFrame(image_path, num_engine_loops, false, false)); //TODO: temporarily prevents flipping
     }
     fclose(file);
 

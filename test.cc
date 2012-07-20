@@ -27,9 +27,7 @@ void testParticleEngine()
     int framerate = 24;
 
     // initialise chimney animated frame
-
     AnimationFrame chimney("test/chimney.png", 1, false, false);
-
 
     // initialise two emitters - this will be done through config files
     Emitter smoke("test/dust.png", 1, 50, 100, 10, 100, 0.5, 0.5, 0.0, 0.0,
@@ -208,8 +206,8 @@ void demoParticles_Animation()
 
 int main()
 {
-    testParticleEngine();
-    //testAnimatedSprites_StatesVelocity();
+    //testParticleEngine();
+    testAnimatedSprites_StatesVelocity();
     //demoParticles_Animation();
     return 0;
 }

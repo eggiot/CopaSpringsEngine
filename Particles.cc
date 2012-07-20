@@ -87,8 +87,7 @@ Emitter::Emitter(std::string image_filename,
     this->min_height_change = min_height_change;
     this->max_height_change = max_height_change;
 
-    Graphics::Image image(image_filename, false, false);
-    texture = image.getTexture();
+    image.load(image_filename, false, false);
     loop = 1;
 
     // preemptively pump a number of cycles so it looks as though the emitters been running for some time
@@ -110,7 +109,7 @@ Particle Emitter::emit()
     // initialise a particle using the info from the emitter
     Particle current_particle;
 
-    current_particle.texture = texture;
+    current_particle.texture = image.getTexture();
     current_particle.life_length = getRandRangei(min_life_length, max_life_length);
     current_particle.x = getRandRangef(min_x_pos, max_x_pos);
     current_particle.y = getRandRangef(min_y_pos, max_y_pos);

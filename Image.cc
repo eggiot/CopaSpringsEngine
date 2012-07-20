@@ -9,11 +9,18 @@
 #include <string>
 /*--------------------------------------*/
 #include "Image.hh"
+#include "Graphics.hh"
 /*--------------------------------------*/
 
 Graphics::Image::Image(std::string filename, bool flip_horizontal, bool flip_vertical)
 {
     this->load(filename, flip_horizontal, flip_vertical);
+}
+
+Graphics::Image::~Image()
+{
+    delete [] image_data;
+    image_data = NULL;
 }
 
 void Graphics::Image::load(std::string filename, bool flip_horizontal, bool flip_vertical)
@@ -34,6 +41,41 @@ void Graphics::Image::load(std::string filename, bool flip_horizontal, bool flip
 
     // get a pointer to the image data (BGRA)
     image_data = (char*)fip_image_data.accessPixels();
+
+    // load texture
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    // if the image has no alpha channel
+    if(this->bpp==24)
+    {
+        // generate texture
+        glTexImage2D(GL_TEXTURE_2D, 0, 3,
+                    this->width, this->height,
+                    0, GL_BGR, GL_UNSIGNED_BYTE, this->image_data);
+    }
+
+    // if the image has an alpha channel
+    else if(this->bpp==32)
+    {
+        // generate the texture
+        glTexImage2D(GL_TEXTURE_2D, 0, 4,
+                    this->width, this->width,
+                    0, GL_BGRA, GL_UNSIGNED_BYTE, this->image_data);
+    }
+
+    // some other number of bits per pixel
+    else
+    {
+        texture = 0;
+    }
+}
+
+void Graphics::Image::draw(float x, float y, float width, float height)
+{
+    Graphics::Utils::drawTexturedQuad(texture, x, y, width, height);
 }
 
 
@@ -59,36 +101,5 @@ int Graphics::Image::getBPP()
 
 GLuint Graphics::Image::getTexture()
 {
-    GLuint texture_id;
-    glGenTextures(1, &texture_id);
-    glBindTexture(GL_TEXTURE_2D, texture_id);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    // if the image has no alpha channel
-    if(this->bpp==24)
-    {
-        // generate texture
-        glTexImage2D(GL_TEXTURE_2D, 0, 3,
-                    this->width, this->height,
-                    0, GL_BGR, GL_UNSIGNED_BYTE, this->image_data);
-    }
-
-    // if the image has an alpha channel
-    else if(this->bpp==32)
-    {
-        // generate the texture
-        glTexImage2D(GL_TEXTURE_2D, 0, 4,
-                    this->width, this->width,
-                    0, GL_BGRA, GL_UNSIGNED_BYTE, this->image_data);
-    }
-
-    // some other number of bits per pixel
-    else
-    {
-        return 0;
-    }
-
-
-    return texture_id;
+    return texture;
 }

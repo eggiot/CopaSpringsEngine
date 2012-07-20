@@ -35,8 +35,8 @@ protected:
     //! The number of engine loops that have elapsed.
     unsigned int elapsed_engine_loops;
 
-    //! the OpenGL texture ID associated with this frame.
-    GLuint texture;
+    //! the image associated with this frame.
+    Graphics::Image image;
 
 public:
     AnimationFrame(std::string image_filename, unsigned int engine_loops, bool flip_horizontal, bool flip_vertical);

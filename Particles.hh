@@ -35,7 +35,6 @@ struct Particle
     float rotate_velocity;
     int life_length;
     float background_colour[4];
-
     void update();
     void draw();
 };
@@ -49,8 +48,8 @@ particle it emits with a random value from within these ranges. */
 class Emitter
 {
 private:
-    //! The texture used for the emitter's particles
-    GLuint texture;
+    //! The image used for the emitter's particles
+    Graphics::Image image;
 
     //! Minimum value for the length of time the particle exists
     int min_life_length;
