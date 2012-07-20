@@ -20,12 +20,9 @@
 
 namespace Graphics
 {
-namespace Utils
-{
 void drawQuad(float x, float y, float width, float height, GLfloat rgba[4]);
 void drawTexturedQuad(GLuint texture_id, float x, float y, float width, float height);
 void initGL(int window_width, int window_height);
-}
 }
 
 /*--------------------------------------*/

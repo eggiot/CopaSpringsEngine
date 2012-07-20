@@ -1,20 +1,17 @@
-/*
+/*---------------------------------------
  * Window.cc
  *
  *  Created on: 16 Aug 2011
  *      Author: Eliot J. Walker
- */
-
-// include engine headers
+ *---------------------------------------*/
 #include "Window.hh"
 #include "Graphics.hh"
-
-// include graphics headers
+/*--------------------------------------*/
 #include <SDL/SDL.h>
 #include <GL/gl.h>
-
-// include standard library headers
+/*--------------------------------------*/
 #include <string>
+/*--------------------------------------*/
 
 /*! \brief Window constructor
 
@@ -29,7 +26,7 @@ Window::Window(int width, int height, std::string title)
     SDL_Init(SDL_INIT_EVERYTHING);
     screen = SDL_SetVideoMode( width, height, 32, SDL_OPENGL | SDL_HWSURFACE);
     SDL_WM_SetCaption(title.c_str(), NULL); // TODO: Enable icons (currently NULL)
-    Graphics::Utils::initGL(width, height);
+    Graphics::initGL(width, height);
 
     // set SDL OpenGL attributes
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);

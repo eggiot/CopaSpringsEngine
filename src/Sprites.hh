@@ -14,20 +14,18 @@
 #include <map>
 /*--------------------------------------*/
 
-namespace Objects
-{
 class Sprite
 {
 protected:
     float x, y, width, height;// TODO (eliot#1#): State
     float x_velocity, y_velocity;// TODO (eliot#1#): State
     // a string-animation map of states - (e.g. "walk", walking_animation)
-    std::map<std::string, Objects::State> states;
+    std::map<std::string, State> states;
     std::string current_state;
 public:
-    Sprite(float x_pos, float y_pos, float w, float h, Objects::State idle_state);
+    Sprite(float x_pos, float y_pos, float w, float h, State idle_state);
     //bool load(std::string filename);
-    void addState(std::string id, Objects::State new_state);
+    void addState(std::string id, State new_state);
     void draw();
     void setState(std::string new_state);
     void move(float x, float y);// TODO (eliot#1#): State
@@ -37,7 +35,6 @@ public:
     float getY();// TODO (eliot#1#): State
     void update();
 };
-}
 
 /*--------------------------------------*/
 #endif /*SPRITES_HH*/

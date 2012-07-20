@@ -8,12 +8,12 @@
 #include "State.hh"
 /*--------------------------------------*/
 
-void Objects::State::setAnimation(Animation new_animation)
+void State::setAnimation(Animation new_animation)
 {
     animation = new_animation;
 }
 
-Animation& Objects::State::getAnimation()
+Animation& State::getAnimation()
 {
     Animation& animation_reference = animation;
     return animation_reference;

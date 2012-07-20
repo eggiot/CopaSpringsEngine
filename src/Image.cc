@@ -75,7 +75,7 @@ void Graphics::Image::load(std::string filename, bool flip_horizontal, bool flip
 
 void Graphics::Image::draw(float x, float y, float width, float height)
 {
-    Graphics::Utils::drawTexturedQuad(texture, x, y, width, height);
+    Graphics::drawTexturedQuad(texture, x, y, width, height);
 }
 
 

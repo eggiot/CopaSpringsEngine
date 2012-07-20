@@ -17,7 +17,7 @@
 /*--------------------------------------*/
 
 // Draw an untextured quad
-void Graphics::Utils::drawQuad(float x, float y, float width, float height, GLfloat rgba[4])
+void Graphics::drawQuad(float x, float y, float width, float height, GLfloat rgba[4])
 {
     glColor4fv(rgba);
     glBegin(GL_POLYGON);
@@ -30,7 +30,7 @@ void Graphics::Utils::drawQuad(float x, float y, float width, float height, GLfl
 }
 
 // draw a textured quad
-void Graphics::Utils::drawTexturedQuad(GLuint texture_id, float x, float y, float width, float height)
+void Graphics::drawTexturedQuad(GLuint texture_id, float x, float y, float width, float height)
 {
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     glBindTexture(GL_TEXTURE_2D, texture_id);
@@ -44,7 +44,7 @@ void Graphics::Utils::drawTexturedQuad(GLuint texture_id, float x, float y, floa
 }
 
 // initialise OpenGL
-void Graphics::Utils::initGL(int window_width, int window_height)
+void Graphics::initGL(int window_width, int window_height)
 {
     // enable texturing
     glEnable(GL_TEXTURE_2D);

@@ -21,7 +21,6 @@
 
 void testParticleEngine()
 {
-    SDL_Event event;
     int window_width = 900; int window_height = 300;
     Window window(window_width, window_height, "Particle Engine");
     int framerate = 24;
@@ -67,26 +66,25 @@ void testAnimatedSprites_StatesVelocity()
     // load state 1
     Animation animation1;
     animation1.load("test/test2.anim", true);
-    Objects::State state1;
+    State state1;
     state1.setAnimation(animation1);
 
     // load state 2
     Animation animation2;
     animation2.load("test/test1.anim", true);
-    Objects::State state2;
+    State state2;
     state2.setAnimation(animation2);
 
     // load state 3
     Animation animation3;
     animation3.load("test/test3.anim", true);
-    Objects::State state3;
+    State state3;
     state3.setAnimation(animation3);
 
     float x = 0.0f; float y = 0.0f;
     float width = 150.0f/(float)window_width; float height = 150.0f/(float)window_height;
-    float velocity = 10.0f/(float)window_width;
 
-    Objects::Sprite sprite(x, y, width, height, state3);
+    Sprite sprite(x, y, width, height, state3);
     sprite.addState("right", state1);
     sprite.addState("left", state2);
 
@@ -158,14 +156,14 @@ void demoParticles_Animation()
     // load state 1
     Animation animation_right;
     animation_right.load("test/demo1/horse-right.anim", true);
-    Objects::State state_right;
+    State state_right;
     state_right.setAnimation(animation_right);
 
     float x = 0.0f; float y = 0.0f;
     float width = 150.0f/(float)window_width; float height = 150.0f/(float)window_height;
     float velocity = 10.0f/(float)window_width;
 
-    Objects::Sprite sprite(x, y, width, height, state_right);
+    Sprite sprite(x, y, width, height, state_right);
     sprite.setXVelocity(velocity);
 
     bool quit = false;

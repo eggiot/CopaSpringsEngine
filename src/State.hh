@@ -10,8 +10,6 @@
 #include "Animation.hh"
 /*--------------------------------------*/
 
-namespace Objects
-{
 class State
 {
 protected:
@@ -20,7 +18,6 @@ public:
     void setAnimation(Animation new_animation);
     Animation& getAnimation();
 };
-}
 
 /*--------------------------------------*/
 #endif /*STATE_HH*/

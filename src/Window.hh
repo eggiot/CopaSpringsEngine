@@ -1,18 +1,16 @@
-/*
+/*---------------------------------------
  * Window.hh
  *
  *  Created on: 16 Aug 2011
  *      Author: Eliot J. Walker
- */
-
+ *---------------------------------------*/
 #ifndef WINDOW_HH
 #define WINDOW_HH
-
-// include graphics headers
+/*--------------------------------------*/
 #include <SDL/SDL.h>
-
-// include standard library headers
+/*--------------------------------------*/
 #include <string>
+/*--------------------------------------*/
 
 /*! \class Window Window.hh "Window.hh"
  \brief A generic window
@@ -31,4 +29,5 @@ public:
     void resize(int width, int height);
 };
 
+/*--------------------------------------*/
 #endif /*WINDOW.HH*/
