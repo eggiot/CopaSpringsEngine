@@ -24,7 +24,7 @@ public:
     // constructors
     Image() { }
     Image(std::string filename, bool flip_horizontal, bool flip_vertical);
-    ~Image();
+    //~Image();
     // load an image from a filename
     void load(std::string filename, bool flip_horizontal, bool flip_vertical);
     char* getPixels();

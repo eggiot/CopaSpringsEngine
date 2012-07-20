@@ -11,6 +11,7 @@
 #include "Sprites.hh"
 #include "State.hh"
 #include "Particles.hh"
+#include "Layer.hh"
 /*--------------------------------------*/
 #include <SDL/SDL.h>
 /*--------------------------------------*/
@@ -19,7 +20,7 @@
 #include <math.h>
 /*--------------------------------------*/
 
-void testParticleEngine()
+void testParticleEngineAndLayers()
 {
     int window_width = 900; int window_height = 300;
     Window window(window_width, window_height, "Particle Engine");
@@ -40,17 +41,21 @@ void testParticleEngine()
                  15.0f/(float)window_width, 15.0f/(float)window_width,
                  0.0, 0.0, 15.0f/(float)window_width, 15.0f/(float)window_width,
                  0.0, 0.0);
+    Layer layer;
+    layer.addEmitter(smoke);
+    Layer layer2;
+    layer2.addEmitter(rain);
 
     bool quit = false;
     while(quit == false)
     {
         glClear(GL_COLOR_BUFFER_BIT);
         smoke.update();
-        rain.update();
-        smoke.draw();
+        layer.update();
+        layer2.update();
+        layer.draw();
         chimney.draw(0.475, 0.0, 61/(float)window_width, 61/(float)window_height);
-        rain.draw();
-
+        layer2.draw();
         SDL_GL_SwapBuffers();
         window.sleep(framerate);
     }
@@ -204,7 +209,7 @@ void demoParticles_Animation()
 
 int main()
 {
-    testParticleEngine();
+    testParticleEngineAndLayers();
     //testAnimatedSprites_StatesVelocity();
     //demoParticles_Animation();
     return 0;

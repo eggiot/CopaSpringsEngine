@@ -9,6 +9,7 @@
  #include "Particles.hh"
  /*--------------------------------------*/
  #include <vector>
+ #include <iostream>
  /*--------------------------------------*/
 
 void Layer::addSprite(Sprite sprite)
@@ -18,7 +19,9 @@ void Layer::addSprite(Sprite sprite)
 
 void Layer::addEmitter(Emitter emitter)
 {
+    std::cout << "1\n";
     emitters.push_back(emitter);
+    std::cout <<"2/n";
 }
 
 void Layer::update()

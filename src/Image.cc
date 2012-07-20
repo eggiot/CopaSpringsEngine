@@ -17,11 +17,11 @@ Graphics::Image::Image(std::string filename, bool flip_horizontal, bool flip_ver
     this->load(filename, flip_horizontal, flip_vertical);
 }
 
-Graphics::Image::~Image()
+/*Graphics::Image::~Image()
 {
     delete [] image_data;
     image_data = NULL;
-}
+}*/
 
 void Graphics::Image::load(std::string filename, bool flip_horizontal, bool flip_vertical)
 {
