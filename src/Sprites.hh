@@ -8,32 +8,44 @@
 #define SPRITES_HH
 /*--------------------------------------*/
 #include "Animation.hh"
-#include "State.hh"
+#include "Image.hh"
 /*--------------------------------------*/
 #include <string>
 #include <map>
 /*--------------------------------------*/
 
+class Spritesheet
+{
+private:
+    // how many sprites horizontally and vertically
+    int num_horizontal, num_vertical;
+    // grid coordinates of the current sprite
+    int current_horizontal, current_vertical;
+    float subimage_width, subimage_height;
+    Graphics::Image image;
+public:
+    Spritesheet() {}
+    Spritesheet(std::string filename, int num_horizontal, int num_vertical);
+    void update();
+    void draw(float x, float y, float width, float height);
+};
+
+/* in most cases, this will be the base class for a specific
+   type of sprite (e.g. EnemySprite, NPCSprite).*/
 class Sprite
 {
 protected:
-    float x, y, width, height;// TODO (eliot#1#): State
-    float x_velocity, y_velocity;// TODO (eliot#1#): State
-    // a string-animation map of states - (e.g. "walk", walking_animation)
-    std::map<std::string, State> states;
-    std::string current_state;
+    float x, y, width, height;
+    float x_velocity, y_velocity;
+    Spritesheet spritesheet;
 public:
-    Sprite(float x_pos, float y_pos, float w, float h, State idle_state);
-    //bool load(std::string filename);
-    void addState(std::string id, State new_state);
-    void draw();
-    void setState(std::string new_state);
-    void move(float x, float y);// TODO (eliot#1#): State
-    void setXVelocity(float new_velocity);// TODO (eliot#1#): State
-    void setYVelocity(float new_velocity);// TODO (eliot#1#): State
-    float getX();// TODO (eliot#1#): State
-    float getY();// TODO (eliot#1#): State
+    Sprite(Spritesheet spritesheet);
     void update();
+    void draw();
+    void move(float x, float y);
+    void setVelocity(float x_velocity, float y_velocity);
+    float getX();
+    float getY();
 };
 
 /*--------------------------------------*/

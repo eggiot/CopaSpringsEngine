@@ -28,7 +28,7 @@ void testParticleEngineAndLayers()
     int framerate = 24;
 
     // initialise chimney animated frame
-    AnimationFrame chimney("test/chimney.png", 1, false, false);
+    //AnimationFrame chimney("test/chimney.png", 1, false, false);
 
     // initialise two emitters - this will be done through config files
     /*Emitter smoke("test/dust.png", 1, 50, 100, 10, 100, 0.5, 0.5, 0.0, 0.0,
@@ -58,14 +58,14 @@ void testParticleEngineAndLayers()
         glClear(GL_COLOR_BUFFER_BIT);
         engine.update();
         engine.draw();
-        chimney.draw(0.475, 0.0, 61/(float)window_width, 61/(float)window_height);
+        //chimney.draw(0.475, 0.0, 61/(float)window_width, 61/(float)window_height);
         SDL_GL_SwapBuffers();
         window.sleep(framerate);
     }
 }
 
 // tests for AnimatedSprites
-void testAnimatedSprites_StatesVelocity()
+/*void testAnimatedSprites_StatesVelocity()
 {
     SDL_Event event;
     int window_width = 900; int window_height = 300;
@@ -150,12 +150,12 @@ void testAnimatedSprites_StatesVelocity()
         {
             sprite.setState("idle");
             sprite.setXVelocity(velocity);
-        }*/
+        }
 
     }
-}
+}*/
 
-void demoParticles_Animation()
+/*void demoParticles_Animation()
 {
     SDL_Event event;
     int window_width = 900; int window_height = 300;
@@ -208,11 +208,12 @@ void demoParticles_Animation()
         }
 
     }
-}
+}*/
 
 int main()
 {
     testParticleEngineAndLayers();
+    std::cout <<"Hello" <<std::endl;
     //testAnimatedSprites_StatesVelocity();
     //demoParticles_Animation();
     return 0;

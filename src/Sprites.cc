@@ -7,58 +7,39 @@
 #include "Animation.hh"
 #include "State.hh"
 #include "Sprites.hh"
+#include "Graphics.hh"
 /*--------------------------------------*/
 #include <map>
 #include <string>
 #include <stdio.h>
 #include <iostream>
 /*--------------------------------------*/
-
-Sprite::Sprite(float x_pos, float y_pos, float w, float h, State idle_state)
+/*----------------------- SPRITE ---------------------------*/
+Sprite::Sprite(Spritesheet spritesheet)
 {
-    // an animated sprite must have a loopable idle animation and it is initialised here.
-    addState("idle", idle_state);
-    x = x_pos; y = y_pos; width = w; height = h;
-    x_velocity = 0.0f; y_velocity = 0.0f;
-    current_state = "idle";
+    this->spritesheet = spritesheet;
 }
 
-void Sprite::addState(std::string id, State new_state)
+void Sprite::update()
 {
-    states.insert(std::pair<std::string, State>(id, new_state));
+    x += x_velocity;
+    y += y_velocity;
 }
 
 void Sprite::draw()
-{
-    // call the draw function of the current state animation
-    states[current_state].getAnimation().draw(x, y, width, height);
-}
+{}
 
-void Sprite::setState(std::string new_state)
-{
-    /* reload the current state so it will play from the start when it is next called.
-       (see the comments for the Animation::reload function)*/
-    states[current_state].getAnimation().reload();
-
-    // change state
-    current_state = new_state;
-}
-
-void Sprite::move(float new_x, float new_y)
+void Sprite::move(float x, float y)
 {
     // change the x and y coordinates
-    x = new_x;
-    y = new_y;
+    this->x = x;
+    this->y = y;
 }
 
-void Sprite::setXVelocity(float new_velocity)
+void Sprite::setVelocity(float x_velocity, float y_velocity)
 {
-    x_velocity = new_velocity;
-}
-
-void Sprite::setYVelocity(float new_velocity)
-{
-    y_velocity = new_velocity;
+    this->x_velocity = x_velocity;
+    this->y_velocity = y_velocity;
 }
 
 float Sprite::getX()
@@ -71,8 +52,61 @@ float Sprite::getY()
     return y;
 }
 
-void Sprite::update()
+/*----------------------- SPRITESHEET ---------------------------*/
+
+Spritesheet::Spritesheet(std::string filename, int num_horizontal, int num_vertical)
 {
-    x += x_velocity;
-    y += y_velocity;
+    image.load(filename, false, false);
+    this->num_horizontal = num_horizontal;
+    this->num_vertical = num_vertical;
+    this->current_horizontal = 0;
+    this->current_vertical = 0;
+
+    this->subimage_width = (float)image.getWidth() / (float)num_horizontal;
+    this->subimage_height = (float)image.getHeight() / (float)num_vertical;
+}
+
+
+/* TODO: only move through a subset of the sprites in the spritesheet. At the moment
+we're going through all of them. */
+void Spritesheet::update()
+{
+    // if we're at the end of a horizontal line
+    if(current_horizontal == num_horizontal)
+    {
+        // start at the beginning of the horizontal line
+        current_horizontal = 1;
+
+        // if we're not at the end of the sheet
+        if(current_vertical < num_vertical)
+        {
+            // move to the next horizontal line
+            ++current_vertical;
+        }
+        // if we are at the end of the sheet
+        else
+        {
+            // move to the first horizontal line
+            current_vertical = 1;
+        }
+    }
+
+    // if we're not at the end of a horizontal line
+    else
+    {
+        // move to the next image in the line
+        ++current_horizontal;
+    }
+}
+
+void Spritesheet::draw(float x, float y, float width, float height)
+{
+    float tex_width = 1.0f / subimage_width;
+    float tex_height = 1.0f / subimage_height;
+    float tex_x = tex_width * current_horizontal;
+    float tex_y = tex_height * current_vertical;
+
+    Graphics::drawSubTexturedQuad(image.getTexture(), x, y, width, height,
+                                  tex_x, tex_y, tex_width, tex_height, 1.0f);
+
 }
