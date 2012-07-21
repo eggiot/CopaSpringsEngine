@@ -7,7 +7,6 @@
 #ifndef SPRITES_HH
 #define SPRITES_HH
 /*--------------------------------------*/
-#include "Animation.hh"
 #include "Image.hh"
 /*--------------------------------------*/
 #include <string>
@@ -39,7 +38,7 @@ protected:
     float x_velocity, y_velocity;
     Spritesheet spritesheet;
 public:
-    Sprite(Spritesheet spritesheet);
+    Sprite(Spritesheet spritesheet, float x, float y, float width, float height);
     void update();
     void draw();
     void move(float x, float y);

@@ -7,9 +7,7 @@
 #include "Window.hh"
 #include "Graphics.hh"
 #include "Image.hh"
-#include "Animation.hh"
 #include "Sprites.hh"
-#include "State.hh"
 #include "Particles.hh"
 #include "Layer.hh"
 #include "Engine.hh"
@@ -19,6 +17,7 @@
 #include <queue>
 #include <iostream>
 #include <math.h>
+#include <string>
 /*--------------------------------------*/
 
 void testParticleEngineAndLayers()
@@ -28,7 +27,8 @@ void testParticleEngineAndLayers()
     int framerate = 24;
 
     // initialise chimney animated frame
-    //AnimationFrame chimney("test/chimney.png", 1, false, false);
+    Spritesheet chimney_sheet("test/spritesheet.png", 4, 4);
+    Sprite chimney(chimney_sheet, 0.475, 0.0, 61/(float)window_width, 61/(float)window_height);
 
     // initialise two emitters - this will be done through config files
     /*Emitter smoke("test/dust.png", 1, 50, 100, 10, 100, 0.5, 0.5, 0.0, 0.0,
@@ -58,7 +58,8 @@ void testParticleEngineAndLayers()
         glClear(GL_COLOR_BUFFER_BIT);
         engine.update();
         engine.draw();
-        //chimney.draw(0.475, 0.0, 61/(float)window_width, 61/(float)window_height);
+        chimney.update();
+        chimney.draw();
         SDL_GL_SwapBuffers();
         window.sleep(framerate);
     }
@@ -213,7 +214,6 @@ void testParticleEngineAndLayers()
 int main()
 {
     testParticleEngineAndLayers();
-    std::cout <<"Hello" <<std::endl;
     //testAnimatedSprites_StatesVelocity();
     //demoParticles_Animation();
     return 0;
