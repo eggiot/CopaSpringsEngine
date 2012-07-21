@@ -24,33 +24,30 @@ void testParticleEngineAndLayers()
 {
     int window_width = 900; int window_height = 200;
     Window window(window_width, window_height, "Particle Engine");
-    int framerate = 24;
-    int per = 30;
-    int per_count = per;
+    int framerate = 50;
 
-    // initialise two emitters - this will be done through config files
-    /*Emitter smoke("test/dust.png", 1, 50, 100, 10, 100, 0.5, 0.5, 0.0, 0.0,
-                  -0.0001, 0.0001, 0.01, 0.01, -0.000001, 0.000001, -0.000001,0.000001,
-                  0.001, 0.004, 10.0f/(float)window_width, 10.0f/(float)window_width,
-                  0.0001, 0.001, 10.0f/(float)window_width, 10.0f/(float)window_width,
-                  0.0001, 0.001);*/
+    // initialise two emitters
     Emitter smoke("test/smoke_emitter.config");
 
-    Emitter rain("test/rain.png", 1, 10, 10, 100, 10000, 0.0, 1.0, 1.0, 1.0,
+    Emitter rain("test/rain.png", 1, 10, 100, 100, 10000, 0.0, 1.0, 1.0, 1.0,
                  -0.001, -0.001, -0.03, -0.03, 0.0, 0.0, 0.0, 0.0, 0.001, 0.004,
                  15.0f/(float)window_width, 15.0f/(float)window_width,
                  0.0, 0.0, 15.0f/(float)window_width, 15.0f/(float)window_width,
                  0.0, 0.0);
 
-    // initialise chimney animated frame
-    Spritesheet chimney_sheet("test/spritesheet.png", 4, 4, 1, 13);
-    Sprite chimney(chimney_sheet, 0.5, 0.0, 61/(float)window_width, 61/(float)window_height);
+    // initialise two sprites
+    Spritesheet man_sheet("test/spritesheet.png", 4, 4, 2, 13);
+    Sprite man(man_sheet, 0.6, 0.0, 61/(float)window_width, 61/(float)window_height);
+
+    Spritesheet chimney_sheet("test/chimney.png", 1, 1, 1, 1);
+    Sprite chimney(chimney_sheet, 0.47, 0.0, 61/(float)window_width, 61/(float)window_height);
 
     Layer layer;
     layer.addEmitter(smoke);
     Layer layer2;
     layer2.addEmitter(rain);
     layer2.addSprite(chimney);
+    layer2.addSprite(man);
     Engine engine;
     engine.addLayer(layer);
     engine.addLayer(layer2);
@@ -58,16 +55,9 @@ void testParticleEngineAndLayers()
     bool quit = false;
     while(quit == false)
     {
-        --per_count;
         glClear(GL_COLOR_BUFFER_BIT);
-        /*if(per_count == 0)
-        {
-            per_count = per;
-            chimney.update();
-        }*/
         engine.update();
         engine.draw();
-        //chimney.draw();
         SDL_GL_SwapBuffers();
         window.sleep(framerate);
     }
