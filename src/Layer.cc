@@ -5,8 +5,8 @@
  *      Author: Eliot J. Walker
  *---------------------------------------*/
  #include "Layer.hh"
- #include "Sprites.hh"
- #include "Particles.hh"
+ #include "sprite/Sprite.hh"
+ #include "particle/Emitter.hh"
  /*--------------------------------------*/
  #include <vector>
  #include <iostream>

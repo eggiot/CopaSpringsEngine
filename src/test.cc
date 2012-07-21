@@ -7,8 +7,8 @@
 #include "Window.hh"
 #include "Graphics.hh"
 #include "Image.hh"
-#include "Sprites.hh"
-#include "Particles.hh"
+#include "sprite/Sprite.hh"
+#include "particle/Emitter.hh"
 #include "Layer.hh"
 #include "Engine.hh"
 /*--------------------------------------*/
@@ -37,7 +37,7 @@ void testParticleEngineAndLayers()
 
     // initialise two sprites
     Spritesheet man_sheet("test/spritesheet.png", 4, 4, 2, 13);
-    Sprite man(man_sheet, 0.6, 0.0, 61/(float)window_width, 61/(float)window_height);
+    Sprite man(man_sheet, 0.8, 0.0, 200/(float)window_width, 200/(float)window_height);
 
     Spritesheet chimney_sheet("test/chimney.png", 1, 1, 1, 1);
     Sprite chimney(chimney_sheet, 0.47, 0.0, 61/(float)window_width, 61/(float)window_height);

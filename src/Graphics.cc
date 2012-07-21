@@ -10,7 +10,6 @@
  *   Created on: 16 Aug 2011
  *       Author: Eliot J. Walker
  ---------------------------------------*/
-#include "Image.hh"
 #include "Graphics.hh"
 /*--------------------------------------*/
 #include <GL/gl.h>

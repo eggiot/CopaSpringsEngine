@@ -7,8 +7,8 @@
 #ifndef LAYER_HH
 #define LAYER_HH
 /*--------------------------------------*/
-#include "Sprites.hh"
-#include "Particles.hh"
+#include "sprite/Sprite.hh"
+#include "particle/Emitter.hh"
 /*--------------------------------------*/
 #include <vector>
 /*--------------------------------------*/
