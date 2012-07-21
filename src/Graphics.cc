@@ -30,7 +30,8 @@ void Graphics::drawQuad(float x, float y, float width, float height, GLfloat rgb
 }
 
 // draw a textured quad
-void Graphics::drawTexturedQuad(GLuint texture_id, float x, float y, float width, float height)
+void Graphics::drawTexturedQuad(GLuint texture_id, float x, float y,
+                                float width, float height)
 {
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     glBindTexture(GL_TEXTURE_2D, texture_id);
@@ -43,7 +44,25 @@ void Graphics::drawTexturedQuad(GLuint texture_id, float x, float y, float width
     glEnd();
 }
 
+// draw part of a texture onto a quad
+void drawSubTexturedQuad(GLuint texture_id, float x, float y,
+                         float width, float height,
+                         float tex_x, float tex_y,
+                         float tex_width, float tex_height)
+{
+    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+    glBindTexture(GL_TEXTURE_2D, texture_id);
+    glBegin(GL_POLYGON);
+        // anti-clockwise
+        glTexCoord2f(tex_x, tex_y); glVertex2f(x, y);
+        glTexCoord2f(tex_x+tex_width, tex_y); glVertex2f(x+width, y);
+        glTexCoord2f(tex_x+tex_width, tex_y+tex_height); glVertex2f(x+width, y+height);
+        glTexCoord2f(tex_x, tex_y+tex_height); glVertex2f(x, y+height);
+    glEnd();
+}
+
 // initialise OpenGL
+// TODO: Put this somewhere else - possibly in Engine class
 void Graphics::initGL(int window_width, int window_height)
 {
     // enable texturing

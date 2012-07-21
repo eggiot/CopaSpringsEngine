@@ -9,3 +9,4 @@ The CopaSprings Game Engine is a 2D game engine written in C++. Its focus is on 
 - Animated sprite system
 - Flexible particle system
 - Hardware-accelerated OpenGL graphics
+- A general object configuration system
