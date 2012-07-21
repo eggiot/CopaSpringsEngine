@@ -90,7 +90,7 @@ void Graphics::initGL(int window_width, int window_height)
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    glClearColor(153.0f/255.0f, 189.0f/255.0f, 188.0f/255.0f, 0.0f);
+    glClearColor(88.0f/255.0f, 129.0f/255.0f, 168.0f/255.0f, 0.0f);
     glViewport(0, 0, window_width, window_height);
     glClear(GL_COLOR_BUFFER_BIT);
     glColor4f(1.0f,1.0f,1.0f, 1.0f);

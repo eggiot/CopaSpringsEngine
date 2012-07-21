@@ -16,6 +16,9 @@
 class Spritesheet
 {
 private:
+    // position of first and lasts sprites we want to display
+    int first_horizontal, first_vertical;
+    int last_horizontal, last_vertical;
     // how many sprites horizontally and vertically
     int num_horizontal, num_vertical;
     // grid coordinates of the current sprite
@@ -24,7 +27,7 @@ private:
     Graphics::Image image;
 public:
     Spritesheet() {}
-    Spritesheet(std::string filename, int num_horizontal, int num_vertical);
+    Spritesheet(std::string filename, int num_horizontal, int num_vertical, int first, int last);
     void update();
     void draw(float x, float y, float width, float height);
 };

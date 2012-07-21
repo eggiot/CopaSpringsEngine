@@ -21,6 +21,8 @@ Sprite::Sprite(Spritesheet spritesheet, float x, float y, float width, float hei
     this->y = y;
     this->width = width;
     this->height = height;
+    this->x_velocity = 0.0f;
+    this->y_velocity = 0.0f;
 }
 
 void Sprite::update()
@@ -60,26 +62,59 @@ float Sprite::getY()
 
 /*----------------------- SPRITESHEET ---------------------------*/
 
-Spritesheet::Spritesheet(std::string filename, int num_horizontal, int num_vertical)
+Spritesheet::Spritesheet(std::string filename, int num_horizontal, int num_vertical, int first, int last)
 {
     image.load(filename, false, false);
     this->num_horizontal = num_horizontal-1;
     this->num_vertical = num_vertical-1;
+    int count = 1;
+
+    for(int row=0; row!=num_vertical; ++row)
+    {
+        for(int column=0; column!=num_horizontal; ++column)
+        {
+            if(count == first)
+            {
+                first_horizontal = column;
+                first_vertical = row;
+            }
+            if(count == last)
+            {
+                last_horizontal = column;
+                last_vertical = row;
+            }
+            ++count;
+        }
+    }
+
+    for(int count=0; count <= last-1; ++count)
+    {
+
+    }
+
     this->current_horizontal = 0;
     this->current_vertical = 0;
 
     this->subimage_width = (float)image.getWidth() / (float)num_horizontal;
     this->subimage_height = (float)image.getHeight() / (float)num_vertical;
+
+    std::cout << first_vertical << ", " << first_horizontal << std::endl;
+    std::cout << last_vertical << ", " << last_horizontal << std::endl;
 }
 
 
-/* TODO: only move through a subset of the sprites in the spritesheet. At the moment
-we're going through all of them. */
 void Spritesheet::update()
 {
-    std::cout << current_horizontal << ", " << current_vertical << std::endl;
+    // if we've already updated to the last sprite
+    if(current_horizontal == last_horizontal && current_vertical==last_vertical)
+    {
+        // go back to the first sprite
+        current_horizontal = first_horizontal;
+        current_vertical = first_vertical;
+    }
+
     // if we're at the end of a horizontal line
-    if(current_horizontal == num_horizontal)
+    else if(current_horizontal == num_horizontal)
     {
         // start at the beginning of the horizontal line
         current_horizontal = 0;
@@ -108,13 +143,13 @@ void Spritesheet::update()
 
 void Spritesheet::draw(float x, float y, float width, float height)
 {
+    // calculate which subset of the texture to display
     float tex_width = subimage_width / image.getWidth();
     float tex_height = subimage_height / image.getHeight();
     float tex_x = tex_width * (float)current_horizontal;
-    float tex_y = tex_height * (float)current_vertical;
+    float tex_y = 1.0f - tex_height * (float)current_vertical - tex_height;
 
-    std::cout << subimage_width << ",  " << subimage_height << std::endl;
-
+    // draw and texture the quad
     Graphics::drawSubTexturedQuad(image.getTexture(), x, y, width, height,
                                   tex_x, tex_y, tex_width, tex_height, 1.0f);
 
