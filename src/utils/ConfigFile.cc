@@ -82,31 +82,32 @@ ConfigValue::operator double() const
 /*----------------------- CONFIGFILE ---------------------------*/
 
 ConfigFile::ConfigFile(std::string const& configFile) {
-  std::ifstream file(configFile.c_str());
-  std::string line;
-  std::string name;
-  std::string value;
-  int equal_position;
-  while (std::getline(file,line)) {
-
-    // skip blank lines
-    if (! line.length()) continue;
-
-    // skip comment lines
-    if (line[0] == '#') continue;
-
-    // find the position of the equal sign
-    equal_position = line.find('=');
-
-
-    // name is everything before '='
-    name  = trim(line.substr(0, equal_position));
-
-    // value is everything after '='
-    value = trim(line.substr(equal_position + 1));
-
-    content[name]=ConfigValue(value);
-  }
+    std::ifstream file(configFile.c_str());
+    if(file.good())
+    {
+        std::string line;
+        std::string name;
+        std::string value;
+        int equal_position;
+        while (std::getline(file,line))
+        {
+            // skip blank lines
+            if (! line.length()) continue;
+            // skip comment lines
+            if (line[0] == '#') continue;
+            // find the position of the equal sign
+            equal_position = line.find('=');
+            // name is everything before '='
+            name  = trim(line.substr(0, equal_position));
+            // value is everything after '='
+            value = trim(line.substr(equal_position + 1));
+            content[name]=ConfigValue(value);
+        }
+    }
+    else
+    {
+        throw "Config file does not exist";
+    }
 }
 
 ConfigValue const& ConfigFile::getValue(std::string const& entry) const

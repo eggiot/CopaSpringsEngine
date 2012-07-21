@@ -31,9 +31,9 @@ void Graphics::drawQuad(float x, float y, float width, float height, GLfloat rgb
 
 // draw a textured quad
 void Graphics::drawTexturedQuad(GLuint texture_id, float x, float y,
-                                float width, float height)
+                                float width, float height, float alpha)
 {
-    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+    glColor4f(1.0f, 1.0f, 1.0f, alpha);
     glBindTexture(GL_TEXTURE_2D, texture_id);
     glBegin(GL_POLYGON);
         // anti-clockwise
@@ -45,12 +45,13 @@ void Graphics::drawTexturedQuad(GLuint texture_id, float x, float y,
 }
 
 // draw part of a texture onto a quad
-void drawSubTexturedQuad(GLuint texture_id, float x, float y,
-                         float width, float height,
-                         float tex_x, float tex_y,
-                         float tex_width, float tex_height)
+void Graphics::drawSubTexturedQuad(GLuint texture_id, float x, float y,
+                                   float width, float height,
+                                   float tex_x, float tex_y,
+                                   float tex_width, float tex_height,
+                                   float alpha)
 {
-    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+    glColor4f(1.0f, 1.0f, 1.0f, alpha);
     glBindTexture(GL_TEXTURE_2D, texture_id);
     glBegin(GL_POLYGON);
         // anti-clockwise

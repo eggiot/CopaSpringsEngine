@@ -27,7 +27,7 @@ AnimationFrame::AnimationFrame(std::string image_filename, unsigned int engine_l
 void AnimationFrame::draw(float x, float y, float width, float height)
 {
     // draw the frame
-    Graphics::drawTexturedQuad(image.getTexture(), x, y, width, height);
+    Graphics::drawTexturedQuad(image.getTexture(), x, y, width, height, 1.0f);
 
     // this AnimationFrame has now been drawn for one more engine loop, so
     // increment the number of elapsed engine loops

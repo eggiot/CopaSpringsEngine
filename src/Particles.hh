@@ -35,6 +35,8 @@ struct Particle
     float rotate_velocity;
     int life_length;
     float background_colour[4];
+    float alpha;
+    float alpha_change;
     void update();
     void draw();
 };
@@ -85,6 +87,10 @@ private:
     float min_width_change, max_width_change;
     float min_height, max_height;
     float min_height_change, max_height_change;
+
+    float min_alpha, max_alpha;
+    float min_alpha_change, max_alpha_change;
+
     int loop;
     std::vector<Particle> particles;
 
@@ -107,19 +113,19 @@ private:
 
 public:
     Emitter(std::string image_filename,
-            int spawn_rate, int particles_per_spawn, int pre_pump_cycles,
-            int min_life_length, int max_life_length,
-            float min_x_pos, float max_x_pos,
-            float min_y_pos, float max_y_pos,
-            float min_velocity_x, float max_velocity_x,
-            float min_velocity_y, float max_velocity_y,
-            float min_acceleration_x, float max_acceleration_x,
-            float min_acceleration_y,float max_acceleration_y,
-            float min_rotate_velocity, float max_rotate_velocity,
-            float min_width, float max_width,
-            float min_width_change, float max_width_change,
-            float min_height, float max_height,
-            float min_height_change, float max_height_change);
+                 int spawn_rate, int particles_per_spawn, int pre_pump_cycles,
+                 int min_life_length, int max_life_length,
+                 float min_x_pos, float max_x_pos,
+                 float min_y_pos, float max_y_pos,
+                 float min_velocity_x, float max_velocity_x,
+                 float min_velocity_y, float max_velocity_y,
+                 float min_acceleration_x, float max_acceleration_x,
+                 float min_acceleration_y,float max_acceleration_y,
+                 float min_rotate_velocity, float max_rotate_velocity,
+                 float min_width, float max_width,
+                 float min_width_change, float max_width_change,
+                 float min_height, float max_height,
+                 float min_height_change, float max_height_change);
     Emitter(std::string filename);
     int spawn_rate;
     unsigned int particles_per_spawn;

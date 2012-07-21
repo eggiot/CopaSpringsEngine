@@ -40,7 +40,7 @@ void Particle::update()
 
 void Particle::draw()
 {
-    Graphics::drawTexturedQuad(texture, x, y, width, height);
+    Graphics::drawTexturedQuad(texture, x, y, width, height, 1.0f);
 }
 
 /*----------------------- EMITTER ---------------------------*/
@@ -133,10 +133,7 @@ Emitter::Emitter(std::string filename)
     this->max_height_change    = config.getValue("max_height_change");
     std::string image_filename = config.getValue("image_filename");
 
-    std::cout << image.getTexture() << std::endl;
-
     image.load(image_filename, false, false);
-    std::cout << image.getTexture() << std::endl;
     loop = 1;
 
     // preemptively pump a number of cycles so it looks as though the emitters been running for some time

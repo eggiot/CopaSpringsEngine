@@ -23,7 +23,7 @@
 
 void testParticleEngineAndLayers()
 {
-    int window_width = 900; int window_height = 300;
+    int window_width = 900; int window_height = 200;
     Window window(window_width, window_height, "Particle Engine");
     int framerate = 24;
 
