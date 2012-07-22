@@ -37,7 +37,7 @@ void Spritesheet::goToSprite(int sprite)
         // if sprite is in this row
         if(current_row*num_columns >= sprite)
         {
-            // set the column the row is in
+            // set the column in which the sprite resides
             current_column = num_columns - (current_row * num_columns - sprite);
             // current_sprite has changed
             current_sprite = sprite;
