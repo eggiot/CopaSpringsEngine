@@ -18,7 +18,6 @@ Spritesheet::Spritesheet(std::string filename, int num_columns, int num_rows, in
     current_sprite = first;
 
     goToSprite(current_sprite);
-    std::cout << current_row << " " << current_column << std::endl;
 
     subimage_width = (float)image.getWidth() / (float)num_columns;
     subimage_height = (float)image.getHeight() / (float)num_rows;
@@ -27,19 +26,13 @@ Spritesheet::Spritesheet(std::string filename, int num_columns, int num_rows, in
 // TODO: Make this faster - if necessary
 void Spritesheet::goToSprite(int sprite)
 {
-    int count = 0;
-    for(int row=0; row!=num_rows; ++row)
+    for(current_row=1; current_row <= num_rows; ++current_row)
     {
-        for(int column=0; column!=num_columns; ++column)
+        if(current_row*num_columns >= sprite)
         {
-            ++count;
-            if(count == sprite)
-            {
-                current_sprite = sprite;
-                current_column = column;
-                current_row = row;
-                break;
-            }
+            current_column = num_columns - (current_row * num_columns - sprite);
+            current_sprite = sprite;
+            break;
         }
     }
 }
@@ -107,8 +100,8 @@ void Spritesheet::draw(float x, float y, float width, float height)
     // calculate which subset of the texture to display
     float tex_width = subimage_width / image.getWidth();
     float tex_height = subimage_height / image.getHeight();
-    float tex_x = tex_width * (float)current_column;
-    float tex_y = 1.0f - tex_height * (float)current_row - tex_height;
+    float tex_x = tex_width * (float)(current_column-1);
+    float tex_y = 1.0f - tex_height * (float)(current_row-1) - tex_height;
 
     // draw and texture the quad
     Graphics::drawSubTexturedQuad(image.getTexture(), x, y, width, height,
