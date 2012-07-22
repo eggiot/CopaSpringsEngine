@@ -71,7 +71,7 @@ private:
     int loop;
     std::vector<Particle> particles;
 
-        /*! \brief Get random floating point number within a range
+    /*! \brief Get random floating point number within a range
 
     Returns a random floating point number from within a range. */
     inline float getRandRangef(float min, float max)

@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 /*--------------------------------------*/
-//horizontal = columns, vertical=rows
+
 Spritesheet::Spritesheet(std::string filename, int num_columns, int num_rows, int first, int last, bool ping_pong)
 {
     // initialise some member variables
@@ -15,26 +15,31 @@ Spritesheet::Spritesheet(std::string filename, int num_columns, int num_rows, in
     this->first = first;
     this->last = last;
     forwards = true;
-    current_sprite = first;
 
-    goToSprite(current_sprite);
+    // calculate how much of the image each sprite occupies
+    float subimage_width = (float)image.getWidth() / (float)num_columns;
+    float subimage_height = (float)image.getHeight() / (float)num_rows;
 
-    subimage_width = (float)image.getWidth() / (float)num_columns;
-    subimage_height = (float)image.getHeight() / (float)num_rows;
-
-        // calculate which subset of the texture to display
+    // calculate how much of the texture each sprite occupies
     tex_width = subimage_width / image.getWidth();
     tex_height = subimage_height / image.getHeight();
+
+    // finally, move to the first sprite
+    current_sprite = first;
+    goToSprite(current_sprite);
 }
 
-// TODO: Make this faster - if necessary
 void Spritesheet::goToSprite(int sprite)
 {
+    // go through all the rows
     for(current_row=1; current_row <= num_rows; ++current_row)
     {
+        // if sprite is in this row
         if(current_row*num_columns >= sprite)
         {
+            // set the column the row is in
             current_column = num_columns - (current_row * num_columns - sprite);
+            // current_sprite has changed
             current_sprite = sprite;
             break;
         }
@@ -101,10 +106,11 @@ void Spritesheet::update()
 
 void Spritesheet::draw(float x, float y, float width, float height)
 {
+    // set which part of the texture we're going to display
     float tex_x = tex_width * (float)(current_column-1);
     float tex_y = 1.0f - tex_height * (float)(current_row-1) - tex_height;
 
-    // draw and texture the quad
+    // draw the sprite
     Graphics::drawSubTexturedQuad(image.getTexture(), x, y, width, height,
                                   tex_x, tex_y, tex_width, tex_height, 1.0f);
 
