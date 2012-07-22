@@ -9,6 +9,7 @@
 /*--------------------------------------*/
 #include <SDL/SDL.h>
 #include <GL/gl.h>
+#include <GL/glu.h>
 /*--------------------------------------*/
 #include <string>
 /*--------------------------------------*/
@@ -59,17 +60,4 @@ First I'll have to create the engine!!
 
 void Window::resize(int new_width, int new_height)
 {
-    // prevent window from being too small
-    if(new_width < 100)
-    {
-        new_width = 100;
-    }
-    if(new_height < 100)
-    {
-        new_height = 100;
-    }
-
-    screen_ = SDL_SetVideoMode(new_width, new_height, 32, SDL_OPENGL | SDL_HWSURFACE);
-    glClear(GL_COLOR_BUFFER_BIT);
-
 }

@@ -67,7 +67,7 @@ void testParticleEngineAndLayers()
 
             {
 
-                //case SDL_VIDEORESIZE: window.resize(event.resize.w, event.resize.h); break; // resizing called here
+                case SDL_VIDEORESIZE: window.resize(event.resize.w, event.resize.h); break; // resizing called here
                 case SDL_QUIT: quit = true; break;
             }
 
