@@ -26,9 +26,11 @@ void Particle::update()
     velocity_x += acceleration_x;
     velocity_y += acceleration_y;
 
-    // rotate and resize
+    // rotate
     rotate += rotate_velocity;
-    width += width_change;
+
+    // resize
+    width  += width_change;
     height += height_change;
 }
 

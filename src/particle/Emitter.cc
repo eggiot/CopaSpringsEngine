@@ -117,22 +117,25 @@ Particle Emitter::emit()
     Particle current_particle;
 
     current_particle.texture = image_.getTexture();
+
     current_particle.life_length = getRandRangei(min_life_length_, max_life_length_);
+
     current_particle.x = getRandRangef(min_x_pos_, max_x_pos_);
     current_particle.y = getRandRangef(min_y_pos_, max_y_pos_);
+
     current_particle.velocity_x = getRandRangef(min_velocity_x_, max_velocity_x_);
     current_particle.velocity_y = getRandRangef(min_velocity_y_, max_velocity_y_);
 
     current_particle.acceleration_x = getRandRangef(min_acceleration_x_, max_acceleration_x_);
     current_particle.acceleration_y = getRandRangef(min_acceleration_y_, max_acceleration_y_);
 
-    current_particle.rotate = 0.0f;
+    current_particle.rotate          = 0.0f;
     current_particle.rotate_velocity = getRandRangef(min_rotate_velocity_, max_rotate_velocity_);
 
-    current_particle.width = getRandRangef(min_width_, max_width_);
+    current_particle.width        = getRandRangef(min_width_, max_width_);
     current_particle.width_change = getRandRangef(min_width_change_, max_width_change_);
 
-    current_particle.height = getRandRangef(min_height_, max_height_);
+    current_particle.height        = getRandRangef(min_height_, max_height_);
     current_particle.height_change = getRandRangef(min_height_change_, max_height_change_);
 
     return current_particle;

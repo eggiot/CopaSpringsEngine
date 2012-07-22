@@ -22,6 +22,7 @@ class Window
 protected:
     //! The SDL surface on which everything will be displayed
     SDL_Surface* screen_;
+    bool fullscreen_;
 
 public:
     Window(int width, int height, std::string title);

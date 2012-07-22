@@ -18,76 +18,76 @@
 #include <vector>
 /*---------------------------------------*/
 
-/*! \brief A particle emitter.
-
-The Emitter provides all the necessary information for the particles it produces. It
-provides a minimum and maximum value for a variety of parameters and provides each
-particle it emits with a random value from within these ranges. */
+/* The Emitter provides all the necessary information for the particles it produces.
+It provides a minimum and maximum value for a variety of parameters and provides
+each particle it emits with a random value from within these ranges. */
 
 class Emitter
 {
 private:
-    //! The image used for the emitter's particles
+    // the image used for the emitter's particles
     Graphics::Image image_;
 
-    //! Minimum value for the length of time the particle exists
-    int min_life_length_;
+    // the length of time the particle exists
+    int min_life_length_, max_life_length_;
 
-    //! maximum particle life length
-    int max_life_length_;
+    // these can be thought of as the emitter's left- and right-hand sides
+    float min_x_pos_, max_x_pos_;
 
-    /*! \brief Minimum value for a particle's initial x-coordinate.
+    // these can be thought of as the emitter's bottom and top sides
+    float min_y_pos_, max_y_pos_;
 
-    This can be thought of as the emitter's left-hand side. */
-    float min_x_pos_;
-
-    /*! \brief Maximum value for a particle's initial x-coordinate.
-
-    This can be thought of as the emitter's right-hand side. */
-    float max_x_pos_;
-
-    /*! \brief Minimum value for a particle's initial y-coordinate.
-
-    This can be thought of as the emitter's bottom side. */
-    float min_y_pos_;
-
-    /*! \brief Maximum value for a particle's initial y-coordinate.
-
-    This can be thought of as the emitter's top side. */
-    float max_y_pos_;
+    // the speed of the particle in the x-axis
     float min_velocity_x_, max_velocity_x_;
+
+    // the speed of the particle in the y-axis
     float min_velocity_y_, max_velocity_y_;
+
+    // the acceleration of the particly in the x-axis
     float min_acceleration_x_, max_acceleration_x_;
+
+    // the acceleration of the particle in the y-axis
     float min_acceleration_y_, max_acceleration_y_;
+
+    // the speed at which the particle rotates
     float min_rotate_velocity_, max_rotate_velocity_;
+
+    // the initial particle width
     float min_width_, max_width_;
+
+    // the speed at which the particle widens
     float min_width_change_, max_width_change_;
+
+    // the initial particle height
     float min_height_, max_height_;
+
+    // the speed at which the particle heightens
     float min_height_change_, max_height_change_;
 
-    float min_alpha_, max_alpha_;
-    float min_alpha_change_, max_alpha_change_;
-
+    // keeps track of how many updates there have been
     int loop_;
-    std::vector<Particle> particles_;
 
+    // how often the emitter emits
     int spawn_rate_;
+
+    // how many particles are emitted each emission
     unsigned int particles_per_spawn_;
-    // preemptively simulate cycles so particle system appears to have been running for a while
+
+    // how many cycles to preemptively simulate so it appears to have been running for a while
     int pre_pump_cycles_;
 
-private:
-    /*! \brief Get random floating point number within a range
+    // the alive particles emitted by this emitter
+    std::vector<Particle> particles_;
 
-    Returns a random floating point number from within a range. */
+private:
+
+    // Returns a random floating point number from within a range.
     inline float getRandRangef(float min, float max)
     {
         return min + ((max-min) * rand()) / (RAND_MAX + 1.0f);
     }
 
-    /*! \brief Get random integer within a range
-
-    Returns a random integer from within a range. */
+    // Returns a random integer from within a range. */
 
     inline int getRandRangei(int min, int max)
     {
@@ -95,6 +95,7 @@ private:
     }
 
 public:
+    // constructor: manually create an emitter
     Emitter(std::string image_filename,
                  int spawn_rate, int particles_per_spawn, int pre_pump_cycles,
                  int min_life_length, int max_life_length,
@@ -109,9 +110,17 @@ public:
                  float min_width_change, float max_width_change,
                  float min_height, float max_height,
                  float min_height_change, float max_height_change);
+
+    // constructor: create an emitter from a config file
     Emitter(std::string filename);
+
+    // emit a particle
     Particle emit();
+
+    // update the state of the emitter and all the alive particles
     void update();
+
+    // draw all the alive particles
     void draw();
 };
 

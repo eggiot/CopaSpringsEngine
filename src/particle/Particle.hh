@@ -17,26 +17,49 @@
 
 struct Particle
 {
+    // the texture to draw
     GLuint texture;
-    float x;
-    float y;
-    float velocity_x;
-    float velocity_y;
-    float acceleration_x;
-    float acceleration_y;
-    float gravity_x;
-    float gravity_y;
-    float width;
-    float width_change;
-    float height;
-    float height_change;
+
+    // the current x and y coordinates
+    float x, y;
+
+    // the direction in which the particle is travelling
+    float velocity_x, velocity_y;
+
+    // the acceleration of the particle on the x- and y-axis
+    float acceleration_x, acceleration_y;
+
+    // the amount by which the particle is being dragged down or pulled up
+    float gravity_x, gravity_y;
+
+    // the current size of the particle
+    float width, height;
+
+    // the amount by which the particle grows per update
+    float width_change, height_change;
+
+    // how rotated is the particle
     float rotate;
+
+    // how much does the particle rotate per update
     float rotate_velocity;
+
+    // for how many updates is the particle updated
     int life_length;
+
+    // what is its background colour
     float background_colour[4];
+
+    // what is its alpha value
     float alpha;
+
+    // by how much does its alpha value change per update
     float alpha_change;
+
+    // update the particle
     void update();
+
+    // draw the particle
     void draw();
 };
 
