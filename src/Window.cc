@@ -60,4 +60,6 @@ First I'll have to create the engine!!
 
 void Window::resize(int new_width, int new_height)
 {
+    screen_ = SDL_SetVideoMode( new_width, new_height, 32, SDL_OPENGL | SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_RESIZABLE);
+    Graphics::initGL(new_width, new_height);
 }
