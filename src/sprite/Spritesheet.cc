@@ -56,7 +56,7 @@ void Spritesheet::update()
         if(forwards)
         {
             // if we're at the last sprite
-            if(current_sprite == last && last != first)
+            if(current_sprite == last)
             {
                 // if we're pingponging
                 if(ping_pong)
