@@ -36,10 +36,10 @@ void testParticleEngineAndLayers()
                  0.0, 0.0);
 
     // initialise two sprites
-    Spritesheet man_sheet("test/spritesheet.png", 4, 4, 2, 13);
+    Spritesheet man_sheet("test/spritesheet.png", 4, 4, 2, 13, true);
     Sprite man(man_sheet, 0.8, 0.0, 200/(float)window_width, 200/(float)window_height);
 
-    Spritesheet chimney_sheet("test/chimney.png", 1, 1, 1, 1);
+    Spritesheet chimney_sheet("test/chimney.png", 1, 1, 1, 1, false);
     Sprite chimney(chimney_sheet, 0.47, 0.0, 61/(float)window_width, 61/(float)window_height);
 
     Layer layer;
