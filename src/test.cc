@@ -22,7 +22,7 @@
 
 void testParticleEngineAndLayers()
 {
-    int window_width = 900; int window_height = 200;
+    int window_width = 900; int window_height = 400;
     Window window(window_width, window_height, "Particle Engine");
     int framerate = 50;
 
@@ -57,8 +57,21 @@ void testParticleEngineAndLayers()
     engine.addLayer(sprite_layer);
 
     bool quit = false;
+    SDL_Event event;
     while(quit == false)
     {
+        while(SDL_PollEvent(&event))
+
+        {
+            switch(event.type)
+
+            {
+
+                //case SDL_VIDEORESIZE: window.resize(event.resize.w, event.resize.h); break; // resizing called here
+                case SDL_QUIT: quit = true; break;
+            }
+
+        }
         glClear(GL_COLOR_BUFFER_BIT);
         engine.update();
         engine.draw();
