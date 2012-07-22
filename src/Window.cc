@@ -24,7 +24,7 @@ The constructor for the Window class.
 Window::Window(int width, int height, std::string title)
 {
     SDL_Init(SDL_INIT_EVERYTHING);
-    screen = SDL_SetVideoMode( width, height, 32, SDL_OPENGL | SDL_HWSURFACE);
+    screen_ = SDL_SetVideoMode( width, height, 32, SDL_OPENGL | SDL_HWSURFACE);
     SDL_WM_SetCaption(title.c_str(), NULL); // TODO: Enable icons (currently NULL)
     Graphics::initGL(width, height);
 
@@ -69,7 +69,7 @@ void Window::resize(int new_width, int new_height)
         new_height = 100;
     }
 
-    screen = SDL_SetVideoMode(new_width, new_height, 32, SDL_OPENGL | SDL_HWSURFACE);
+    screen_ = SDL_SetVideoMode(new_width, new_height, 32, SDL_OPENGL | SDL_HWSURFACE);
     glClear(GL_COLOR_BUFFER_BIT);
 
 }

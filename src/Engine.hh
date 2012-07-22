@@ -15,7 +15,7 @@
 class Engine
 {
 private:
-    std::vector<Layer> layers;
+    std::vector<Layer> layers_;
 public:
     void addLayer(Layer layer);
     void update();

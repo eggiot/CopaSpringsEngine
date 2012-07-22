@@ -37,6 +37,4 @@ void Particle::draw()
     Graphics::drawTexturedQuad(texture, x, y, width, height, 1.0f);
 }
 
-/*----------------------- EMITTER ---------------------------*/
-
 

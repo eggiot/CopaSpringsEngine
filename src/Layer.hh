@@ -16,8 +16,8 @@
 class Layer
 {
 private:
-    std::vector<Sprite> sprites;
-    std::vector<Emitter> emitters;
+    std::vector<Sprite> sprites_;
+    std::vector<Emitter> emitters_;
 public:
     void addSprite(Sprite sprite);
     void addEmitter(Emitter emitter);

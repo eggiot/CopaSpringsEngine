@@ -8,39 +8,38 @@
 Spritesheet::Spritesheet(std::string filename, int num_columns, int num_rows, int first, int last, bool ping_pong)
 {
     // initialise some member variables
-    image.load(filename, false, false);
-    this->num_columns = num_columns;
-    this->num_rows = num_rows;
-    this->ping_pong = ping_pong;
-    this->first = first;
-    this->last = last;
-    forwards = true;
+    image_.load(filename);
+    num_columns_ = num_columns;
+    num_rows_ = num_rows;
+    ping_pong_ = ping_pong;
+    first_ = first;
+    last_ = last;
+    forwards_ = true;
 
     // calculate how much of the image each sprite occupies
-    float subimage_width = (float)image.getWidth() / (float)num_columns;
-    float subimage_height = (float)image.getHeight() / (float)num_rows;
+    float subimage_width = (float)image_.getWidth() / (float)num_columns_;
+    float subimage_height = (float)image_.getHeight() / (float)num_rows_;
 
     // calculate how much of the texture each sprite occupies
-    tex_width = subimage_width / image.getWidth();
-    tex_height = subimage_height / image.getHeight();
+    tex_width_ = subimage_width / image_.getWidth();
+    tex_height_ = subimage_height / image_.getHeight();
 
     // finally, move to the first sprite
-    current_sprite = first;
-    goToSprite(current_sprite);
+    goToSprite(first_);
 }
 
 void Spritesheet::goToSprite(int sprite)
 {
     // go through all the rows
-    for(current_row=1; current_row <= num_rows; ++current_row)
+    for(current_row_=1; current_row_ <= num_rows_; ++current_row_)
     {
         // if sprite is in this row
-        if(current_row*num_columns >= sprite)
+        if(current_row_*num_columns_ >= sprite)
         {
             // set the column in which the sprite resides
-            current_column = num_columns - (current_row * num_columns - sprite);
+            current_column_ = num_columns_ - (current_row_ * num_columns_ - sprite);
             // current_sprite has changed
-            current_sprite = sprite;
+            current_sprite_ = sprite;
             break;
         }
     }
@@ -50,27 +49,27 @@ void Spritesheet::goToSprite(int sprite)
 void Spritesheet::update()
 {
     // an update is unnecessary if we're only displaying one frame
-    if(first !=last)
+    if(first_ !=last_)
     {
         // if we're going forwards
-        if(forwards)
+        if(forwards_)
         {
             // if we're at the last sprite
-            if(current_sprite == last)
+            if(current_sprite_ == last_)
             {
                 // if we're pingponging
-                if(ping_pong)
+                if(ping_pong_)
                 {
                     // go backwards
-                    forwards = false;
+                    forwards_ = false;
                     // move to the last sprite
-                    goToSprite(current_sprite-1);
+                    goToSprite(current_sprite_ - 1);
                 }
                 // if we're not pingponging
                 else
                 {
                     // go back to the first sprite
-                    goToSprite(first);
+                    goToSprite(first_);
                 }
             }
 
@@ -78,7 +77,7 @@ void Spritesheet::update()
             else
             {
                 // go to the next sprite
-                goToSprite(current_sprite+1);
+                goToSprite(current_sprite_ + 1);
             }
         }
 
@@ -86,19 +85,19 @@ void Spritesheet::update()
         else
         {
             // if we're at the first sprite
-            if(current_sprite == first)
+            if(current_sprite_ == first_)
             {
                 // start going forwards
-                forwards = true;
+                forwards_ = true;
                 // move to the next sprite
-                goToSprite(current_sprite+1);
+                goToSprite(current_sprite_ + 1);
             }
 
             // if we're not at the first sprite
             else
             {
                 // go to the next sprite
-                goToSprite(current_sprite-1);
+                goToSprite(current_sprite_ - 1);
             }
         }
     }
@@ -107,12 +106,12 @@ void Spritesheet::update()
 void Spritesheet::draw(float x, float y, float width, float height)
 {
     // set which part of the texture we're going to display
-    float tex_x = tex_width * (float)(current_column-1);
-    float tex_y = 1.0f - tex_height * (float)(current_row-1) - tex_height;
+    float tex_x = tex_width_ * (float)(current_column_ - 1);
+    float tex_y = 1.0f - tex_height_ * (float)(current_row_ - 1) - tex_height_;
 
     // draw the sprite
-    Graphics::drawSubTexturedQuad(image.getTexture(), x, y, width, height,
-                                  tex_x, tex_y, tex_width, tex_height, 1.0f);
+    Graphics::drawSubTexturedQuad(image_.getTexture(), x, y, width, height,
+                                  tex_x, tex_y, tex_width_, tex_height_, 1.0f);
 
 }
 

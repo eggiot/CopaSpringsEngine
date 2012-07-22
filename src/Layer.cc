@@ -14,26 +14,26 @@
 
 void Layer::addSprite(Sprite sprite)
 {
-    sprites.push_back(sprite);
+    sprites_.push_back(sprite);
 }
 
 void Layer::addEmitter(Emitter emitter)
 {
-    emitters.push_back(emitter);
+    emitters_.push_back(emitter);
 }
 
 void Layer::update()
 {
     // update sprites
-    for(std::vector<Sprite>::iterator current_sprite = sprites.begin();
-    current_sprite != sprites.end(); ++current_sprite)
+    for(std::vector<Sprite>::iterator current_sprite = sprites_.begin();
+    current_sprite != sprites_.end(); ++current_sprite)
     {
         current_sprite->update();
     }
 
     // update emitters
-    for(std::vector<Emitter>::iterator current_emitter = emitters.begin();
-    current_emitter != emitters.end(); ++current_emitter)
+    for(std::vector<Emitter>::iterator current_emitter = emitters_.begin();
+    current_emitter != emitters_.end(); ++current_emitter)
     {
         current_emitter->update();
     }
@@ -45,15 +45,15 @@ void Layer::update()
 void Layer::draw()
 {
     // draw sprites
-    for(std::vector<Sprite>::iterator current_sprite = sprites.begin();
-    current_sprite != sprites.end(); ++current_sprite)
+    for(std::vector<Sprite>::iterator current_sprite = sprites_.begin();
+    current_sprite != sprites_.end(); ++current_sprite)
     {
         current_sprite->draw();
     }
 
     // draw emitters
-    for(std::vector<Emitter>::iterator current_emitter = emitters.begin();
-    current_emitter != emitters.end(); ++current_emitter)
+    for(std::vector<Emitter>::iterator current_emitter = emitters_.begin();
+    current_emitter != emitters_.end(); ++current_emitter)
     {
         current_emitter->draw();
     }

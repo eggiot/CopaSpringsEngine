@@ -14,7 +14,7 @@
 class ConfigValue
 {
 private:
-    std::string value;
+    std::string value_;
 public:
     // constructors
     ConfigValue()
@@ -34,7 +34,7 @@ public:
 };
 
 class ConfigFile {
-  std::map<std::string,ConfigValue> content;
+  std::map<std::string,ConfigValue> content_;
 
 public:
   ConfigFile(std::string const& config_filename);

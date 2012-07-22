@@ -9,14 +9,14 @@
 
 void Engine::addLayer(Layer layer)
 {
-    layers.push_back(layer);
+    layers_.push_back(layer);
 }
 
 void Engine::update()
 {
     // update layers
-    for(std::vector<Layer>::iterator current_layer = layers.begin();
-    current_layer != layers.end(); ++current_layer)
+    for(std::vector<Layer>::iterator current_layer = layers_.begin();
+    current_layer != layers_.end(); ++current_layer)
     {
         current_layer->update();
     }
@@ -25,8 +25,8 @@ void Engine::update()
 void Engine::draw()
 {
     // draw layers
-    for(std::vector<Layer>::iterator current_layer = layers.begin();
-    current_layer != layers.end(); ++current_layer)
+    for(std::vector<Layer>::iterator current_layer = layers_.begin();
+    current_layer != layers_.end(); ++current_layer)
     {
         current_layer->draw();
     }

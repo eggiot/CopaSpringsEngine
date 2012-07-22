@@ -24,28 +24,28 @@ class Spritesheet
 {
 private:
     // the range of sprites we want to display
-    int first, last;
+    int first_, last_;
 
     // position of the current sprite
-    int current_sprite;
+    int current_sprite_;
 
     // grid coordinates of the current sprite
-    int current_column, current_row;
+    int current_column_, current_row_;
 
     // the total size of the spritesheet grid
-    int num_columns, num_rows;
+    int num_columns_, num_rows_;
 
     // the proportional size of each sprite in the OpenGL texture
-    float tex_width, tex_height;
+    float tex_width_, tex_height_;
 
     // the spritesheet image
-    Graphics::Image image;
+    Graphics::Image image_;
 
     // is the spritesheet set to ping pong?
-    bool ping_pong;
+    bool ping_pong_;
 
     // is the spritesheet currently moving forwards or backwards through the range?
-    bool forwards;
+    bool forwards_;
 
     // Move to a sprite within the spritesheet
     void goToSprite(int sprite);

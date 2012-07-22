@@ -16,46 +16,46 @@
 /*--------------------------------------*/
 Sprite::Sprite(Spritesheet spritesheet, float x, float y, float width, float height)
 {
-    this->spritesheet = spritesheet;
-    this->x = x;
-    this->y = y;
-    this->width = width;
-    this->height = height;
-    this->x_velocity = 0.0f;
-    this->y_velocity = 0.0f;
+    spritesheet_ = spritesheet;
+    x_           = x;
+    y_           = y;
+    width_       = width;
+    height_      = height;
+    x_velocity_  = 0.0f;
+    y_velocity_  = 0.0f;
 }
 
 void Sprite::update()
 {
-    x += x_velocity;
-    y += y_velocity;
-    spritesheet.update();
+    x_ += x_velocity_;
+    y_ += y_velocity_;
+    spritesheet_.update();
 }
 
 void Sprite::draw()
 {
-    spritesheet.draw(x, y, width, height);
+    spritesheet_.draw(x_, y_, width_, height_);
 }
 
 void Sprite::move(float x, float y)
 {
     // change the x and y coordinates
-    this->x = x;
-    this->y = y;
+    x_ = x;
+    y_ = y;
 }
 
 void Sprite::setVelocity(float x_velocity, float y_velocity)
 {
-    this->x_velocity = x_velocity;
-    this->y_velocity = y_velocity;
+    x_velocity_ = x_velocity;
+    y_velocity_ = y_velocity;
 }
 
 float Sprite::getX()
 {
-    return x;
+    return x_;
 }
 
 float Sprite::getY()
 {
-    return y;
+    return y_;
 }

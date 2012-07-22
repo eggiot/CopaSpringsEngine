@@ -32,31 +32,31 @@ std::string trim(std::string const& source, char const* delims = " \t\r\n")
 
 ConfigValue::ConfigValue(std::string const& value)
 {
-    this->value = value;
+    value_ = value;
 }
 
 ConfigValue::ConfigValue(double value)
 {
     std::stringstream stream;
     stream << value;
-    this->value = stream.str();
+    value_ = stream.str();
 }
 
 ConfigValue::ConfigValue(ConfigValue const& other)
 {
-    this->value = other.value;
+    value_ = other.value_;
 }
 
 
 ConfigValue& ConfigValue::operator = (ConfigValue const& other)
 {
-    this->value = other.value;
+    value_ = other.value_;
     return *this;
 }
 
 ConfigValue& ConfigValue::operator = (std::string const& value)
 {
-    this->value = value;
+    value_ = value;
     return *this;
 }
 
@@ -64,18 +64,18 @@ ConfigValue& ConfigValue::operator = (double value)
 {
     std::stringstream stream;
     stream << value;
-    this->value = stream.str();
+    value_ = stream.str();
     return *this;
 }
 
 ConfigValue::operator std::string() const
 {
-    return value;
+    return value_;
 }
 
 ConfigValue::operator double() const
 {
-    return atof(value.c_str());
+    return atof(value_.c_str());
 }
 
 
@@ -101,7 +101,7 @@ ConfigFile::ConfigFile(std::string const& configFile) {
             name  = trim(line.substr(0, equal_position));
             // value is everything after '='
             value = trim(line.substr(equal_position + 1));
-            content[name]=ConfigValue(value);
+            content_[name]=ConfigValue(value);
         }
     }
     else
@@ -112,8 +112,8 @@ ConfigFile::ConfigFile(std::string const& configFile) {
 
 ConfigValue const& ConfigFile::getValue(std::string const& entry) const
 {
-    std::map<std::string, ConfigValue>::const_iterator result = content.find(entry);
+    std::map<std::string, ConfigValue>::const_iterator result = content_.find(entry);
 
-    if (result == content.end()) throw "Does not exist";
+    if (result == content_.end()) throw "Does not exist";
     return result->second;
 }

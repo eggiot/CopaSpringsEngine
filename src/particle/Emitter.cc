@@ -27,41 +27,41 @@ Emitter::Emitter(std::string image_filename,
                  float min_height, float max_height,
                  float min_height_change, float max_height_change)
 {
-    this->pre_pump_cycles     = pre_pump_cycles;
-    this->spawn_rate          = spawn_rate;
-    this->particles_per_spawn = particles_per_spawn;
-    this->min_life_length     = min_life_length;
-    this->max_life_length     = max_life_length;
-    this->min_x_pos           = min_x_pos;
-    this->max_x_pos           = max_x_pos;
-    this->min_y_pos           = min_y_pos;
-    this->max_y_pos           = max_y_pos;
-    this->min_velocity_x      = min_velocity_x;
-    this->max_velocity_x      = max_velocity_x;
-    this->min_velocity_y      = min_velocity_y;
-    this->max_velocity_y      = max_velocity_y;
-    this->min_acceleration_x  = min_acceleration_x;
-    this->max_acceleration_x  = max_acceleration_x;
-    this->min_acceleration_y  = min_acceleration_y;
-    this->max_acceleration_y  = max_acceleration_y;
-    this->min_rotate_velocity = min_rotate_velocity;
-    this->max_rotate_velocity = max_rotate_velocity;
-    this->min_width           = min_width;
-    this->max_width           = max_width;
-    this->min_width_change    = min_width_change;
-    this->max_width_change    = max_width_change;
-    this->min_height          = min_height;
-    this->max_height          = max_height;
-    this->min_height_change   = min_height_change;
-    this->max_height_change   = max_height_change;
+    pre_pump_cycles_      = pre_pump_cycles;
+    spawn_rate_           = spawn_rate;
+    particles_per_spawn_  = particles_per_spawn;
+    min_life_length_      = min_life_length;
+    max_life_length_      = max_life_length;
+    min_x_pos_            = min_x_pos;
+    max_x_pos_            = max_x_pos;
+    min_y_pos_            = min_y_pos;
+    max_y_pos_            = max_y_pos;
+    min_velocity_x_       = min_velocity_x;
+    max_velocity_x_       = max_velocity_x;
+    min_velocity_y_       = min_velocity_y;
+    max_velocity_y_       = max_velocity_y;
+    min_acceleration_x_   = min_acceleration_x;
+    max_acceleration_x_   = max_acceleration_x;
+    min_acceleration_y_   = min_acceleration_y;
+    max_acceleration_y_   = max_acceleration_y;
+    min_rotate_velocity_  = min_rotate_velocity;
+    max_rotate_velocity_  = max_rotate_velocity;
+    min_width_            = min_width;
+    max_width_            = max_width;
+    min_width_change_     = min_width_change;
+    max_width_change_     = max_width_change;
+    min_height_           = min_height;
+    max_height_           = max_height;
+    min_height_change_    = min_height_change;
+    max_height_change_    = max_height_change;
 
-    image.load(image_filename, false, false);
-    loop = 1;
+    image_.load(image_filename);
+    loop_ = 1;
 
     // preemptively pump a number of cycles so it looks as though the emitters been running for some time
-    for(int cycle = 0; cycle != pre_pump_cycles; ++cycle)
+    for(int cycle = 0; cycle != pre_pump_cycles_; ++cycle)
     {
-        particles.push_back(this->emit());
+        particles_.push_back(this->emit());
         this->update();
     }
 }
@@ -71,42 +71,42 @@ Emitter::Emitter(std::string filename)
 {
     ConfigFile config(filename);
 
-    this->pre_pump_cycles      = config.getValue("pre_pump_cycles");
-    this->spawn_rate           = config.getValue("spawn_rate");
-    this->particles_per_spawn  = config.getValue("particles_per_spawn");
-    this->min_life_length      = config.getValue("min_life_length");
-    this->max_life_length      = config.getValue("max_life_length");
-    this->min_x_pos            = config.getValue("min_x_pos");
-    this->max_x_pos            = config.getValue("max_x_pos");
-    this->min_y_pos            = config.getValue("min_y_pos");
-    this->max_y_pos            = config.getValue("max_y_pos");
-    this->min_velocity_x       = config.getValue("min_velocity_x");
-    this->max_velocity_x       = config.getValue("max_velocity_x");
-    this->min_velocity_y       = config.getValue("min_velocity_y");
-    this->max_velocity_y       = config.getValue("max_velocity_y");
-    this->min_acceleration_x   = config.getValue("min_acceleration_x");
-    this->max_acceleration_x   = config.getValue("max_acceleration_x");
-    this->min_acceleration_y   = config.getValue("min_acceleration_y");
-    this->max_acceleration_y   = config.getValue("max_acceleration_y");
-    this->min_rotate_velocity  = config.getValue("min_rotate_velocity");
-    this->max_rotate_velocity  = config.getValue("max_rotate_velocity");
-    this->min_width            = config.getValue("min_width");
-    this->max_width            = config.getValue("max_width");
-    this->min_width_change     = config.getValue("min_width_change");
-    this->max_width_change     = config.getValue("max_width_change");
-    this->min_height           = config.getValue("min_height");
-    this->max_height           = config.getValue("max_height");
-    this->min_height_change    = config.getValue("min_height_change");
-    this->max_height_change    = config.getValue("max_height_change");
+    pre_pump_cycles_      = config.getValue("pre_pump_cycles");
+    spawn_rate_           = config.getValue("spawn_rate");
+    particles_per_spawn_  = config.getValue("particles_per_spawn");
+    min_life_length_      = config.getValue("min_life_length");
+    max_life_length_      = config.getValue("max_life_length");
+    min_x_pos_            = config.getValue("min_x_pos");
+    max_x_pos_            = config.getValue("max_x_pos");
+    min_y_pos_            = config.getValue("min_y_pos");
+    max_y_pos_            = config.getValue("max_y_pos");
+    min_velocity_x_       = config.getValue("min_velocity_x");
+    max_velocity_x_       = config.getValue("max_velocity_x");
+    min_velocity_y_       = config.getValue("min_velocity_y");
+    max_velocity_y_       = config.getValue("max_velocity_y");
+    min_acceleration_x_   = config.getValue("min_acceleration_x");
+    max_acceleration_x_   = config.getValue("max_acceleration_x");
+    min_acceleration_y_   = config.getValue("min_acceleration_y");
+    max_acceleration_y_   = config.getValue("max_acceleration_y");
+    min_rotate_velocity_  = config.getValue("min_rotate_velocity");
+    max_rotate_velocity_  = config.getValue("max_rotate_velocity");
+    min_width_            = config.getValue("min_width");
+    max_width_            = config.getValue("max_width");
+    min_width_change_     = config.getValue("min_width_change");
+    max_width_change_     = config.getValue("max_width_change");
+    min_height_           = config.getValue("min_height");
+    max_height_           = config.getValue("max_height");
+    min_height_change_    = config.getValue("min_height_change");
+    max_height_change_    = config.getValue("max_height_change");
     std::string image_filename = config.getValue("image_filename");
 
-    image.load(image_filename, false, false);
-    loop = 1;
+    image_.load(image_filename);
+    loop_ = 1;
 
     // preemptively pump a number of cycles so it looks as though the emitters been running for some time
-    for(int cycle = 0; cycle != pre_pump_cycles; ++cycle)
+    for(int cycle = 0; cycle != pre_pump_cycles_; ++cycle)
     {
-        particles.push_back(this->emit());
+        particles_.push_back(this->emit());
         this->update();
     }
 }
@@ -116,24 +116,24 @@ Particle Emitter::emit()
     // initialise a particle using the info from the emitter
     Particle current_particle;
 
-    current_particle.texture = image.getTexture();
-    current_particle.life_length = getRandRangei(min_life_length, max_life_length);
-    current_particle.x = getRandRangef(min_x_pos, max_x_pos);
-    current_particle.y = getRandRangef(min_y_pos, max_y_pos);
-    current_particle.velocity_x = getRandRangef(min_velocity_x, max_velocity_x);
-    current_particle.velocity_y = getRandRangef(min_velocity_y, max_velocity_y);
+    current_particle.texture = image_.getTexture();
+    current_particle.life_length = getRandRangei(min_life_length_, max_life_length_);
+    current_particle.x = getRandRangef(min_x_pos_, max_x_pos_);
+    current_particle.y = getRandRangef(min_y_pos_, max_y_pos_);
+    current_particle.velocity_x = getRandRangef(min_velocity_x_, max_velocity_x_);
+    current_particle.velocity_y = getRandRangef(min_velocity_y_, max_velocity_y_);
 
-    current_particle.acceleration_x = getRandRangef(min_acceleration_x, max_acceleration_x);
-    current_particle.acceleration_y = getRandRangef(min_acceleration_y, max_acceleration_y);
+    current_particle.acceleration_x = getRandRangef(min_acceleration_x_, max_acceleration_x_);
+    current_particle.acceleration_y = getRandRangef(min_acceleration_y_, max_acceleration_y_);
 
     current_particle.rotate = 0.0f;
-    current_particle.rotate_velocity = getRandRangef(min_rotate_velocity, max_rotate_velocity);
+    current_particle.rotate_velocity = getRandRangef(min_rotate_velocity_, max_rotate_velocity_);
 
-    current_particle.width = getRandRangef(min_width, max_width);
-    current_particle.width_change = getRandRangef(min_width_change, max_width_change);
+    current_particle.width = getRandRangef(min_width_, max_width_);
+    current_particle.width_change = getRandRangef(min_width_change_, max_width_change_);
 
-    current_particle.height = getRandRangef(min_height, max_height);
-    current_particle.height_change = getRandRangef(min_height_change, max_height_change);
+    current_particle.height = getRandRangef(min_height_, max_height_);
+    current_particle.height_change = getRandRangef(min_height_change_, max_height_change_);
 
     return current_particle;
 }
@@ -141,39 +141,39 @@ Particle Emitter::emit()
 void Emitter::update()
 {
     // if it's time to emit particles
-    if(loop%spawn_rate==0)
+    if(loop_%spawn_rate_==0)
     {
         // emit particles_per_spawn number of particles
-        for(unsigned int particle_number = 0; particle_number < particles_per_spawn; ++particle_number)
+        for(unsigned int particle_number = 0; particle_number < particles_per_spawn_; ++particle_number)
         {
-            particles.push_back(this->emit());
+            particles_.push_back(this->emit());
         }
     }
 
     // update the position of all the particles
     //TODO: This should be done only for particles that are visible on the screen
-    for(std::vector<Particle>::iterator current_particle = particles.begin();
-    current_particle < particles.end(); ++current_particle)
+    for(std::vector<Particle>::iterator current_particle = particles_.begin();
+    current_particle < particles_.end(); ++current_particle)
     {
         current_particle->update();
 
         if(current_particle->life_length < 0)
         {
-            particles.erase(current_particle);
+            particles_.erase(current_particle);
         }
     }
-    ++loop;
+    ++loop_;
 
     // reset loop
-    if(loop==1001)
-        loop = 1;
+    if(loop_==1001)
+        loop_ = 1;
 
 }
 
 void Emitter::draw()
 {
-    for(std::vector<Particle>::iterator current_particle = particles.begin();
-    current_particle != particles.end(); ++current_particle)
+    for(std::vector<Particle>::iterator current_particle = particles_.begin();
+    current_particle != particles_.end(); ++current_particle)
     {
         current_particle->draw();
     }

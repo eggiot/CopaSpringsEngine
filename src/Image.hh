@@ -17,16 +17,16 @@ namespace Graphics
 class Image
 {
 protected:
-    GLuint texture;
-    int width, height, bpp;
-    char* image_data;
+    GLuint texture_;
+    int width_, height_, bpp_;
+    char* image_data_;
 public:
     // constructors
     Image() { }
-    Image(std::string filename, bool flip_horizontal, bool flip_vertical);
+    Image(std::string filename);
     //~Image();
     // load an image from a filename
-    void load(std::string filename, bool flip_horizontal, bool flip_vertical);
+    void load(std::string filename);
     char* getPixels();
     int getWidth();
     int getHeight();

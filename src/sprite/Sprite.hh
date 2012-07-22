@@ -19,9 +19,9 @@
 class Sprite
 {
 protected:
-    float x, y, width, height;
-    float x_velocity, y_velocity;
-    Spritesheet spritesheet;
+    float x_, y_, width_, height_;
+    float x_velocity_, y_velocity_;
+    Spritesheet spritesheet_;
 public:
     Sprite(Spritesheet spritesheet, float x, float y, float width, float height);
     void update();
