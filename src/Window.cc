@@ -52,15 +52,11 @@ void Window::sleep(int msecs)
 
 Changes the size of the window.
 
-Currently, this function makes the display black as it removes all textures. The engile
-will have to reload all the textures and redisplay them whenever the window is resized.
-First I'll have to create the engine!!
-
 \param new_width The width in pixels of the resized window.
 \param new_height The height in pixels of the resized window. */
 
 void Window::resize(int new_width, int new_height)
 {
     screen_ = SDL_SetVideoMode( new_width, new_height, 32, SDL_OPENGL | SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_RESIZABLE);
-    Graphics::initGL(new_width, new_height);
+    glViewport(0, 0, new_width, new_height);
 }
