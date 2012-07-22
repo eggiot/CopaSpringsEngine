@@ -21,6 +21,10 @@ Spritesheet::Spritesheet(std::string filename, int num_columns, int num_rows, in
 
     subimage_width = (float)image.getWidth() / (float)num_columns;
     subimage_height = (float)image.getHeight() / (float)num_rows;
+
+        // calculate which subset of the texture to display
+    tex_width = subimage_width / image.getWidth();
+    tex_height = subimage_height / image.getHeight();
 }
 
 // TODO: Make this faster - if necessary
@@ -97,9 +101,6 @@ void Spritesheet::update()
 
 void Spritesheet::draw(float x, float y, float width, float height)
 {
-    // calculate which subset of the texture to display
-    float tex_width = subimage_width / image.getWidth();
-    float tex_height = subimage_height / image.getHeight();
     float tex_x = tex_width * (float)(current_column-1);
     float tex_y = 1.0f - tex_height * (float)(current_row-1) - tex_height;
 

@@ -22,7 +22,12 @@ private:
     int current_column, current_row;
     // how many sprites horizontally and vertically
     int num_columns, num_rows;
+
     float subimage_width, subimage_height;
+
+    // width and height of the subtexture
+    float tex_width, tex_height;
+
     Graphics::Image image;
     bool ping_pong;
     bool forwards;

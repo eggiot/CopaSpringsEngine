@@ -140,7 +140,7 @@ void testParticleEngineAndLayers()
         glClear(GL_COLOR_BUFFER_BIT);
 
 
- /*       if(sprite.getX() > (1.0f-width))
+ /       if(sprite.getX() > (1.0f-width))
         {
             sprite.setState("choke");
             sprite.setXVelocity(-velocity);
