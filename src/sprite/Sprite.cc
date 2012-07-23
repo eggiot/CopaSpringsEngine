@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <vector>
+#include <GL/gl.h>
 /*--------------------------------------*/
 Sprite::Sprite(Spritesheet spritesheet, float x, float y, float width, float height)
 {
@@ -34,7 +35,10 @@ void Sprite::update()
 
 void Sprite::draw()
 {
-    spritesheet_.draw(x_, y_, width_, height_);
+    glPushMatrix();
+    glTranslatef(x_, y_, 0.0f);
+    spritesheet_.draw(0.0f, 0.0f, width_, height_);
+    glPopMatrix();
 }
 
 void Sprite::move(float x, float y)

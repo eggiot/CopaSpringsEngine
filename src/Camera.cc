@@ -37,11 +37,23 @@ void Camera::unattach()
     attached_ = false;
 }
 
+int Camera::getX()
+{
+    return x_;
+}
+
+int Camera::getY()
+{
+    return y_;
+}
+
 void Camera::update()
 {
     if(attached_)
     {
-        x_ = (parent_sprite_->getX()) - (width_ / 2) + x_offset_;
-        y_ = parent_sprite_->getY() - (height_ / 2) + y_offset_;
+        x_ = parent_sprite_->getX();
+        y_ = parent_sprite_->getY();
+        //x_ = (parent_sprite_->getX()) - (width_ / 2) + x_offset_;
+        //y_ = parent_sprite_->getY() - (height_ / 2) + y_offset_;
     }
 }

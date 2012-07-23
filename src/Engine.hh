@@ -8,6 +8,7 @@
 #define ENGINE_HH
 /*--------------------------------------*/
 #include "Layer.hh"
+#include "Camera.hh"
 /*--------------------------------------*/
 #include <vector>
 /*--------------------------------------*/
@@ -16,7 +17,10 @@ class Engine
 {
 private:
     std::vector<Layer> layers_;
+    Camera *camera_;
 public:
+    Engine();
+    Engine(Camera& camera);
     void addLayer(Layer layer);
     void update();
     void draw();

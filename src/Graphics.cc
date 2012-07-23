@@ -13,6 +13,7 @@
 #include "Graphics.hh"
 /*--------------------------------------*/
 #include <GL/gl.h>
+#include <GL/glu.h>
 /*--------------------------------------*/
 
 // Draw an untextured quad
@@ -81,7 +82,7 @@ void Graphics::initGL(int window_width, int window_height)
     // set up a perspective projection
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity(); // clear
-    glOrtho(0.0, 1.0, 0.0, 1, 0.0, 1.0); //orthographic projection
+    gluOrtho2D(0, window_width*2, 0, window_height*2); //orthographic projection
 
     // edit the model-view matrix
     glMatrixMode(GL_MODELVIEW);
@@ -89,7 +90,7 @@ void Graphics::initGL(int window_width, int window_height)
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    glClearColor(88.0f/255.0f, 129.0f/255.0f, 168.0f/255.0f, 0.0f);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glViewport(0, 0, window_width, window_height);
     glClear(GL_COLOR_BUFFER_BIT);
     glColor4f(1.0f,1.0f,1.0f, 1.0f);

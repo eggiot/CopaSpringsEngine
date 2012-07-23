@@ -24,6 +24,8 @@ public:
     ~Camera();
     void attach(Sprite& sprite);
     void unattach();
+    int getX();
+    int getY();
     void update();
 };
 
