@@ -24,7 +24,7 @@ void testParticleEngineAndLayers()
 {
     int window_width = 900; int window_height = 400;
     Window window(window_width, window_height, "Particle Engine");
-    int framerate = 27;
+    int framerate = 50;
 
     // initialise two emitters
     Emitter smoke("test/smoke_emitter.config");
@@ -43,7 +43,7 @@ void testParticleEngineAndLayers()
     Sprite blocks(block_sheet, 200, 20, 100, 100);
 
     Spritesheet chimney_sheet("test/chimney.png", 1, 1, 1, 1, false);
-    Sprite chimney(chimney_sheet, 420, 0.0, 61, 61);
+    Sprite chimney(chimney_sheet, 425, 0.0, 61, 61);
 
     Camera camera(man);
     World world(camera);
