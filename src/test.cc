@@ -9,8 +9,8 @@
 #include "Image.hh"
 #include "sprite/Sprite.hh"
 #include "particle/Emitter.hh"
-#include "Layer.hh"
 #include "Engine.hh"
+#include "World.hh"
 /*--------------------------------------*/
 #include <SDL/SDL.h>
 /*--------------------------------------*/
@@ -24,7 +24,7 @@ void testParticleEngineAndLayers()
 {
     int window_width = 900; int window_height = 400;
     Window window(window_width, window_height, "Particle Engine");
-    int framerate = 50;
+    int framerate = 27;
 
     // initialise two emitters
     Emitter smoke("test/smoke_emitter.config");
@@ -37,46 +37,31 @@ void testParticleEngineAndLayers()
 
     // initialise two sprites
     Spritesheet man_sheet("test/spritesheet.png", 4, 4, 6, 13, false);
-    Sprite man(man_sheet, window_width*0.8, 0, 200, 200);
+    Sprite man(man_sheet, 700, 0, 200, 200);
 
     Spritesheet block_sheet("test/spritesheet-blocks.png", 4, 2, 1, 8, true);
-    Sprite blocks(block_sheet, 0.1, 0.2, 100/(float)window_width, 100/(float)window_height);
+    Sprite blocks(block_sheet, 200, 20, 100, 100);
 
     Spritesheet chimney_sheet("test/chimney.png", 1, 1, 1, 1, false);
-    Sprite chimney(chimney_sheet, 0.47, 0.0, 61/(float)window_width, 61/(float)window_height);
-
-    Layer emitter_layer;
-    emitter_layer.addEmitter(rain);
-    emitter_layer.addEmitter(smoke);
-    Layer sprite_layer;
-    sprite_layer.addSprite(chimney);
-    sprite_layer.addSprite(man);
-    sprite_layer.addSprite(blocks);
+    Sprite chimney(chimney_sheet, 420, 0.0, 61, 61);
 
     Camera camera(man);
-    Engine engine(camera);
-    engine.addLayer(emitter_layer);
-    engine.addLayer(sprite_layer);
+    World world(camera);
+    world.addSprite(man);
+    world.addSprite(blocks);
+    world.addSprite(chimney);
+    world.addEmitter(smoke);
+    Engine engine(world);
 
     bool quit = false;
-    SDL_Event event;
+
     while(quit == false)
     {
-        while(SDL_PollEvent(&event))
-
-        {
-            switch(event.type)
-
-            {
-
-                case SDL_VIDEORESIZE: window.resize(event.resize.w, event.resize.h); break; // resizing called here
-                case SDL_QUIT: quit = true; break;
-            }
-
-        }
         glClear(GL_COLOR_BUFFER_BIT);
-        engine.update();
-        engine.draw();
+        //engine.update();
+        //engine.draw();
+        world.update();
+        world.draw();
         SDL_GL_SwapBuffers();
         window.sleep(framerate);
     }

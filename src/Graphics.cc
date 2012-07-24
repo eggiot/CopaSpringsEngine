@@ -82,7 +82,7 @@ void Graphics::initGL(int window_width, int window_height)
     // set up a perspective projection
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity(); // clear
-    gluOrtho2D(0, window_width*2, 0, window_height*2); //orthographic projection
+    glOrtho(0.0, window_width, 0.0, window_height, 0.0, 1.0); //orthographic projection
 
     // edit the model-view matrix
     glMatrixMode(GL_MODELVIEW);

@@ -14,6 +14,7 @@
 #include <iostream>
 #include <vector>
 #include <GL/gl.h>
+#include <SDL/SDL.h>
 /*--------------------------------------*/
 Sprite::Sprite(Spritesheet spritesheet, float x, float y, float width, float height)
 {
@@ -28,17 +29,15 @@ Sprite::Sprite(Spritesheet spritesheet, float x, float y, float width, float hei
 
 void Sprite::update()
 {
-    x_ += x_velocity_;
-    y_ += y_velocity_;
     spritesheet_.update();
 }
 
 void Sprite::draw()
 {
-    glPushMatrix();
-    glTranslatef(x_, y_, 0.0f);
-    spritesheet_.draw(0.0f, 0.0f, width_, height_);
-    glPopMatrix();
+    //glPushMatrix();
+    //glTranslatef(x_, y_, 0.0f);
+    spritesheet_.draw(x_, y_, width_, height_);
+    //glPopMatrix();
 }
 
 void Sprite::move(float x, float y)

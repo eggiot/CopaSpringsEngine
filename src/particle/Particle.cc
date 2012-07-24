@@ -36,10 +36,10 @@ void Particle::update()
 
 void Particle::draw()
 {
-    glPushMatrix();
-    glTranslatef(x, y, 0.0f);
-    Graphics::drawTexturedQuad(texture, 0, 0, width, height, 1.0f);
-    glPopMatrix();
+    //glPushMatrix();
+    //glTranslatef(x, y, 0.0f);
+    Graphics::drawTexturedQuad(texture, x, y, width, height, 1.0f);
+    //glPopMatrix();
 }
 
 
