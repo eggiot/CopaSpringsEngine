@@ -4,7 +4,7 @@
  *  Created on: 20 Jul 2012
  *      Author: Eliot J. Walker
  *---------------------------------------*/
-#include "ConfigFile.hh"
+#include "ConfigFile.h"
 /*--------------------------------------*/
 #include <string>
 #include <sstream>

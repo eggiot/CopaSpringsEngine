@@ -4,8 +4,8 @@
  *  Created on: 23 Aug 2011
  *      Author: Eliot J. Walker
  *---------------------------------------*/
-#include "../Graphics.hh"
-#include "Particle.hh"
+#include "../Graphics.h"
+#include "Particle.h"
 /*--------------------------------------*/
 #include <GL/gl.h>
 /*--------------------------------------*/

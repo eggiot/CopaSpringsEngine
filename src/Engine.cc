@@ -4,8 +4,8 @@
  *  Created on: 20 Jul 2012
  *      Author: Eliot J. Walker
  *---------------------------------------*/
-#include "Engine.hh"
-#include "Camera.hh"
+#include "Engine.h"
+#include "camera/Camera.h"
 /*--------------------------------------*/
 #include <iostream>
 #include <GL/glu.h>

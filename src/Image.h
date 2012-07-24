@@ -1,11 +1,11 @@
 /*---------------------------------------
- * Image.hh
+ * Image.h
  *
  *  Created on: 16 Aug 2011
  *      Author: Eliot J. Walker
  *---------------------------------------*/
-#ifndef IMAGE_HH
-#define IMAGE_HH
+#ifndef IMAGE_H
+#define IMAGE_H
 /*--------------------------------------*/
 #include <GL/gl.h>
 #include <SDL/SDL_image.h>
@@ -38,4 +38,4 @@ public:
 }
 
 /*--------------------------------------*/
-#endif /*IMAGE.HH*/
+#endif /*IMAGE.h*/

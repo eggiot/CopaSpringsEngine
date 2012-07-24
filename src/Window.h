@@ -1,18 +1,18 @@
 /*---------------------------------------
- * Window.hh
+ * Window.h
  *
  *  Created on: 16 Aug 2011
  *      Author: Eliot J. Walker
  *---------------------------------------*/
-#ifndef WINDOW_HH
-#define WINDOW_HH
+#ifndef WINDOW_H
+#define WINDOW_H
 /*--------------------------------------*/
 #include <SDL/SDL.h>
 /*--------------------------------------*/
 #include <string>
 /*--------------------------------------*/
 
-/*! \class Window Window.hh "Window.hh"
+/*! \class Window Window.h "Window.h"
  \brief A generic window
 
  A generic window class that acts much as a wrapper for SDL's windowing system. */
@@ -31,4 +31,4 @@ public:
 };
 
 /*--------------------------------------*/
-#endif /*WINDOW.HH*/
+#endif /*WINDOW.h*/

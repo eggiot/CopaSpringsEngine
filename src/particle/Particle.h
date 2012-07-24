@@ -1,5 +1,5 @@
 /*---------------------------------------
- * Particles.hh
+ * Particles.h
  *
  *  Created on: 23 Aug 2011
  *      Author: Eliot J. Walker
@@ -9,8 +9,8 @@
  *      Emitter
  *      ParticleSystem
  *---------------------------------------*/
-#ifndef PARTICLES_HH
-#define PARTICLES_HH
+#ifndef PARTICLES_H
+#define PARTICLES_H
 /*---------------------------------------*/
 #include <GL/gl.h>
 /*---------------------------------------*/
@@ -64,4 +64,4 @@ struct Particle
 };
 
 /*--------------------------------------*/
-#endif /*PARTICLES_HH*/
+#endif /*PARTICLES_H*/

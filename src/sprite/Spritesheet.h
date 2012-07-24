@@ -1,13 +1,13 @@
 /*---------------------------------------
- * Spritesheet.hh
+ * Spritesheet.h
  *
  *  Created on: 21 Jul 2012
  *      Author: Eliot J. Walker
  *---------------------------------------*/
-#ifndef SPRITESHEET_HH
-#define SPRITESHEET_HH
+#ifndef SPRITESHEET_H
+#define SPRITESHEET_H
 /*--------------------------------------*/
-#include "../Image.hh"
+#include "../Image.h"
 #include <string>
 /*--------------------------------------*/
 
@@ -65,4 +65,4 @@ public:
 };
 
 /*--------------------------------------*/
-#endif /*SPRITES_HH*/
+#endif /*SPRITES_H*/

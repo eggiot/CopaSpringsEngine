@@ -1,5 +1,5 @@
 /*---------------------------------------
- * Emitter.hh
+ * Emitter.h
  *
  *  Created on: 21 Jul 2012
  *      Author: Eliot J. Walker
@@ -7,11 +7,11 @@
  *  Defines:
  *      Emitter
  *---------------------------------------*/
-#ifndef EMITTER_HH
-#define EMITTER_HH
+#ifndef EMITTER_H
+#define EMITTER_H
 /*---------------------------------------*/
-#include "Particle.hh"
-#include "../Image.hh"
+#include "Particle.h"
+#include "../Image.h"
 /*---------------------------------------*/
 #include <stdlib.h>
 #include <string>
@@ -125,4 +125,4 @@ public:
 };
 
 /*--------------------------------------*/
-#endif /*EMITTER_HH*/
+#endif /*EMITTER_H*/

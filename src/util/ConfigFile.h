@@ -1,11 +1,11 @@
 /*---------------------------------------
- * ConfigFile.hh
+ * ConfigFile.h
  *
  *  Created on: 20 Jul 2012
  *      Author: Eliot J. Walker
  *---------------------------------------*/
-#ifndef CONFIGFILE_HH
-#define CONFIGFILE_HH
+#ifndef CONFIGFILE_H
+#define CONFIGFILE_H
 /*--------------------------------------*/
 #include <string>
 #include <map>
@@ -42,4 +42,4 @@ public:
 };
 
 /*--------------------------------------*/
-#endif /*CONFIGFILE_HH*/
+#endif /*CONFIGFILE_H*/

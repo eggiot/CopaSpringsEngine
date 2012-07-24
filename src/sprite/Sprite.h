@@ -1,14 +1,14 @@
 /*---------------------------------------
- * Sprites.hh
+ * Sprites.h
  *
  *  Created on: 18 Aug 2011
  *      Author: Eliot J. Walker
  *---------------------------------------*/
-#ifndef SPRITES_HH
-#define SPRITES_HH
+#ifndef SPRITES_H
+#define SPRITES_H
 /*--------------------------------------*/
-#include "Spritesheet.hh"
-#include "../Image.hh"
+#include "Spritesheet.h"
+#include "../Image.h"
 /*--------------------------------------*/
 #include <string>
 #include <map>
@@ -28,9 +28,13 @@ public:
     void draw();
     void move(float x, float y);
     void setVelocity(float x_velocity, float y_velocity);
+
+    // query methods
     float getX();
     float getY();
+    float getWidth();
+    float getHeight();
 };
 
 /*--------------------------------------*/
-#endif /*SPRITES_HH*/
+#endif /*SPRITES_H*/

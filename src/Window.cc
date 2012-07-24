@@ -4,8 +4,8 @@
  *  Created on: 16 Aug 2011
  *      Author: Eliot J. Walker
  *---------------------------------------*/
-#include "Window.hh"
-#include "Graphics.hh"
+#include "Window.h"
+#include "Graphics.h"
 /*--------------------------------------*/
 #include <SDL/SDL.h>
 #include <GL/gl.h>

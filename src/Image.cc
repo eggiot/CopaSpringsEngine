@@ -8,8 +8,8 @@
 /*--------------------------------------*/
 #include <string>
 /*--------------------------------------*/
-#include "Image.hh"
-#include "Graphics.hh"
+#include "Image.h"
+#include "Graphics.h"
 /*--------------------------------------*/
 
 Graphics::Image::Image(std::string filename)

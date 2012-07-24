@@ -1,13 +1,13 @@
 /*---------------------------------------
- * Engine.hh
+ * Engine.h
  *
  *  Created on: 20 Jul 2012
  *      Author: Eliot J. Walker
  *---------------------------------------*/
-#ifndef ENGINE_HH
-#define ENGINE_HH
+#ifndef ENGINE_H
+#define ENGINE_H
 /*--------------------------------------*/
-#include "World.hh"
+#include "World.h"
 /*--------------------------------------*/
 #include <vector>
 /*--------------------------------------*/
@@ -24,4 +24,4 @@ public:
 };
 
 /*--------------------------------------*/
-#endif /*ENGINE_HH*/
+#endif /*ENGINE_H*/

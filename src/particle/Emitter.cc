@@ -4,10 +4,10 @@
  *  Created on: 21 Jul 2012
  *      Author: Eliot J. Walker
  *---------------------------------------*/
-#include "Emitter.hh"
-#include "Particle.hh"
-#include "../Image.hh"
-#include "../util/ConfigFile.hh"
+#include "Emitter.h"
+#include "Particle.h"
+#include "../Image.h"
+#include "../util/ConfigFile.h"
 /*---------------------------------------*/
 #include <vector>
 /*---------------------------------------*/

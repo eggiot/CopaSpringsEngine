@@ -4,9 +4,9 @@
  *  Created on: 18 Aug 2011
  *      Author: Eliot J. Walker
  *---------------------------------------*/
-#include "Sprite.hh"
-#include "Spritesheet.hh"
-#include "../Graphics.hh"
+#include "Sprite.h"
+#include "Spritesheet.h"
+#include "../Graphics.h"
 /*--------------------------------------*/
 #include <map>
 #include <string>
@@ -36,15 +36,15 @@ void Sprite::draw()
 {
     //glPushMatrix();
     //glTranslatef(x_, y_, 0.0f);
-    spritesheet_.draw(x_, y_, width_, height_);
+    spritesheet_.draw(0, 0, width_, height_);
     //glPopMatrix();
 }
 
 void Sprite::move(float x, float y)
 {
     // change the x and y coordinates
-    x_ = x;
-    y_ = y;
+    x_ += x;
+    y_ += y;
 }
 
 void Sprite::setVelocity(float x_velocity, float y_velocity)
@@ -61,4 +61,14 @@ float Sprite::getX()
 float Sprite::getY()
 {
     return y_;
+}
+
+float Sprite::getWidth()
+{
+    return width_;
+}
+
+float Sprite::getHeight()
+{
+    return height_;
 }

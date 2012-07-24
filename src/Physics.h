@@ -1,5 +1,5 @@
-#ifndef PHYSICS_HH
-#define PHYSICS_HH
+#ifndef PHYSICS_H
+#define PHYSICS_H
 
 /*namespace Physics
 {
@@ -13,4 +13,4 @@ public:
 };
 }*/
 
-#endif /*PHYSICS_HH*/
+#endif /*PHYSICS_H*/

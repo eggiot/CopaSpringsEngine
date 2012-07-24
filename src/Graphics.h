@@ -1,19 +1,19 @@
 /*---------------------------------------
- * Graphics.hh
+ * Graphics.h
  *
  *  Created on: 21 Aug 2011
  *      Author: Eliot J. Walker
  *
  * based on:
- *  oglutils.hh
+ *  oglutils.h
  *
  *   Created on: 16 Aug 2011
  *       Author: Eliot J. Walker
  *---------------------------------------*/
-#ifndef GRAPHICS_HH
-#define GRAPHICS_HH
+#ifndef GRAPHICS_H
+#define GRAPHICS_H
 /*--------------------------------------*/
-#include "Image.hh"
+#include "Image.h"
 /*--------------------------------------*/
 #include <GL/gl.h>
 /*--------------------------------------*/
@@ -31,5 +31,5 @@ void initGL(int window_width, int window_height);
 }
 
 /*--------------------------------------*/
-#endif /*GRAPHICS_HH*/
+#endif /*GRAPHICS_H*/
 

@@ -4,13 +4,14 @@
  *  Created on: 16 Aug 2011
  *      Author: Eliot J. Walker
  ---------------------------------------*/
-#include "Window.hh"
-#include "Graphics.hh"
-#include "Image.hh"
-#include "sprite/Sprite.hh"
-#include "particle/Emitter.hh"
-#include "Engine.hh"
-#include "World.hh"
+#include "Window.h"
+#include "Graphics.h"
+#include "Image.h"
+#include "sprite/Sprite.h"
+#include "particle/Emitter.h"
+#include "Engine.h"
+#include "World.h"
+#include "camera/FollowingCamera.h"
 /*--------------------------------------*/
 #include <SDL/SDL.h>
 /*--------------------------------------*/
@@ -45,7 +46,9 @@ void testParticleEngineAndLayers()
     Spritesheet chimney_sheet("test/chimney.png", 1, 1, 1, 1, false);
     Sprite chimney(chimney_sheet, 425, 0.0, 61, 61);
 
-    Camera camera(man);
+    int i = 1;
+
+    FollowingCamera camera(man);
     World world(camera);
     world.addSprite(man);
     world.addSprite(blocks);
@@ -61,6 +64,24 @@ void testParticleEngineAndLayers()
         //engine.update();
         //engine.draw();
         world.update();
+
+/*SDL_Event event;
+        while(SDL_PollEvent(&event))
+
+        {
+            if(event.type == SDL_KEYDOWN)
+            {
+                if(event.key.keysym.sym == SDLK_DOWN)
+                    man.move(0, -100);
+                else if(event.key.keysym.sym == SDLK_UP)
+                    man.move(0, 100);
+                else if(event.key.keysym.sym == SDLK_LEFT)
+                    man.move(-100, 0);
+                else if(event.key.keysym.sym == SDLK_RIGHT)
+                    man.move(100, 0);
+            }
+
+        }*/
         world.draw();
         SDL_GL_SwapBuffers();
         window.sleep(framerate);
