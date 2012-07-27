@@ -30,6 +30,8 @@ Sprite::Sprite(Spritesheet spritesheet, float x, float y, float width, float hei
 void Sprite::update()
 {
     spritesheet_.update();
+    x_ += x_velocity_;
+    y_ += y_velocity_;
 }
 
 void Sprite::draw()

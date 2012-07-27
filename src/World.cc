@@ -24,7 +24,6 @@ void World::addEmitter(Emitter emitter)
 
 void World::update()
 {
-    camera_.update();
     // update sprites
     for(std::vector<Sprite>::iterator current_sprite = sprites_.begin();
     current_sprite != sprites_.end(); ++current_sprite)
@@ -38,7 +37,7 @@ void World::update()
     {
         current_emitter->update();
     }
-
+    camera_.update();
 }
 
 // TODO: draw half of the particles, then draw the sprites,
@@ -48,7 +47,7 @@ void World::draw()
     glPushMatrix();
 
     //move the camera
-    glTranslatef((camera_.getX()), (camera_.getY()), 0.0f);
+    //glTranslatef((camera_.getX()), (camera_.getY()), 0.0f);
     // draw sprites
 
     // draw emitters

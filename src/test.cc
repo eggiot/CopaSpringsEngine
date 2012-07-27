@@ -25,12 +25,12 @@ void testParticleEngineAndLayers()
 {
     int window_width = 900; int window_height = 400;
     Window window(window_width, window_height, "Particle Engine");
-    int framerate = 50;
+    int framerate = 27;
 
     // initialise two emitters
     Emitter smoke("test/smoke_emitter.config");
 
-    Emitter rain("test/rain.png", 1, 10, 100, 100, 10000, 0.0, 1.0, 1.0, 1.0,
+    Emitter rain("test/rain.png", 1, 10, 100, 100, 10000, -window_width, window_width, window_height, window_height,
                  -0.001, -0.001, -0.03, -0.03, 0.0, 0.0, 0.0, 0.0, 0.001, 0.004,
                  15.0f/(float)window_width, 15.0f/(float)window_width,
                  0.0, 0.0, 15.0f/(float)window_width, 15.0f/(float)window_width,
@@ -39,6 +39,7 @@ void testParticleEngineAndLayers()
     // initialise two sprites
     Spritesheet man_sheet("test/spritesheet.png", 4, 4, 6, 13, false);
     Sprite man(man_sheet, 700, 0, 200, 200);
+    man.setVelocity(-30, 0);
 
     Spritesheet block_sheet("test/spritesheet-blocks.png", 4, 2, 1, 8, true);
     Sprite blocks(block_sheet, 200, 20, 100, 100);
@@ -46,14 +47,12 @@ void testParticleEngineAndLayers()
     Spritesheet chimney_sheet("test/chimney.png", 1, 1, 1, 1, false);
     Sprite chimney(chimney_sheet, 425, 0.0, 61, 61);
 
-    int i = 1;
-
     FollowingCamera camera(man);
     World world(camera);
-    world.addSprite(man);
     world.addSprite(blocks);
     world.addSprite(chimney);
     world.addEmitter(smoke);
+    world.addSprite(man);
     Engine engine(world);
 
     bool quit = false;
@@ -63,6 +62,7 @@ void testParticleEngineAndLayers()
         glClear(GL_COLOR_BUFFER_BIT);
         //engine.update();
         //engine.draw();
+        man.update();
         world.update();
 
 /*SDL_Event event;
@@ -82,7 +82,21 @@ void testParticleEngineAndLayers()
             }
 
         }*/
+        if(man.getX() < 0)
+            man.setVelocity(20, 0);
+        else if(man.getX() > 700)
+            man.setVelocity(-20, 0);
         world.draw();
+
+
+        glPushMatrix();
+        glTranslatef(-(camera.getX())+man.getX(), -(camera.getY())+man.getY(), 0.0f);
+        man.draw();
+        glPopMatrix();
+
+
+
+
         SDL_GL_SwapBuffers();
         window.sleep(framerate);
     }
