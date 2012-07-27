@@ -7,6 +7,8 @@
 #ifndef DYNAMICARRAY_H
 #define DYNAMICARRAY_H
 /*--------------------------------------*/
+#include <stdexcept>
+/*--------------------------------------*/
 
 template <class Item_>
 class DynamicArray
@@ -76,6 +78,11 @@ public:
             resizeArray();
         }
         array_[size_] = value;
+    }
+
+    int size()
+    {
+        return size_;
     }
 }
 

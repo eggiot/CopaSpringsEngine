@@ -28,6 +28,11 @@ public:
     {
         return array_[index];
     }
+
+    int size()
+    {
+        return size_;
+    }
 }
 
 /*--------------------------------------*/
