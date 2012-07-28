@@ -12,6 +12,16 @@
 #include <vector>
 /*---------------------------------------*/
 
+// preemptively pump a number of cycles so it looks as though the emitters been running for some time
+void Emitter::prePump()
+{
+    for(int cycle = 0; cycle != pre_pump_cycles_; ++cycle)
+    {
+        particles_.push_back(this->emit());
+        this->update();
+    }
+}
+
 Emitter::Emitter(std::string image_filename,
                  int spawn_rate, int particles_per_spawn, int pre_pump_cycles,
                  int min_life_length, int max_life_length,
@@ -58,15 +68,9 @@ Emitter::Emitter(std::string image_filename,
     image_.load(image_filename);
     loop_ = 1;
 
-    // preemptively pump a number of cycles so it looks as though the emitters been running for some time
-    for(int cycle = 0; cycle != pre_pump_cycles_; ++cycle)
-    {
-        particles_.push_back(this->emit());
-        this->update();
-    }
+    prePump();
 }
 
-// TODO: Load an emitter from a file
 Emitter::Emitter(std::string filename)
 {
     ConfigFile config(filename);
@@ -103,12 +107,7 @@ Emitter::Emitter(std::string filename)
     image_.load(image_filename);
     loop_ = 1;
 
-    // preemptively pump a number of cycles so it looks as though the emitters been running for some time
-    for(int cycle = 0; cycle != pre_pump_cycles_; ++cycle)
-    {
-        particles_.push_back(this->emit());
-        this->update();
-    }
+    prePump();
 }
 
 Particle Emitter::emit()
@@ -160,6 +159,7 @@ void Emitter::update()
     {
         current_particle->update();
 
+        // remove dead particles
         if(current_particle->life_length < 0)
         {
             particles_.erase(current_particle);

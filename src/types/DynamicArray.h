@@ -28,7 +28,7 @@ private:
         std::copy(array_, array_ + capacity_, tmp_array);
 
         // reset array_
-        delete [] array;
+        delete [] array_;
 
         // the capacity of array_ has now been multiplied by resize_multiplier_
         array_ = new Item_[capacity_*resize_multiplier_];
@@ -37,7 +37,7 @@ private:
         std::copy(tmp_array, tmp_array+capacity_, array_);
 
         // capacity is now resize_muliplier_ times greater
-        capacity *= resize_multiplier_;
+        capacity_ *= resize_multiplier_;
 
         // free memory
         delete[] tmp_array;
@@ -84,7 +84,7 @@ public:
     {
         return size_;
     }
-}
+};
 
 /*--------------------------------------*/
 #endif /*DYNAMICARRAY_H*/

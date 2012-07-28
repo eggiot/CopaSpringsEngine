@@ -94,6 +94,8 @@ private:
         return rand() % (max - min + 1) + min; // TODO: Probably doesn't work
     }
 
+    void prePump();
+
 public:
     // constructor: manually create an emitter
     Emitter(std::string image_filename,
