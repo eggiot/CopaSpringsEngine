@@ -12,7 +12,7 @@
 #include <vector>
 /*---------------------------------------*/
 
-// preemptively pump a number of cycles so it looks as though the emitters been running for some time
+// preemptively pump a number of cycles so it looks as though the emitter's been running for some time
 void Emitter::prePump()
 {
     for(int cycle = 0; cycle != pre_pump_cycles_; ++cycle)
