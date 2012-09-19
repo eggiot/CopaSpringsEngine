@@ -44,31 +44,16 @@ void World::update()
 // then draw the remaining particles
 void World::draw()
 {
-    glPushMatrix();
-
-    //move the camera
-    //glTranslatef((camera_.getX()), (camera_.getY()), 0.0f);
-    // draw sprites
-
     // draw emitters
     for(std::vector<Emitter>::iterator current_emitter = emitters_.begin();
     current_emitter != emitters_.end(); ++current_emitter)
     {
-        glPushMatrix();
-        glTranslatef(-(camera_.getX()), -(camera_.getY()), 0.0f);
         current_emitter->draw();
-        glTranslatef(0,0,0);
-        glPopMatrix();
     }
 
     for(std::vector<Sprite>::iterator current_sprite = sprites_.begin();
     current_sprite != sprites_.end(); ++current_sprite)
     {
-        glPushMatrix();
-        glTranslatef(-(camera_.getX())+current_sprite->getX(), -(camera_.getY())+current_sprite->getY(), 0.0f);
         current_sprite->draw();
-        //glTranslatef(,current_sprite->getY(),0);
-        glPopMatrix();
     }
-    glPopMatrix();
 }

@@ -27,7 +27,8 @@ void drawSubTexturedQuad(GLuint texture_id, float x, float y,
                          float width, float height,
                          float tex_x, float tex_y,
                          float tex_width, float tex_height, float alpha);
-void initGL(int window_width, int window_height);
+void initGL(int window_width, int window_height,
+            float viewport_width, float viewport_height);
 }
 
 /*--------------------------------------*/

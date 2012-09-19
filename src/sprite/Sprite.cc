@@ -36,10 +36,7 @@ void Sprite::update()
 
 void Sprite::draw()
 {
-    //glPushMatrix();
-    //glTranslatef(x_, y_, 0.0f);
-    spritesheet_.draw(0, 0, width_, height_);
-    //glPopMatrix();
+    spritesheet_.draw(x_, y_, width_, height_);
 }
 
 void Sprite::move(float x, float y)

@@ -20,13 +20,16 @@
 void Graphics::drawQuad(float x, float y, float width, float height, GLfloat rgba[4])
 {
     glColor4fv(rgba);
-    glBegin(GL_POLYGON);
+    glPushMatrix();
+    glTranslatef(x, y, 0.0);
+    glBegin(GL_QUADS);
         // anti-clockwise
-        glVertex2f(x, y);
-        glVertex2f(x+width, y);
-        glVertex2f(x+width, y+height);
-        glVertex2f(x, y+height);
+        glVertex2f(0.0, 0.0);
+        glVertex2f(width, 0.0);
+        glVertex2f(width, height);
+        glVertex2f(0.0, height);
     glEnd();
+    glPopMatrix();
 }
 
 // draw a textured quad
@@ -35,13 +38,16 @@ void Graphics::drawTexturedQuad(GLuint texture_id, float x, float y,
 {
     glColor4f(1.0f, 1.0f, 1.0f, alpha);
     glBindTexture(GL_TEXTURE_2D, texture_id);
-    glBegin(GL_POLYGON);
+    glPushMatrix();
+    glTranslatef(x, y, 0.0);
+    glBegin(GL_QUADS);
         // anti-clockwise
-        glTexCoord2f(0.0f, 0.0f); glVertex2f(x, y);
-        glTexCoord2f(1.0f, 0.0f); glVertex2f(x+width, y);
-        glTexCoord2f(1.0f, 1.0f); glVertex2f(x+width, y+height);
-        glTexCoord2f(0.0f, 1.0f); glVertex2f(x, y+height);
+        glTexCoord2f(0.0f, 0.0f); glVertex2f(0.0, 0.0);
+        glTexCoord2f(1.0f, 0.0f); glVertex2f(width, 0.0);
+        glTexCoord2f(1.0f, 1.0f); glVertex2f(width, height);
+        glTexCoord2f(0.0f, 1.0f); glVertex2f(0.0, height);
     glEnd();
+    glPopMatrix();
 }
 
 // draw part of a texture onto a quad
@@ -53,18 +59,22 @@ void Graphics::drawSubTexturedQuad(GLuint texture_id, float x, float y,
 {
     glColor4f(1.0f, 1.0f, 1.0f, alpha);
     glBindTexture(GL_TEXTURE_2D, texture_id);
-    glBegin(GL_POLYGON);
+    glPushMatrix();
+    glTranslatef(x, y, 0.0);
+    glBegin(GL_QUADS);
         // anti-clockwise
-        glTexCoord2f(tex_x, tex_y); glVertex2f(x, y);
-        glTexCoord2f(tex_x+tex_width, tex_y); glVertex2f(x+width, y);
-        glTexCoord2f(tex_x+tex_width, tex_y+tex_height); glVertex2f(x+width, y+height);
-        glTexCoord2f(tex_x, tex_y+tex_height); glVertex2f(x, y+height);
+        glTexCoord2f(tex_x, tex_y); glVertex2f(0.0, 0.0);
+        glTexCoord2f(tex_x+tex_width, tex_y); glVertex2f(width, 0.0);
+        glTexCoord2f(tex_x+tex_width, tex_y+tex_height); glVertex2f(width, height);
+        glTexCoord2f(tex_x, tex_y+tex_height); glVertex2f(0.0, height);
     glEnd();
+    glPopMatrix();
 }
 
 // initialise OpenGL
 // TODO: Put this somewhere else - possibly in Engine class
-void Graphics::initGL(int window_width, int window_height)
+void Graphics::initGL(int window_width, int window_height,
+                      float viewport_width, float viewport_height)
 {
     // enable texturing
     glEnable(GL_TEXTURE_2D);
@@ -82,7 +92,8 @@ void Graphics::initGL(int window_width, int window_height)
     // set up a perspective projection
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity(); // clear
-    glOrtho(0.0, window_width, 0.0, window_height, 0.0, 1.0); //orthographic projection
+    float aspect = (float)window_width / (float)window_height;
+    gluOrtho2D(0.0, aspect*viewport_width, 0.0, viewport_height); //orthographic projection
 
     // edit the model-view matrix
     glMatrixMode(GL_MODELVIEW);

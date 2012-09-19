@@ -25,7 +25,7 @@ void testParticleEngineAndLayers()
 {
 
     int window_width = 900; int window_height = 400;
-    Window window(window_width, window_height, "Particle Engine");
+    Window window(window_width, window_height, "Particle Engine", 5, 5);
     int framerate = 27;
 
     // initialise two emitters
@@ -39,14 +39,14 @@ void testParticleEngineAndLayers()
 
     // initialise two sprites
     Spritesheet man_sheet("test/spritesheet.png", 4, 4, 6, 13, false);
-    Sprite man(man_sheet, 700, 0, 200, 200);
-    man.setVelocity(-30, 0);
+    Sprite man(man_sheet, 5, 0, 0.8, 2.0);
+    man.setVelocity(-0.1, 0);
 
     Spritesheet block_sheet("test/spritesheet-blocks.png", 4, 2, 1, 8, true);
-    Sprite blocks(block_sheet, 200, 20, 100, 100);
+    Sprite blocks(block_sheet, 5, 5, 1, 1);
 
     Spritesheet chimney_sheet("test/chimney.png", 1, 1, 1, 1, false);
-    Sprite chimney(chimney_sheet, 425, 0.0, 61, 61);
+    Sprite chimney(chimney_sheet, 7, 0.0, 1.0, 1.0);
 
     FollowingCamera camera(man);
     World world(camera);
@@ -84,16 +84,16 @@ void testParticleEngineAndLayers()
 
         }*/
         if(man.getX() < 0)
-            man.setVelocity(20, 0);
-        else if(man.getX() > 700)
-            man.setVelocity(-20, 0);
+            man.setVelocity(0.1, 0);
+        else if(man.getX() > 5)
+            man.setVelocity(-0.1, 0);
         world.draw();
 
+        std::cout << man.getX();
 
-        glPushMatrix();
-        glTranslatef(-(camera.getX())+man.getX(), -(camera.getY())+man.getY(), 0.0f);
+
+
         man.draw();
-        glPopMatrix();
 
 
 
