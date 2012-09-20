@@ -25,7 +25,7 @@ void testParticleEngineAndLayers()
 {
 
     int window_width = 900; int window_height = 400;
-    Window window(window_width, window_height, "Particle Engine", 5, 5);
+    Window window(window_width, window_height, "Particle Engine", window_width/100, window_width/100);
     int framerate = 27;
 
     // initialise two emitters
@@ -39,11 +39,11 @@ void testParticleEngineAndLayers()
 
     // initialise two sprites
     Spritesheet man_sheet("test/spritesheet.png", 4, 4, 6, 13, false);
-    Sprite man(man_sheet, 5, 0, 0.8, 2.0);
+    Sprite man(man_sheet, 5, 0, 1, 2.0);
     man.setVelocity(-0.1, 0);
 
     Spritesheet block_sheet("test/spritesheet-blocks.png", 4, 2, 1, 8, true);
-    Sprite blocks(block_sheet, 5, 5, 1, 1);
+    Sprite blocks(block_sheet, 5, 0, 1, 1);
 
     Spritesheet chimney_sheet("test/chimney.png", 1, 1, 1, 1, false);
     Sprite chimney(chimney_sheet, 7, 0.0, 1.0, 1.0);
@@ -61,38 +61,15 @@ void testParticleEngineAndLayers()
     while(quit == false)
     {
         glClear(GL_COLOR_BUFFER_BIT);
-        //engine.update();
-        //engine.draw();
         man.update();
+        camera.update();
         world.update();
 
-/*SDL_Event event;
-        while(SDL_PollEvent(&event))
-
-        {
-            if(event.type == SDL_KEYDOWN)
-            {
-                if(event.key.keysym.sym == SDLK_DOWN)
-                    man.move(0, -100);
-                else if(event.key.keysym.sym == SDLK_UP)
-                    man.move(0, 100);
-                else if(event.key.keysym.sym == SDLK_LEFT)
-                    man.move(-100, 0);
-                else if(event.key.keysym.sym == SDLK_RIGHT)
-                    man.move(100, 0);
-            }
-
-        }*/
         if(man.getX() < 0)
             man.setVelocity(0.1, 0);
         else if(man.getX() > 5)
             man.setVelocity(-0.1, 0);
         world.draw();
-
-        std::cout << man.getX();
-
-
-
         man.draw();
 
 

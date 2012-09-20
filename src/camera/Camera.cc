@@ -16,33 +16,33 @@ Camera::Camera()
     y_ = 0;
 }
 
-Camera::Camera(int x, int y)
+Camera::Camera(float x, float y)
 {
     this->setPosition(x, y);
 }
 
-void Camera::setX(int x)
+void Camera::setX(float x)
 {
     x_ = x;
 }
 
-void Camera::setY(int y)
+void Camera::setY(float y)
 {
     y_ = y;
 }
 
-void Camera::setPosition(int x, int y)
+void Camera::setPosition(float x, float y)
 {
     x_ = x;
     y+ - y;
 }
 
-int Camera::getX()
+float Camera::getX()
 {
     return x_;
 }
 
-int Camera::getY()
+float Camera::getY()
 {
     return y_;
 }

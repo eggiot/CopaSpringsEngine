@@ -12,18 +12,18 @@ class Camera
 {
 protected:
     // what part of the world does the camera show
-    int x_, y_;
+    float x_, y_;
 public:
     Camera();
-    Camera(int x, int y);
+    Camera(float x, float y);
     //assignment methods
-    void setX(int x);
-    void setY(int y);
-    void setPosition(int x, int y);
+    void setX(float x);
+    void setY(float y);
+    void setPosition(float x, float y);
 
     // query methods
-    int getX();
-    int getY();
+    float getX();
+    float getY();
     virtual void update();
 };
 
