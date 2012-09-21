@@ -64,7 +64,7 @@ void Graphics::Image::load(std::string filename)
 
 void Graphics::Image::draw(float x, float y, float width, float height)
 {
-    Graphics::drawTexQuad_i(texture_, x, y, width, height, 1.0f);
+    Graphics::drawTexQuad(texture_, x, y, width, height);
 }
 
 

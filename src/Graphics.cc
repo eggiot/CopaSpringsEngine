@@ -55,63 +55,6 @@ void Graphics::initGL(int window_width, int window_height,
     glTranslatef(0.0f,0.0f,0.0f);
 }
 
-
-//TODO: Use vertex arrays
-// Draw an untextured quad
-void Graphics::drawQuad_i(float x, float y, float width, float height, GLfloat rgba[4])
-{
-    glColor4fv(rgba);
-    glPushMatrix();
-    glTranslatef(x, y, 0.0);
-    glBegin(GL_QUADS);
-        // anti-clockwise
-        glVertex2f(0.0, 0.0);
-        glVertex2f(width, 0.0);
-        glVertex2f(width, height);
-        glVertex2f(0.0, height);
-    glEnd();
-    glPopMatrix();
-}
-
-// draw a textured quad
-void Graphics::drawTexQuad_i(GLuint texture_id, float x, float y,
-                                float width, float height, float alpha)
-{
-    glColor4f(1.0f, 1.0f, 1.0f, alpha);
-    glBindTexture(GL_TEXTURE_2D, texture_id);
-    glPushMatrix();
-    glTranslatef(x, y, 0.0);
-    glBegin(GL_QUADS);
-        // anti-clockwise
-        glTexCoord2f(0.0f, 0.0f); glVertex2f(0.0, 0.0);
-        glTexCoord2f(1.0f, 0.0f); glVertex2f(width, 0.0);
-        glTexCoord2f(1.0f, 1.0f); glVertex2f(width, height);
-        glTexCoord2f(0.0f, 1.0f); glVertex2f(0.0, height);
-    glEnd();
-    glPopMatrix();
-}
-
-// draw part of a texture onto a quad
-void Graphics::drawSubTexQuad_i(GLuint texture_id, float x, float y,
-                                     float width, float height,
-                                     float tex_x, float tex_y,
-                                     float tex_width, float tex_height,
-                                     float alpha)
-{
-    glColor4f(1.0f, 1.0f, 1.0f, alpha);
-    glBindTexture(GL_TEXTURE_2D, texture_id);
-    glPushMatrix();
-    glTranslatef(x, y, 0.0);
-    glBegin(GL_QUADS);
-        // anti-clockwise
-        glTexCoord2f(tex_x, tex_y); glVertex2f(0.0, 0.0);
-        glTexCoord2f(tex_x+tex_width, tex_y); glVertex2f(width, 0.0);
-        glTexCoord2f(tex_x+tex_width, tex_y+tex_height); glVertex2f(width, height);
-        glTexCoord2f(tex_x, tex_y+tex_height); glVertex2f(0.0, height);
-    glEnd();
-    glPopMatrix();
-}
-
 void Graphics::drawTexQuad(GLuint texture, float x, float y, float width, float height)
 {
     GLfloat vertices[4*2] = {0.0, 0.0,
