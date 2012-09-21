@@ -129,8 +129,8 @@ void Spritesheet::draw(float x, float y, float width, float height)
     float tex_y = 1.0f - tex_height_ * (float)(current_row_ - 1) - tex_height_;
 
     // draw the sprite
-    Graphics::drawSubTexturedQuad(image_.getTexture(), x, y, width, height,
-                                  tex_x, tex_y, tex_width_, tex_height_, 1.0f);
+    Graphics::drawSubTexQuad(image_.getTexture(), x, y, width, height,
+                                  tex_x, tex_y, tex_width_, tex_height_);
 
 }
 

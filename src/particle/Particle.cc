@@ -36,7 +36,7 @@ void Particle::update()
 
 void Particle::draw()
 {
-    Graphics::drawTexturedQuad(texture, x, y, width, height, 1.0f);
+    Graphics::drawTexQuad(texture, x, y, width, height);
 }
 
 

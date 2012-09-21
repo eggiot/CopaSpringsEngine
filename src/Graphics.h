@@ -45,15 +45,19 @@ void initGL(int window_width, int window_height,
             float viewport_width, float viewport_height);
 
 // immediate mode drawing functions
-void drawQuad(float x, float y, float width, float height, GLfloat rgba[4]);
-void drawTexturedQuad(GLuint texture_id, float x, float y,
+void drawQuad_i(float x, float y, float width, float height, GLfloat rgba[4]);
+void drawTexQuad_i(GLuint texture_id, float x, float y,
                                 float width, float height, float alpha);
-void drawSubTexturedQuad(GLuint texture_id, float x, float y,
+void drawSubTexQuad_i(GLuint texture_id, float x, float y,
                          float width, float height,
                          float tex_x, float tex_y,
                          float tex_width, float tex_height, float alpha);
 
-void drawScene(std::vector<Quad> quads);
+void drawTexQuad(GLuint texture, float x, float y, float width, float height);
+void drawSubTexQuad(GLuint texture, float x, float y,
+                    float width, float height,
+                    float tex_x, float tex_y,
+                    float tex_width, float tex_height);
 }
 
 /*--------------------------------------*/
