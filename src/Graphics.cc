@@ -15,13 +15,48 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 /*--------------------------------------*/
-namespace Graphics
+#include <vector>
+/*--------------------------------------*/
+
+// initialise OpenGL
+// TODO: Put this somewhere else - possibly in Engine class
+void Graphics::initGL(int window_width, int window_height,
+                      float viewport_width, float viewport_height)
 {
-// are we running in immediate mode?
-const bool immediate = true;
+    // enable texturing
+    glEnable(GL_TEXTURE_2D);
+
+    // enable blending
+    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+
+    /*disable the depth test - depth will be determined
+    only by the order in which the objects are drawn*/
+    glDisable(GL_DEPTH_TEST);
+
+    // set up a perspective projection
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity(); // clear
+    float aspect = (float)window_width / (float)window_height;
+    gluOrtho2D(0.0, aspect*viewport_width, 0.0, viewport_height); //orthographic projection
+
+    // edit the model-view matrix
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity(); // clear
+
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+    glClearColor(104.0f/255.0f, 160.0f/255.0f, 223.0f/255.0f, 1.0f);
+    glViewport(0, 0, window_width, window_height);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor4f(1.0f,1.0f,1.0f, 1.0f);
+    glTranslatef(0.0f,0.0f,0.0f);
 }
 
-//TODO: Use vertex arrays and remove these functions
+
+//TODO: Use vertex arrays
 // Draw an untextured quad
 void Graphics::drawQuad(float x, float y, float width, float height, GLfloat rgba[4])
 {
@@ -77,39 +112,7 @@ void Graphics::drawSubTexturedQuad(GLuint texture_id, float x, float y,
     glPopMatrix();
 }
 
-// initialise OpenGL
-// TODO: Put this somewhere else - possibly in Engine class
-void Graphics::initGL(int window_width, int window_height,
-                      float viewport_width, float viewport_height)
+void Graphics::drawScene(std::vector<Quad> quads)
 {
-    // enable texturing
-    glEnable(GL_TEXTURE_2D);
 
-    // enable blending
-    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_BLEND);
-    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-
-    /*disable the depth test - depth will be determined
-    only by the order in which the objects are drawn*/
-    glDisable(GL_DEPTH_TEST);
-
-    // set up a perspective projection
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity(); // clear
-    float aspect = (float)window_width / (float)window_height;
-    gluOrtho2D(0.0, aspect*viewport_width, 0.0, viewport_height); //orthographic projection
-
-    // edit the model-view matrix
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity(); // clear
-
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
-    glClearColor(104.0f/255.0f, 160.0f/255.0f, 223.0f/255.0f, 1.0f);
-    glViewport(0, 0, window_width, window_height);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glColor4f(1.0f,1.0f,1.0f, 1.0f);
-    glTranslatef(0.0f,0.0f,0.0f);
 }

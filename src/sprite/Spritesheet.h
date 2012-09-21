@@ -8,7 +8,10 @@
 #define SPRITESHEET_H
 /*--------------------------------------*/
 #include "../Image.h"
+#include "../Graphics.h"
+/*--------------------------------------*/
 #include <string>
+#include <vector>
 /*--------------------------------------*/
 
 /*
@@ -60,7 +63,10 @@ public:
     // updates the location of the next sprite to display from the spritesheet
     void update();
 
-    // draws the current sprite
+    // get the texture coordinates of the spritesheet
+    Graphics::TexCoord getTexCoords();
+
+    // draws the current sprite in immediate mode
     void draw(float x, float y, float width, float height);
 };
 

@@ -3,6 +3,7 @@
 /*--------------------------------------*/
 #include <string>
 #include <iostream>
+#include <vector>
 /*--------------------------------------*/
 
 Spritesheet::Spritesheet(std::string filename, int num_columns, int num_rows, int first, int last, bool ping_pong)
@@ -104,6 +105,20 @@ void Spritesheet::update()
 }
 
 // get texcoord arrays
+Graphics::TexCoord Spritesheet::getTexCoords()
+{
+    Graphics::TexCoord tex_coords;
+
+    // set which part of the texture we're going to display
+    float tex_x = tex_width_ * (float)(current_column_ - 1);
+    float tex_y = 1.0f - tex_height_ * (float)(current_row_ - 1) - tex_height_;
+
+    tex_coords.x = tex_x;
+    tex_coords.y = tex_y;
+    tex_coords.height = tex_height_;
+    tex_coords.width = tex_width_;
+    return tex_coords;
+}
 
 
 // immediate mode draw

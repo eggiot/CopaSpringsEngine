@@ -23,10 +23,9 @@
 
 void testParticleEngineAndLayers()
 {
-
     int window_width = 900; int window_height = 400;
     Window window(window_width, window_height, "Particle Engine", 4, 4);
-    int framerate = 50;
+    int framerate = 0;
 
     // initialise two emitters
     Emitter smoke("test/smoke_emitter.config");
@@ -73,6 +72,7 @@ void testParticleEngineAndLayers()
         man.draw();
         SDL_GL_SwapBuffers();
         window.sleep(framerate);
+        std::cout << time << std::endl;
     }
 }
 
