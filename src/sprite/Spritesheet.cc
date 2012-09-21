@@ -103,6 +103,10 @@ void Spritesheet::update()
     }
 }
 
+// get texcoord arrays
+
+
+// immediate mode draw
 void Spritesheet::draw(float x, float y, float width, float height)
 {
     // set which part of the texture we're going to display

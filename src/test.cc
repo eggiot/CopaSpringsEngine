@@ -25,8 +25,8 @@ void testParticleEngineAndLayers()
 {
 
     int window_width = 900; int window_height = 400;
-    Window window(window_width, window_height, "Particle Engine", window_width/100, window_width/100);
-    int framerate = 27;
+    Window window(window_width, window_height, "Particle Engine", 4, 4);
+    int framerate = 50;
 
     // initialise two emitters
     Emitter smoke("test/smoke_emitter.config");
@@ -39,8 +39,8 @@ void testParticleEngineAndLayers()
 
     // initialise two sprites
     Spritesheet man_sheet("test/spritesheet.png", 4, 4, 6, 13, false);
-    Sprite man(man_sheet, 5, 0, 1, 2.0);
-    man.setVelocity(-0.1, 0);
+    Sprite man(man_sheet, 5, 0, 1.0, 2.0);
+    man.setVelocity(-0.3, 0);
 
     Spritesheet block_sheet("test/spritesheet-blocks.png", 4, 2, 1, 8, true);
     Sprite blocks(block_sheet, 5, 0, 1, 1);
@@ -66,15 +66,11 @@ void testParticleEngineAndLayers()
         world.update();
 
         if(man.getX() < 0)
-            man.setVelocity(0.1, 0);
+            man.setVelocity(0.3, 0);
         else if(man.getX() > 5)
-            man.setVelocity(-0.1, 0);
+            man.setVelocity(-0.3, 0);
         world.draw();
         man.draw();
-
-
-
-
         SDL_GL_SwapBuffers();
         window.sleep(framerate);
     }

@@ -7,15 +7,12 @@
 #include "FollowingCamera.h"
 #include "../sprite/Sprite.h"
 /*--------------------------------------*/
-#include <iostream>
-/*--------------------------------------*/
 
 void FollowingCamera::update()
 {
-    x_ = attached_sprite_.getX();
+    x_ = attached_sprite_.getX() - 2;
     y_ = attached_sprite_.getY();
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glTranslatef(-x_, -y_, 0.0);
-    std::cout << x_ << " " << y_ << std::endl;
 }

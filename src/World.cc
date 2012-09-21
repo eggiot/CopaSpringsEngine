@@ -9,7 +9,6 @@
  #include "particle/Emitter.h"
  /*--------------------------------------*/
  #include <vector>
- #include <iostream>
  /*--------------------------------------*/
 
 void World::addSprite(Sprite sprite)

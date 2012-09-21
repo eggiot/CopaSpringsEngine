@@ -8,14 +8,7 @@
 #include "Spritesheet.h"
 #include "../Graphics.h"
 /*--------------------------------------*/
-#include <map>
-#include <string>
-#include <stdio.h>
-#include <iostream>
-#include <vector>
-#include <GL/gl.h>
-#include <SDL/SDL.h>
-/*--------------------------------------*/
+
 Sprite::Sprite(Spritesheet spritesheet, float x, float y, float width, float height)
 {
     spritesheet_ = spritesheet;

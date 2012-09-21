@@ -15,7 +15,13 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 /*--------------------------------------*/
+namespace Graphics
+{
+// are we running in immediate mode?
+const bool immediate = true;
+}
 
+//TODO: Use vertex arrays and remove these functions
 // Draw an untextured quad
 void Graphics::drawQuad(float x, float y, float width, float height, GLfloat rgba[4])
 {
