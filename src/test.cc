@@ -25,7 +25,7 @@ void testParticleEngineAndLayers()
 {
     int window_width = 900; int window_height = 400;
     Window window(window_width, window_height, "Particle Engine", 4, 4);
-    int framerate = 0;
+    int framerate = 40;
 
     // initialise two emitters
     Emitter smoke("test/smoke_emitter.config");
@@ -47,12 +47,19 @@ void testParticleEngineAndLayers()
     Spritesheet chimney_sheet("test/chimney.png", 1, 1, 1, 1, false);
     Sprite chimney(chimney_sheet, 7, 0.0, 1.0, 1.0);
 
-    FollowingCamera camera(man);
-    World world(camera);
+    World world;
     world.addSprite(blocks);
     world.addSprite(chimney);
     world.addEmitter(smoke);
-    world.addSprite(man);
+
+    for (int i = 0; i > -1000; i -= 2)
+    {
+        Sprite block_post(block_sheet, i, 0, 1, 1);
+        world.addSprite(block_post);
+    }
+
+    world.addCentralSprite(man, 0, 0);
+
     Engine engine(world);
 
     bool quit = false;
@@ -60,19 +67,10 @@ void testParticleEngineAndLayers()
     while(quit == false)
     {
         glClear(GL_COLOR_BUFFER_BIT);
-        man.update();
-        camera.update();
         world.update();
-
-        if(man.getX() < 0)
-            man.setVelocity(0.3, 0);
-        else if(man.getX() > 5)
-            man.setVelocity(-0.3, 0);
         world.draw();
-        man.draw();
         SDL_GL_SwapBuffers();
         window.sleep(framerate);
-        std::cout << time << std::endl;
     }
 }
 

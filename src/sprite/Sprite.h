@@ -23,6 +23,8 @@ protected:
     float x_velocity_, y_velocity_;
     Spritesheet spritesheet_;
 public:
+    // default constructor
+    Sprite () {}
     Sprite(Spritesheet spritesheet, float x, float y, float width, float height);
     void update();
     void draw();

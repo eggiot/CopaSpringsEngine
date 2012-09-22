@@ -12,6 +12,7 @@ void FollowingCamera::update()
 {
     x_ = attached_sprite_.getX() - 2;
     y_ = attached_sprite_.getY();
+    attached_sprite_.update();
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glTranslatef(-x_, -y_, 0.0);

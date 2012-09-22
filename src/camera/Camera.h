@@ -24,7 +24,7 @@ public:
     // query methods
     float getX();
     float getY();
-    virtual void update();
+    void update();
 };
 
 /*--------------------------------------*/

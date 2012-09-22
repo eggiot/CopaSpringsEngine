@@ -8,6 +8,7 @@
   /*--------------------------------------*/
  #include <iostream>
  #include <SDL/SDL.h>
+ #include <GL/gl.h>
  /*--------------------------------------*/
 
 Camera::Camera()
@@ -48,4 +49,8 @@ float Camera::getY()
 }
 
 void Camera::update()
-{ }
+{
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glTranslatef(-x_, -y_, 0.0);
+}

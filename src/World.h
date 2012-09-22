@@ -19,12 +19,15 @@ class World
 private:
     std::vector<Sprite> sprites_;
     std::vector<Emitter> emitters_;
-    Camera& camera_;
+    Camera camera_;
+    bool camera_follows_;
+    Sprite central_sprite_;
 public:
-    World(Camera& camera) : camera_(camera)
-    { }
+    World();
     void addSprite(Sprite sprite);
+    void addCentralSprite(Sprite sprite, float x_offset_, float y_offset);
     void addEmitter(Emitter emitter);
+    void setCamera(Camera camera);
     void update();
     void draw();
 };
