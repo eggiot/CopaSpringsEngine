@@ -8,17 +8,24 @@
 #define ENGINE_H
 /*--------------------------------------*/
 #include "World.h"
+#include "Window.h"
 /*--------------------------------------*/
 #include <vector>
+#include <string>
 /*--------------------------------------*/
 
 class Engine
 {
 private:
     World *world_;
+    Window window_;
+    int framerate_;
 public:
-    Engine(World& world);
+    Engine();
     void setWorld(World& world);
+    void initWindow(int width, int height, std::string title);
+    void initGraphics(float viewport_width, float viewport_height);
+    void setFramerate(int msecs);
     void update();
     void draw();
 };

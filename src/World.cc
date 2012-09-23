@@ -10,6 +10,8 @@
  /*--------------------------------------*/
  #include <vector>
  /*--------------------------------------*/
+ #include <GL/gl.h>
+ /*--------------------------------------*/
 
 World::World()
 {
@@ -64,6 +66,7 @@ void World::update()
 
 void World::draw()
 {
+    glClear(GL_COLOR_BUFFER_BIT);
     // draw emitters
     for(std::vector<Emitter>::iterator current_emitter = emitters_.begin();
     current_emitter != emitters_.end(); ++current_emitter)
@@ -81,4 +84,6 @@ void World::draw()
     {
         central_sprite_.draw();
     }
+
+    SDL_GL_SwapBuffers();
 }

@@ -10,6 +10,7 @@
 #include "../util/ConfigFile.h"
 /*---------------------------------------*/
 #include <vector>
+#include <iostream>
 /*---------------------------------------*/
 
 // preemptively pump a number of cycles so it looks as though the emitter's been running for some time

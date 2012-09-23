@@ -8,13 +8,29 @@
 #include "Camera.h"
 /*--------------------------------------*/
 #include <iostream>
-#include <GL/glu.h>
 /*--------------------------------------*/
 
-Engine::Engine(World& world)
+Engine::Engine()
 {
-    world_ = &world;
+    world_ = NULL;
 }
+
+void Engine::initWindow(int width, int height, std::string title)
+{
+    window_.init(width, height, title);
+}
+
+void Engine::initGraphics(float viewport_width, float viewport_height)
+{
+    window_.initGraphics(viewport_width, viewport_height);
+}
+
+void Engine::setFramerate(int msecs)
+{
+    framerate_ = msecs;
+}
+
+
 void Engine::setWorld(World& world)
 {
     world_ = &world;
@@ -22,8 +38,11 @@ void Engine::setWorld(World& world)
 
 void Engine::update()
 {
+    world_->update();
 }
 
 void Engine::draw()
 {
+    world_->draw();
+    window_.sleep(framerate_);
 }

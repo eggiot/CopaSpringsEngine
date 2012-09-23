@@ -8,6 +8,7 @@
 #include <GL/gl.h>
 /*--------------------------------------*/
 #include <string>
+#include <iostream>
 /*--------------------------------------*/
 #include "Image.h"
 #include "Graphics.h"

@@ -24,6 +24,11 @@ The constructor for the Window class.
 
 Window::Window(int width, int height, std::string title)
 {
+    this->init(width, height, title);
+}
+
+void Window::init(int width, int height, std::string title)
+{
     SDL_Init(SDL_INIT_EVERYTHING);
     fullscreen_ = false;
     screen_ = SDL_SetVideoMode( width, height, 32, SDL_OPENGL | SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_RESIZABLE);
@@ -34,7 +39,9 @@ Window::Window(int width, int height, std::string title)
 
 void Window::initGraphics(float viewport_width, float viewport_height)
 {
-    Graphics::initGL(width_, height_, viewport_width, viewport_height);
+    viewport_width_ = viewport_width;
+    viewport_height_ = viewport_height;
+    Graphics::initGL(width_, height_, viewport_width_, viewport_height_);
 
     // set SDL OpenGL attributes
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
@@ -58,11 +65,14 @@ void Window::sleep(int msecs)
 
 Changes the size of the window.
 
-\param new_width The width in pixels of the resized window.
-\param new_height The height in pixels of the resized window. */
+\param width The width in pixels of the resized window.
+\param height The height in pixels of the resized window. */
 
-void Window::resize(int new_width, int new_height)
+void Window::resize(int width, int height)
 {
-    screen_ = SDL_SetVideoMode( new_width, new_height, 32, SDL_OPENGL | SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_RESIZABLE);
-    glViewport(0, 0, new_width, new_height);
+    width_ = width;
+    height_ = height;
+    screen_ = SDL_SetVideoMode(width_, height_, 32, SDL_OPENGL | SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_RESIZABLE);
+    //glViewport(0, 0, new_width, new_height);
+    Graphics::initGL(width_, height_, viewport_width_, viewport_height_);
 }

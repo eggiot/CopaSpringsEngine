@@ -16,6 +16,7 @@
 #include <GL/glu.h>
 /*--------------------------------------*/
 #include <vector>
+#include <iostream>
 /*--------------------------------------*/
 
 // initialise OpenGL

@@ -5,25 +5,27 @@
  *      Author: Eliot J. Walker
  ---------------------------------------*/
 #include "Window.h"
-#include "Graphics.h"
-#include "Image.h"
 #include "sprite/Sprite.h"
 #include "particle/Emitter.h"
 #include "Engine.h"
 #include "World.h"
 #include "Camera.h"
 /*--------------------------------------*/
-#include <SDL/SDL.h>
-/*--------------------------------------*/
 #include <iostream>
+#include <GL/gl.h>
 /*--------------------------------------*/
 
 void testParticleEngineAndLayers()
 {
     int window_width = 900; int window_height = 400;
-    Window window(window_width, window_height, "Particle Engine");
-    window.initGraphics(4, 4);
+    //Window window(window_width, window_height, "Particle Engine");
+    //window.initGraphics(4, 4);
     int framerate = 40;
+
+    Engine engine;
+    engine.initWindow(window_width, window_height, "Test");
+    engine.initGraphics(4,4);
+    engine.setFramerate(framerate);
 
     // initialise two emitters
     Emitter smoke("test/smoke_emitter.config");
@@ -49,26 +51,20 @@ void testParticleEngineAndLayers()
     world.addSprite(blocks);
     world.addSprite(chimney);
     world.addEmitter(smoke);
-
     for (int i = 0; i > -1000; i -= 2)
     {
         Sprite block_post(block_sheet, i, 0, 1, 1);
         world.addSprite(block_post);
     }
-
     world.addCentralSprite(man, 0, 0);
 
-    Engine engine(world);
+    engine.setWorld(world);
 
     bool quit = false;
-
     while(quit == false)
     {
-        glClear(GL_COLOR_BUFFER_BIT);
-        world.update();
-        world.draw();
-        SDL_GL_SwapBuffers();
-        window.sleep(framerate);
+        engine.update();
+        engine.draw();
     }
 }
 

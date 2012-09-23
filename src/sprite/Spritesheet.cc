@@ -131,6 +131,5 @@ void Spritesheet::draw(float x, float y, float width, float height)
     // draw the sprite
     Graphics::drawSubTexQuad(image_.getTexture(), x, y, width, height,
                                   tex_x, tex_y, tex_width_, tex_height_);
-
 }
 
