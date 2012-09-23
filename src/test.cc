@@ -4,7 +4,6 @@
  *  Created on: 16 Aug 2011
  *      Author: Eliot J. Walker
  ---------------------------------------*/
-#include "Window.h"
 #include "sprite/Sprite.h"
 #include "particle/Emitter.h"
 #include "Engine.h"
@@ -18,8 +17,6 @@
 void testParticleEngineAndLayers()
 {
     int window_width = 900; int window_height = 400;
-    //Window window(window_width, window_height, "Particle Engine");
-    //window.initGraphics(4, 4);
     int framerate = 40;
 
     Engine engine;
