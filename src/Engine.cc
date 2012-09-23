@@ -5,7 +5,7 @@
  *      Author: Eliot J. Walker
  *---------------------------------------*/
 #include "Engine.h"
-#include "camera/Camera.h"
+#include "Camera.h"
 /*--------------------------------------*/
 #include <iostream>
 #include <GL/glu.h>

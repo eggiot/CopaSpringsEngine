@@ -9,7 +9,7 @@
 /*--------------------------------------*/
 #include "sprite/Sprite.h"
 #include "particle/Emitter.h"
-#include "camera/Camera.h"
+#include "Camera.h"
 /*--------------------------------------*/
 #include <vector>
 /*--------------------------------------*/

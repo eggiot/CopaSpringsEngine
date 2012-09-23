@@ -35,7 +35,7 @@ void Camera::setY(float y)
 void Camera::setPosition(float x, float y)
 {
     x_ = x;
-    y+ - y;
+    y_ - y;
 }
 
 float Camera::getX()

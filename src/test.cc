@@ -11,14 +11,11 @@
 #include "particle/Emitter.h"
 #include "Engine.h"
 #include "World.h"
-#include "camera/FollowingCamera.h"
+#include "Camera.h"
 /*--------------------------------------*/
 #include <SDL/SDL.h>
 /*--------------------------------------*/
-#include <queue>
 #include <iostream>
-#include <math.h>
-#include <string>
 /*--------------------------------------*/
 
 void testParticleEngineAndLayers()
