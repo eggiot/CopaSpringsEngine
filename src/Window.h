@@ -23,10 +23,10 @@ protected:
     //! The SDL surface on which everything will be displayed
     SDL_Surface* screen_;
     bool fullscreen_;
-
+    int width_, height_;
 public:
-    Window(int width, int height, std::string title,
-           float viewport_width, float viewport_height);
+    Window(int width, int height, std::string title);
+    void initGraphics(float viewport_width, float viewport_height);
     void sleep(int msecs);
     void resize(int width, int height);
 };

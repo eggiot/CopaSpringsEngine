@@ -22,14 +22,19 @@ The constructor for the Window class.
 \param height The height of the window in pixels.
 \param title The title to display in the window's title bar. */
 
-Window::Window(int width, int height, std::string title,
-               float viewport_width, float viewport_height)
+Window::Window(int width, int height, std::string title)
 {
     SDL_Init(SDL_INIT_EVERYTHING);
     fullscreen_ = false;
     screen_ = SDL_SetVideoMode( width, height, 32, SDL_OPENGL | SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_RESIZABLE);
     SDL_WM_SetCaption(title.c_str(), NULL); // TODO: Enable icons (currently NULL)
-    Graphics::initGL(width, height, viewport_width, viewport_height);
+    width_ = width;
+    height_ = height;
+}
+
+void Window::initGraphics(float viewport_width, float viewport_height)
+{
+    Graphics::initGL(width_, height_, viewport_width, viewport_height);
 
     // set SDL OpenGL attributes
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);

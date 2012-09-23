@@ -62,8 +62,6 @@ void World::update()
     camera_.update();
 }
 
-// TODO: draw half of the particles, then draw the sprites,
-// then draw the remaining particles
 void World::draw()
 {
     // draw emitters
