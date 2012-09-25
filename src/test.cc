@@ -9,25 +9,29 @@
 #include "Engine.h"
 #include "World.h"
 #include "Camera.h"
+#include "Audio.h"
 /*--------------------------------------*/
 #include <iostream>
 #include <GL/gl.h>
 /*--------------------------------------*/
 
+#define RUN_TIME 10000
+
 void testParticleEngineAndLayers()
 {
     int window_width = 900; int window_height = 400;
+    float viewport_width = 4.0; float viewport_height = 4.0;
     int framerate = 40;
 
     Engine engine;
     engine.initWindow(window_width, window_height, "Test");
-    engine.initGraphics(4,4);
+    engine.initGraphics(viewport_width, viewport_height);
     engine.setFramerate(framerate);
 
     // initialise two emitters
     Emitter smoke("test/smoke_emitter.config");
 
-    Emitter rain("test/rain.png", 1, 10, 100, 100, 10000, -window_width, window_width, window_height, window_height,
+    Emitter rain("test/rain.png", 1, 10, 100, 100, 10000, -1000, 1000, viewport_height, viewport_height,
                  -0.001, -0.001, -0.03, -0.03, 0.0, 0.0, 0.0, 0.0, 0.001, 0.004,
                  15.0f/(float)window_width, 15.0f/(float)window_width,
                  0.0, 0.0, 15.0f/(float)window_width, 15.0f/(float)window_width,
@@ -58,7 +62,7 @@ void testParticleEngineAndLayers()
     engine.setWorld(world);
 
     bool quit = false;
-    while(quit == false)
+    while(SDL_GetTicks() < RUN_TIME)
     {
         engine.update();
         engine.draw();

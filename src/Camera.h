@@ -8,24 +8,7 @@
 #define CAMERA_H
 /*--------------------------------------*/
 
-class Camera
-{
-protected:
-    // what part of the world does the camera show
-    float x_, y_;
-public:
-    Camera();
-    Camera(float x, float y);
-    //assignment methods
-    void setX(float x);
-    void setY(float y);
-    void setPosition(float x, float y);
-
-    // query methods
-    float getX();
-    float getY();
-    void update();
-};
+void cameraLookAt(float x, float y);
 
 /*--------------------------------------*/
 #endif /*CAMERA_H*/

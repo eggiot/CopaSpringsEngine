@@ -22,6 +22,7 @@ private:
     int framerate_;
 public:
     Engine();
+    ~Engine();
     void setWorld(World& world);
     void initWindow(int width, int height, std::string title);
     void initGraphics(float viewport_width, float viewport_height);

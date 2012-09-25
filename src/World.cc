@@ -34,11 +34,6 @@ void World::addEmitter(Emitter emitter)
     emitters_.push_back(emitter);
 }
 
-void World::setCamera(Camera camera)
-{
-    camera_ = camera;
-}
-
 void World::update()
 {
     // update sprites
@@ -59,9 +54,8 @@ void World::update()
     if(camera_follows_)
     {
         central_sprite_.update();
-        camera_.setPosition(central_sprite_.getX(), central_sprite_.getY());
+        cameraLookAt(central_sprite_.getX(), central_sprite_.getY());
     }
-    camera_.update();
 }
 
 void World::draw()

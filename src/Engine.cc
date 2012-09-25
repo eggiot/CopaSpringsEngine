@@ -15,6 +15,11 @@ Engine::Engine()
     world_ = NULL;
 }
 
+Engine::~Engine()
+{
+    world_ = NULL;
+}
+
 void Engine::initWindow(int width, int height, std::string title)
 {
     window_.init(width, height, title);
