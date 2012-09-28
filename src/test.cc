@@ -10,6 +10,7 @@
 #include "World.h"
 #include "Camera.h"
 #include "Audio.h"
+#include "GameObject.h"
 /*--------------------------------------*/
 #include <iostream>
 #include <GL/gl.h>
@@ -69,8 +70,54 @@ void testParticleEngineAndLayers()
     }
 }
 
+class TestComponent : public Component
+{
+    void update()
+    {
+        std::cout << "Updating component" << std::endl;
+    }
+
+    void render()
+    {
+        std::cout << "Rendering" << std::endl;
+    }
+};
+
+void testGameObjects()
+{
+    GameObject go("test_game_object");
+    Graphics::Quad quad;
+    quad.x = 1; quad.y = 1; quad. width = 1; quad.height = 1; quad.rotation = 0;
+    quad.ux = 0; quad.uy = 0; quad.uwidth = 1; quad.uheight = 1;
+    go.setQuad(quad);
+    TestComponent* gc = new TestComponent();
+    go.setComponent(gc);
+
+    Component* gcd = go.getComponent(gc->family_id_);
+
+    if (gcd != NULL)
+    {
+        std::cout << "Got something" << std::endl;
+        if (gc == gcd)
+        {
+            std::cout << "gc == gcd" << std::endl;
+        }
+        else
+        {
+            std::cout << "gc != gcd" << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "Didn't get anything" << std::endl;
+    }
+
+    go.clearComponents();
+}
+
 int main()
 {
-    testParticleEngineAndLayers();
+    //testParticleEngineAndLayers();
+    testGameObjects();
     return 0;
 }

@@ -38,6 +38,7 @@ struct Quad
 {
     float x, y, width, height;
     float ux, uy, uwidth, uheight;
+    float rotation;
 };
 
 // default initialisation function
