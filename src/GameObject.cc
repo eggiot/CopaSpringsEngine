@@ -57,7 +57,9 @@ void GameObject::clearComponents()
         component != components_.end(); ++component)
     {
         delete component->second;
+        std::cout << component->second << std::endl;
         component->second = NULL;
+        std::cout << component->second << std::endl;
         components_.erase(component);
     }
     components_.clear();

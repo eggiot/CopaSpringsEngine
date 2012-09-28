@@ -9,6 +9,8 @@
 #include "../Graphics.h"
 /*--------------------------------------*/
 
+/* TODO: This sprite class will eventually be replaced
+ by a GameObject with a Spritesheet component */
 Sprite::Sprite(Spritesheet spritesheet, float x, float y, float width, float height)
 {
     spritesheet_ = spritesheet;
@@ -23,6 +25,7 @@ Sprite::Sprite(Spritesheet spritesheet, float x, float y, float width, float hei
 void Sprite::update()
 {
     spritesheet_.update();
+    // TODO: forcing movement is a very inflexible approach
     x_ += x_velocity_;
     y_ += y_velocity_;
 }

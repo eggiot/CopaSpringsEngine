@@ -72,6 +72,7 @@ Emitter::Emitter(std::string image_filename,
     prePump();
 }
 
+// create an emitter using info from a config file
 Emitter::Emitter(std::string filename)
 {
     ConfigFile config(filename);
@@ -174,6 +175,7 @@ void Emitter::update()
 
 }
 
+// draws all the particles
 void Emitter::draw()
 {
     for(std::vector<Particle>::iterator current_particle = particles_.begin();

@@ -40,7 +40,7 @@ void testParticleEngineAndLayers()
 
     // initialise two sprites
     Spritesheet man_sheet("test/spritesheet.png", 4, 4, 6, 13, false);
-    Sprite man(man_sheet, 5, 0, 1.0, 2.0);
+    Sprite man(man_sheet, 5, 0, 2.0, 2.0);
     man.setVelocity(-0.3, 0);
 
     Spritesheet block_sheet("test/spritesheet-blocks.png", 4, 2, 1, 8, true);
@@ -70,11 +70,12 @@ void testParticleEngineAndLayers()
     }
 }
 
-class TestComponent : public Component
+class RenderComponent : public Component
 {
+public:
     void update()
     {
-        std::cout << "Updating component" << std::endl;
+        std::cout << "Updating TestComponent" << std::endl;
     }
 
     void render()
@@ -90,10 +91,11 @@ void testGameObjects()
     quad.x = 1; quad.y = 1; quad. width = 1; quad.height = 1; quad.rotation = 0;
     quad.ux = 0; quad.uy = 0; quad.uwidth = 1; quad.uheight = 1;
     go.setQuad(quad);
-    TestComponent* gc = new TestComponent();
+    RenderComponent* gc = new RenderComponent();
     go.setComponent(gc);
 
     Component* gcd = go.getComponent(gc->family_id_);
+    RenderComponent* testgcd = static_cast<RenderComponent*>(gcd);
 
     if (gcd != NULL)
     {
@@ -101,6 +103,8 @@ void testGameObjects()
         if (gc == gcd)
         {
             std::cout << "gc == gcd" << std::endl;
+            gcd->update();
+            testgcd->render();
         }
         else
         {
@@ -112,12 +116,16 @@ void testGameObjects()
         std::cout << "Didn't get anything" << std::endl;
     }
 
+    std::cout << gc << std::endl;
+
     go.clearComponents();
+
+    std::cout << gc << std::endl;
 }
 
 int main()
 {
-    //testParticleEngineAndLayers();
-    testGameObjects();
+    testParticleEngineAndLayers();
+    //testGameObjects();
     return 0;
 }

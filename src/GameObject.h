@@ -8,7 +8,6 @@
 #define GAMEOBJECT_H
 /*---------------------------------------*/
 #include "Graphics.h"
-#include "Component.h"
 /*---------------------------------------*/
 #include <string>
 #include <map>
