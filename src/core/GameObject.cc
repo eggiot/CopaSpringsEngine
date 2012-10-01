@@ -5,6 +5,7 @@
  *      Author: Eliot J. Walker
  *---------------------------------------*/
 #include "GameObject.h"
+#include <boost/shared_ptr.hpp>
 /*---------------------------------------*/
 
 GameObject::GameObject(const gameobject_id_t& id)
@@ -32,12 +33,13 @@ void GameObject::setID(const GameObject::gameobject_id_t& id)
     id_ = id;
 }
 
-Component* GameObject::getComponent(const Component::component_id_t& family_id)
+boost::shared_ptr<Component> GameObject::getComponent(const Component::component_id_t& family_id)
 {
     component_table_t::iterator component = components_.find(family_id);
     if(component == components_.end())
     {
-        return NULL;
+        boost::shared_ptr<Component> null_component;
+        return null_component;
     }
     else
     {
@@ -47,35 +49,26 @@ Component* GameObject::getComponent(const Component::component_id_t& family_id)
 
 void GameObject::setComponent(Component* new_component)
 {
-    Component::component_id_t id = new_component->family_id_;
-    new_component->setOwnerObject(this);
-    components_[id] = new_component;
+    Component::component_id_t id = new_component->family_id;
+    new_component->setOwnerObject(boost::shared_ptr<GameObject>(this));
+    components_[id] = boost::shared_ptr<Component> (new_component);
 }
 void GameObject::clearComponents()
 {
-    for(component_table_t::iterator component = components_.begin();
-        component != components_.end(); ++component)
-    {
-        delete component->second;
-        std::cout << component->second << std::endl;
-        component->second = NULL;
-        std::cout << component->second << std::endl;
-        components_.erase(component);
-    }
     components_.clear();
 }
 
 Component::Component(Component::component_id_t family_id)
 {
-    family_id_ = family_id;
+    this->family_id = family_id;
 }
 
-void Component::setOwnerObject(GameObject* game_object)
+void Component::setOwnerObject(boost::shared_ptr<GameObject> game_object)
 {
     owner_object_ = game_object;
 }
 
-GameObject* Component::getOwnerObject()
+boost::shared_ptr<GameObject> Component::getOwnerObject()
 {
     return owner_object_;
 }

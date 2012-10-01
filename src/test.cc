@@ -14,6 +14,7 @@
 /*--------------------------------------*/
 #include <iostream>
 #include <GL/gl.h>
+#include <boost/shared_ptr.hpp>
 /*--------------------------------------*/
 
 #define RUN_TIME 10000
@@ -94,13 +95,13 @@ void testGameObjects()
     RenderComponent* gc = new RenderComponent();
     go.setComponent(gc);
 
-    Component* gcd = go.getComponent(gc->family_id_);
-    RenderComponent* testgcd = static_cast<RenderComponent*>(gcd);
+    boost::shared_ptr<Component> gcd = go.getComponent(gc->family_id);
+    boost::shared_ptr<RenderComponent> testgcd = boost::static_pointer_cast<RenderComponent>(gcd);
 
-    if (gcd != NULL)
+    if (gcd)
     {
         std::cout << "Got something" << std::endl;
-        if (gc == gcd)
+        if (gc == gcd.get())
         {
             std::cout << "gc == gcd" << std::endl;
             gcd->update();
@@ -115,17 +116,12 @@ void testGameObjects()
     {
         std::cout << "Didn't get anything" << std::endl;
     }
-
-    std::cout << gc << std::endl;
-
-    go.clearComponents();
-
-    std::cout << gc << std::endl;
 }
 
 int main()
 {
-    testParticleEngineAndLayers();
-    //testGameObjects();
+    //testParticleEngineAndLayers();
+    testGameObjects();
+    std::cout << "Hello";
     return 0;
 }

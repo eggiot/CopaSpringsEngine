@@ -5,12 +5,14 @@
  *      Author: Eliot J. Walker
  *---------------------------------------*/
 #include "Emitter.h"
-#include "Particle.h"
 #include "../Image.h"
 #include "../util/ConfigFile.h"
+#include "../Graphics.h"
 /*---------------------------------------*/
 #include <vector>
 #include <iostream>
+/*---------------------------------------*/
+#include <GL/gl.h>
 /*---------------------------------------*/
 
 // preemptively pump a number of cycles so it looks as though the emitter's been running for some time
@@ -184,3 +186,35 @@ void Emitter::draw()
         current_particle->draw();
     }
 }
+
+
+/*----------------------- PARTICLE ---------------------------*/
+
+void Particle::update()
+{
+    //update particle
+    // move the particle through its velocity
+    x += velocity_x;
+    y += velocity_y;
+
+    // reduce its life length
+    life_length -= 1;
+
+    // accelerate / decelerate the particle
+    velocity_x += acceleration_x;
+    velocity_y += acceleration_y;
+
+    // rotate
+    rotate += rotate_velocity;
+
+    // resize
+    width  += width_change;
+    height += height_change;
+}
+
+void Particle::draw()
+{
+    Graphics::drawTexQuad(texture, x, y, width, height);
+}
+
+
