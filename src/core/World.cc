@@ -5,8 +5,8 @@
  *      Author: Eliot J. Walker
  *---------------------------------------*/
  #include "World.h"
- #include "sprite/Sprite.h"
- #include "particle/Emitter.h"
+ #include "../deprecated/Sprite.h"
+ #include "../components/Emitter.h"
  /*--------------------------------------*/
  #include <vector>
  /*--------------------------------------*/

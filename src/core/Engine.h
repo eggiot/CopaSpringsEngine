@@ -8,7 +8,7 @@
 #define ENGINE_H
 /*--------------------------------------*/
 #include "World.h"
-#include "Window.h"
+#include "../graphics/Window.h"
 /*--------------------------------------*/
 #include <vector>
 #include <string>

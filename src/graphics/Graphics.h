@@ -13,7 +13,7 @@
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 /*--------------------------------------*/
-#include "Image.h"
+#include "../media/Image.h"
 /*--------------------------------------*/
 #include <GL/gl.h>
 /*--------------------------------------*/

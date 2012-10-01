@@ -10,8 +10,7 @@
 #ifndef EMITTER_H
 #define EMITTER_H
 /*---------------------------------------*/
-#include "Particle.h"
-#include "../Image.h"
+#include "../media/Image.h"
 /*---------------------------------------*/
 #include <stdlib.h>
 #include <string>

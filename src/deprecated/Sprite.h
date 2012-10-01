@@ -7,8 +7,8 @@
 #ifndef SPRITES_H
 #define SPRITES_H
 /*--------------------------------------*/
-#include "Spritesheet.h"
-#include "../Image.h"
+#include "../components/Spritesheet.h"
+#include "../media/Image.h"
 /*--------------------------------------*/
 #include <string>
 #include <map>

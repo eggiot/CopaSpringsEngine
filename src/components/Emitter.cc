@@ -5,9 +5,9 @@
  *      Author: Eliot J. Walker
  *---------------------------------------*/
 #include "Emitter.h"
-#include "../Image.h"
+#include "../media/Image.h"
 #include "../util/ConfigFile.h"
-#include "../Graphics.h"
+#include "../graphics/Graphics.h"
 /*---------------------------------------*/
 #include <vector>
 #include <iostream>

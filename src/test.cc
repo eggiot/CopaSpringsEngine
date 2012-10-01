@@ -4,13 +4,13 @@
  *  Created on: 16 Aug 2011
  *      Author: Eliot J. Walker
  ---------------------------------------*/
-#include "sprite/Sprite.h"
-#include "particle/Emitter.h"
-#include "Engine.h"
-#include "World.h"
-#include "Camera.h"
-#include "Audio.h"
-#include "GameObject.h"
+#include "deprecated/Sprite.h"
+#include "components/Emitter.h"
+#include "components/Camera.h"
+#include "core/Engine.h"
+#include "core/World.h"
+#include "core/GameObject.h"
+#include "media/Audio.h"
 /*--------------------------------------*/
 #include <iostream>
 #include <GL/gl.h>
@@ -120,8 +120,7 @@ void testGameObjects()
 
 int main()
 {
-    //testParticleEngineAndLayers();
-    testGameObjects();
-    std::cout << "Hello";
+    testParticleEngineAndLayers();
+    //testGameObjects();
     return 0;
 }

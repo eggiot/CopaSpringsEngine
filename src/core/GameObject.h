@@ -7,7 +7,7 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 /*---------------------------------------*/
-#include "Graphics.h"
+#include "../graphics/Graphics.h"
 /*---------------------------------------*/
 #include <string>
 #include <map>

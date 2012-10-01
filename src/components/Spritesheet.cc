@@ -1,5 +1,5 @@
 #include "Spritesheet.h"
-#include "../Graphics.h"
+#include "../graphics/Graphics.h"
 /*--------------------------------------*/
 #include <string>
 #include <iostream>

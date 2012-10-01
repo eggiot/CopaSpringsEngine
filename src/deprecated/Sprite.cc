@@ -5,8 +5,8 @@
  *      Author: Eliot J. Walker
  *---------------------------------------*/
 #include "Sprite.h"
-#include "Spritesheet.h"
-#include "../Graphics.h"
+#include "../components/Spritesheet.h"
+#include "../graphics/Graphics.h"
 /*--------------------------------------*/
 
 /* TODO: This sprite class will eventually be replaced

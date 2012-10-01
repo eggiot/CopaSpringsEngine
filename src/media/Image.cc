@@ -11,7 +11,7 @@
 #include <iostream>
 /*--------------------------------------*/
 #include "Image.h"
-#include "Graphics.h"
+#include "../graphics/Graphics.h"
 /*--------------------------------------*/
 
 Graphics::Image::Image(std::string filename)

@@ -7,9 +7,9 @@
 #ifndef WORLD_H
 #define WORLD_H
 /*--------------------------------------*/
-#include "sprite/Sprite.h"
-#include "particle/Emitter.h"
-#include "Camera.h"
+#include "../deprecated/Sprite.h"
+#include "../components/Emitter.h"
+#include "../components/Camera.h"
 /*--------------------------------------*/
 #include <vector>
 /*--------------------------------------*/

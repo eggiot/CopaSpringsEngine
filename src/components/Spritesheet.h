@@ -7,8 +7,8 @@
 #ifndef SPRITESHEET_H
 #define SPRITESHEET_H
 /*--------------------------------------*/
-#include "../Image.h"
-#include "../Graphics.h"
+#include "../media/Image.h"
+#include "../graphics/Graphics.h"
 /*--------------------------------------*/
 #include <string>
 #include <vector>
