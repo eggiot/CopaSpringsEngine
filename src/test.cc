@@ -17,7 +17,7 @@
 #include <boost/shared_ptr.hpp>
 /*--------------------------------------*/
 
-#define RUN_TIME 10000
+#define RUN_TIME 1000
 
 void testParticleEngineAndLayers()
 {
@@ -31,23 +31,23 @@ void testParticleEngineAndLayers()
     engine.setFramerate(framerate);
 
     // initialise two emitters
-    Emitter smoke("test/smoke_emitter.config");
+    Emitter smoke("media/smoke_emitter.config");
 
-    Emitter rain("test/rain.png", 1, 10, 100, 100, 10000, -1000, 1000, viewport_height, viewport_height,
+    Emitter rain("media/rain.png", 1, 10, 100, 100, 10000, -1000, 1000, viewport_height, viewport_height,
                  -0.001, -0.001, -0.03, -0.03, 0.0, 0.0, 0.0, 0.0, 0.001, 0.004,
                  15.0f/(float)window_width, 15.0f/(float)window_width,
                  0.0, 0.0, 15.0f/(float)window_width, 15.0f/(float)window_width,
                  0.0, 0.0);
 
     // initialise two sprites
-    Spritesheet man_sheet("test/spritesheet.png", 4, 4, 6, 13, false);
+    Spritesheet man_sheet("media/spritesheet.png", 4, 4, 6, 13, false);
     Sprite man(man_sheet, 5, 0, 2.0, 2.0);
     man.setVelocity(-0.3, 0);
 
-    Spritesheet block_sheet("test/spritesheet-blocks.png", 4, 2, 1, 8, true);
+    Spritesheet block_sheet("media/spritesheet-blocks.png", 4, 2, 1, 8, true);
     Sprite blocks(block_sheet, 5, 0, 1, 1);
 
-    Spritesheet chimney_sheet("test/chimney.png", 1, 1, 1, 1, false);
+    Spritesheet chimney_sheet("media/chimney.png", 1, 1, 1, 1, false);
     Sprite chimney(chimney_sheet, 7, 0.0, 1.0, 1.0);
 
     World world;
