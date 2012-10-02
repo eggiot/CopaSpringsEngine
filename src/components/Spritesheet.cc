@@ -6,7 +6,8 @@
 #include <vector>
 /*--------------------------------------*/
 
-Spritesheet::Spritesheet(std::string filename, int num_columns, int num_rows, int first, int last, bool ping_pong)
+Spritesheet::Spritesheet(std::string filename, int num_columns, int num_rows,
+			 int first, int last, bool ping_pong)
 {
     // initialise some member variables
     image_.load(filename);

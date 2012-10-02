@@ -121,7 +121,7 @@ void testGameObjects()
 
 int main()
 {
-    //testParticleEngineAndLayers();
-    testGameObjects();
+    testParticleEngineAndLayers();
+    //testGameObjects();
     return 0;
 }

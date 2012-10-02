@@ -58,26 +58,7 @@ void Graphics::initGL(int window_width, int window_height,
 
 void Graphics::drawTexQuad(GLuint texture, float x, float y, float width, float height)
 {
-    GLfloat vertices[4*2] = {0.0, 0.0,
-                            width, 0.0,
-                            width, height,
-                            0.0, height};
-
-    GLfloat texcoords[4 * 2] = {0.0, 0.0,
-                                1.0, 0.0,
-                                1.0, 1.0,
-                                0.0, 1.0};
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glPushMatrix();
-    glTranslatef(x, y, 0.0);
-
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glEnableClientState(GL_VERTEX_ARRAY);
-
-    glTexCoordPointer(2, GL_FLOAT, 0, texcoords);
-    glVertexPointer(2, GL_FLOAT, 0, vertices);
-    glDrawArrays(GL_QUADS, 0, 4);
-    glPopMatrix();
+    Graphics::drawSubTexQuad(texture, x, y, width, height, 0.0, 0.0, 1.0, 1.0);
 }
 
 void Graphics::drawSubTexQuad(GLuint texture, float x, float y,
