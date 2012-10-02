@@ -33,17 +33,16 @@ void GameObject::setID(const GameObject::gameobject_id_t& id)
     id_ = id;
 }
 
-boost::shared_ptr<Component> GameObject::getComponent(const Component::component_id_t& family_id)
+Component* GameObject::getComponent(const Component::component_id_t& family_id)
 {
     component_table_t::iterator component = components_.find(family_id);
     if(component == components_.end())
     {
-        boost::shared_ptr<Component> null_component;
-        return null_component;
+        return NULL;
     }
     else
     {
-        return component->second;
+    	return component->second;
     }
 }
 
@@ -51,7 +50,7 @@ void GameObject::setComponent(Component* new_component)
 {
     Component::component_id_t id = new_component->family_id;
     new_component->setOwnerObject(boost::shared_ptr<GameObject>(this));
-    components_[id] = boost::shared_ptr<Component> (new_component);
+    components_.insert(id, new_component);
 }
 void GameObject::clearComponents()
 {

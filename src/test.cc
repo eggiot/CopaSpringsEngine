@@ -54,6 +54,7 @@ void testParticleEngineAndLayers()
     world.addSprite(blocks);
     world.addSprite(chimney);
     world.addEmitter(smoke);
+
     for (int i = 0; i > -1000; i -= 2)
     {
         Sprite block_post(block_sheet, i, 0, 1, 1);
@@ -87,21 +88,21 @@ public:
 
 void testGameObjects()
 {
-    GameObject go("test_game_object");
+    GameObject* go = new GameObject("test_game_object");
     Graphics::Quad quad;
     quad.x = 1; quad.y = 1; quad. width = 1; quad.height = 1; quad.rotation = 0;
     quad.ux = 0; quad.uy = 0; quad.uwidth = 1; quad.uheight = 1;
-    go.setQuad(quad);
+    go->setQuad(quad);
     RenderComponent* gc = new RenderComponent();
-    go.setComponent(gc);
+    go->setComponent(gc);
 
-    boost::shared_ptr<Component> gcd = go.getComponent(gc->family_id);
-    boost::shared_ptr<RenderComponent> testgcd = boost::static_pointer_cast<RenderComponent>(gcd);
+    Component* gcd = go->getComponent(gc->family_id);
+    RenderComponent* testgcd = static_cast<RenderComponent*>(gcd);
 
     if (gcd)
     {
         std::cout << "Got something" << std::endl;
-        if (gc == gcd.get())
+        if (gc == gcd)
         {
             std::cout << "gc == gcd" << std::endl;
             gcd->update();
@@ -120,7 +121,7 @@ void testGameObjects()
 
 int main()
 {
-    testParticleEngineAndLayers();
-    //testGameObjects();
+    //testParticleEngineAndLayers();
+    testGameObjects();
     return 0;
 }

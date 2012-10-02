@@ -13,13 +13,18 @@
 #include <map>
 #include <iostream>
 #include <boost/shared_ptr.hpp>
+#include <boost/ptr_container/ptr_map.hpp>
 /*---------------------------------------*/
 
+// forward declaration of GameObject
 class GameObject;
 
+/* a component is a (theoretically) self-contained unit that provides some sort of
+   functionality when added to a game object (e.g. physics / renderer / input components */
 class Component
 {
 protected:
+	// a shared pointer to the GameObject that owns the component
     boost::shared_ptr<GameObject> owner_object_;
 public:
     typedef std::string component_id_t;
@@ -41,15 +46,25 @@ public:
 class GameObject
 {
 public:
+	// declare types
     typedef std::string gameobject_id_t;
-    typedef std::map< Component::component_id_t, boost::shared_ptr<Component> > component_table_t;
+    typedef boost::ptr_map< Component::component_id_t, Component> component_table_t;
+
+    // constructor
     GameObject(const gameobject_id_t& id);
+
+    // the object's unique id
     gameobject_id_t id_;
+
+    // get the quad for graphics
+    // TODO: Quads should only contain position and width data and should be renamed to Transforms
     const Graphics::Quad& getQuad();
     void setQuad(const Graphics::Quad& quad);
+
+    // get the id
     const gameobject_id_t& getID();
     void setID(const gameobject_id_t& id);
-    boost::shared_ptr<Component> getComponent(const Component::component_id_t& family_id);
+    Component* getComponent(const Component::component_id_t& family_id);
     void setComponent(Component* new_component);
     void clearComponents();
 protected:
