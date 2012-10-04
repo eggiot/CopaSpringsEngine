@@ -15,8 +15,7 @@
 
 void World::addGameObject(GameObject* game_object)
 {
-    boost::shared_ptr<GameObject> new_go(game_object);
-    game_objects_.push_back(new_go);
+    game_objects_.push_back(game_object->shared_this_);
 }
 
 void World::addEmitter(Emitter emitter)

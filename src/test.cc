@@ -87,16 +87,17 @@ void testGameObjects()
     GameObject* go = new GameObject("test_game_object");
     
     // set transform
-    go->setTransform(1.0, 1.0, 1.0, 1.0, 0.0);
+    go->setTransform(1.0, 1.0, 2.0, 2.0, 0.0);
+    Spritesheet* gc = new Spritesheet("media/spritesheet.png", 4, 4, 6, 13, false);
     
     // add a render component to the GameObject
-    go->setComponent(new Spritesheet("media/spritesheet.png", 4, 4, 6, 13, false));
+    go->setComponent(gc);
     
     World world;
     world.addGameObject(go);
     
     engine.setWorld(world);
-
+    
     while(SDL_GetTicks() < RUN_TIME)
     {
         engine.update();

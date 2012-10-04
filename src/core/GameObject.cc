@@ -10,6 +10,7 @@
 
 GameObject::GameObject(const gameobject_id_t& id)
 {
+    shared_this_ = boost::shared_ptr<GameObject>(this);
     id_ = id;
 }
 
@@ -53,9 +54,10 @@ Component* GameObject::getComponent(const Component::component_id_t& family_id)
 void GameObject::setComponent(Component* new_component)
 {
     Component::component_id_t id = new_component->family_id;
-    new_component->setOwnerObject(boost::shared_ptr<GameObject>(this));
+    new_component->setOwnerObject(shared_this_);
     components_.insert(id, new_component);
 }
+
 void GameObject::clearComponents()
 {
     components_.clear();

@@ -87,9 +87,11 @@ public:
     const Graphics::Quad& getQuad();
     const gameobject_id_t& getID();
     Component* getComponent(const Component::component_id_t& family_id);
+    boost::shared_ptr<GameObject> shared_this_;
 protected:
     Graphics::Quad quad_;
     component_table_t components_;
+    
 };
 
 /*---------------------------------------*/
