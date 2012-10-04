@@ -7,28 +7,27 @@
 #ifndef WORLD_H
 #define WORLD_H
 /*--------------------------------------*/
-#include "../deprecated/Sprite.h"
+#include "GameObject.h"
 #include "../components/Emitter.h"
 #include "../components/Camera.h"
 /*--------------------------------------*/
 #include <vector>
+#include <boost/shared_ptr.hpp>
 /*--------------------------------------*/
 
 class World
 {
-private:
-    std::vector<Sprite> sprites_;
-    std::vector<Emitter> emitters_;
-    bool camera_follows_;
-    Sprite central_sprite_;
 public:
-    World();
-    void addSprite(Sprite sprite);
-    void addCentralSprite(Sprite sprite, float x_offset_, float y_offset);
+    typedef std::vector < boost::shared_ptr<GameObject> > govec_t;
+    World() {}
+    void addGameObject(GameObject* game_object);
     void addEmitter(Emitter emitter);
     void update();
-    void draw();
+    void run();
     int i;
+private:
+    govec_t game_objects_;
+    std::vector<Emitter> emitters_;
 };
 
 /*--------------------------------------*/

@@ -28,7 +28,7 @@ public:
     void initGraphics(float viewport_width, float viewport_height);
     void setFramerate(int msecs);
     void update();
-    void draw();
+    void run();
 };
 
 /*--------------------------------------*/

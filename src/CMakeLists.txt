@@ -1,6 +1,5 @@
 add_subdirectory(components)
 add_subdirectory(core)
-add_subdirectory(deprecated)
 add_subdirectory(graphics)
 add_subdirectory(media)
 add_subdirectory(types)

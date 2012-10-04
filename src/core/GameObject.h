@@ -24,7 +24,6 @@ class GameObject;
 class Component
 {
 protected:
-	// a shared pointer to the GameObject that owns the component
     boost::shared_ptr<GameObject> owner_object_;
 public:
     typedef std::string component_id_t;
@@ -32,17 +31,31 @@ public:
     Component(component_id_t family_id);
     virtual ~Component() {}
 
+    // a unique id referring to this component instance
     component_id_t component_id;
+    
+    /* an id referring to the type of this component
+       (e.g. render_component, ai_component, etc.).
+       Each GameObject can only have one component
+       from each family. */
     component_id_t family_id;
 
+    /* the update function is internal (i.e. it only
+       updates this component. */
     virtual void update() {}
 
+    /* the run() function is external. It updates things
+       outside of this component (the owner object,
+       OpenGL buffers, etc.) */
+    virtual void run() {}
+
+    // assignment functions
     void setOwnerObject(boost::shared_ptr<GameObject> game_object);
+    
+    // query functions
     boost::shared_ptr<GameObject> getOwnerObject();
 };
 
-//TODO: Possibly replace the map of boost::shared_ptr<T>s with a
-// boost::ptr_multimap - this would be more efficient
 class GameObject
 {
 public:
@@ -55,18 +68,25 @@ public:
 
     // the object's unique id
     gameobject_id_t id_;
+    
+    void update();
+    void run();
+    
+    // remove all the GameObject's components
+    void clearComponents();
 
-    // get the quad for graphics
+    // assignment functions
+    void setID(const gameobject_id_t& id);
+    void setComponent(Component* new_component);
+    void setTransform(float x, float y,
+                      float width, float height,
+                      float rotation);
+
+    // query functions
     // TODO: Quads should only contain position and width data and should be renamed to Transforms
     const Graphics::Quad& getQuad();
-    void setQuad(const Graphics::Quad& quad);
-
-    // get the id
     const gameobject_id_t& getID();
-    void setID(const gameobject_id_t& id);
     Component* getComponent(const Component::component_id_t& family_id);
-    void setComponent(Component* new_component);
-    void clearComponents();
 protected:
     Graphics::Quad quad_;
     component_table_t components_;

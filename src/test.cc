@@ -4,21 +4,21 @@
  *  Created on: 16 Aug 2011
  *      Author: Eliot J. Walker
  ---------------------------------------*/
-#include "deprecated/Sprite.h"
 #include "components/Emitter.h"
 #include "components/Camera.h"
 #include "core/Engine.h"
 #include "core/World.h"
 #include "core/GameObject.h"
 #include "media/Audio.h"
+#include "components/Spritesheet.h"
 /*--------------------------------------*/
 #include <iostream>
 #include <GL/gl.h>
 #include <boost/shared_ptr.hpp>
 /*--------------------------------------*/
 
-#define RUN_TIME 1000
-
+#define RUN_TIME 10000
+/*
 void testParticleEngineAndLayers()
 {
     int window_width = 900; int window_height = 400;
@@ -71,57 +71,42 @@ void testParticleEngineAndLayers()
         engine.draw();
     }
 }
-
-class RenderComponent : public Component
-{
-public:
-    void update()
-    {
-        std::cout << "Updating TestComponent" << std::endl;
-    }
-
-    void render()
-    {
-        std::cout << "Rendering" << std::endl;
-    }
-};
+*/
 
 void testGameObjects()
 {
+    int window_width = 900; int window_height = 400;
+    float viewport_width = 4.0; float viewport_height = 4.0;
+    int framerate = 40;
+    Engine engine;
+    engine.initWindow(window_width, window_height, "Test");
+    engine.initGraphics(viewport_width, viewport_height);
+    engine.setFramerate(framerate);
+    
+    // create GameObject
     GameObject* go = new GameObject("test_game_object");
-    Graphics::Quad quad;
-    quad.x = 1; quad.y = 1; quad. width = 1; quad.height = 1; quad.rotation = 0;
-    quad.ux = 0; quad.uy = 0; quad.uwidth = 1; quad.uheight = 1;
-    go->setQuad(quad);
-    RenderComponent* gc = new RenderComponent();
-    go->setComponent(gc);
+    
+    // set transform
+    go->setTransform(1.0, 1.0, 1.0, 1.0, 0.0);
+    
+    // add a render component to the GameObject
+    go->setComponent(new Spritesheet("media/spritesheet.png", 4, 4, 6, 13, false));
+    
+    World world;
+    world.addGameObject(go);
+    
+    engine.setWorld(world);
 
-    Component* gcd = go->getComponent(gc->family_id);
-    RenderComponent* testgcd = static_cast<RenderComponent*>(gcd);
-
-    if (gcd)
+    while(SDL_GetTicks() < RUN_TIME)
     {
-        std::cout << "Got something" << std::endl;
-        if (gc == gcd)
-        {
-            std::cout << "gc == gcd" << std::endl;
-            gcd->update();
-            testgcd->render();
-        }
-        else
-        {
-            std::cout << "gc != gcd" << std::endl;
-        }
-    }
-    else
-    {
-        std::cout << "Didn't get anything" << std::endl;
+        engine.update();
+        engine.run();
     }
 }
 
 int main()
 {
-    testParticleEngineAndLayers();
-    //testGameObjects();
+    //testParticleEngineAndLayers();
+    testGameObjects();
     return 0;
 }

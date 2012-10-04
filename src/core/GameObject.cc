@@ -18,9 +18,13 @@ const Graphics::Quad& GameObject::getQuad()
     return quad_;
 }
 
-void GameObject::setQuad(const Graphics::Quad& quad)
+void GameObject::setTransform(float x, float y,
+                              float width, float height,
+                              float rotation)
 {
-    quad_ = quad;
+    quad_.x = x; quad_.y = y;
+    quad_.width = width; quad_.height = height;
+    quad_.rotation = rotation;
 }
 
 const GameObject::gameobject_id_t& GameObject::getID()
@@ -56,6 +60,25 @@ void GameObject::clearComponents()
 {
     components_.clear();
 }
+
+void GameObject::update()
+{
+    for(component_table_t::iterator component = components_.begin();
+        component != components_.end(); ++component)
+    {
+        component->second->update();
+    }
+}
+
+void GameObject::run()
+{
+    for(component_table_t::iterator component = components_.begin();
+        component != components_.end(); ++component)
+    {
+        component->second->run();
+    }
+}
+
 
 Component::Component(Component::component_id_t family_id)
 {

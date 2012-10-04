@@ -6,30 +6,6 @@
 #include <vector>
 /*--------------------------------------*/
 
-Spritesheet::Spritesheet(std::string filename, int num_columns, int num_rows,
-			 int first, int last, bool ping_pong)
-{
-    // initialise some member variables
-    image_.load(filename);
-    num_columns_ = num_columns;
-    num_rows_ = num_rows;
-    ping_pong_ = ping_pong;
-    first_ = first;
-    last_ = last;
-    forwards_ = true;
-
-    // calculate how much of the image each sprite occupies
-    float subimage_width = (float)image_.getWidth() / (float)num_columns_;
-    float subimage_height = (float)image_.getHeight() / (float)num_rows_;
-
-    // calculate how much of the texture each sprite occupies
-    tex_width_ = subimage_width / image_.getWidth();
-    tex_height_ = subimage_height / image_.getHeight();
-
-    // finally, move to the first sprite
-    goToSprite(first_);
-}
-
 void Spritesheet::goToSprite(int sprite)
 {
     // go through all the rows
@@ -105,32 +81,18 @@ void Spritesheet::update()
     }
 }
 
-// get texcoord arrays
-Graphics::TexCoord Spritesheet::getTexCoords()
-{
-    Graphics::TexCoord tex_coords;
-
-    // set which part of the texture we're going to display
-    float tex_x = tex_width_ * (float)(current_column_ - 1);
-    float tex_y = 1.0f - tex_height_ * (float)(current_row_ - 1) - tex_height_;
-
-    tex_coords.x = tex_x;
-    tex_coords.y = tex_y;
-    tex_coords.height = tex_height_;
-    tex_coords.width = tex_width_;
-    return tex_coords;
-}
-
-
-// immediate mode draw
-void Spritesheet::draw(float x, float y, float width, float height)
+void Spritesheet::run()
 {
     // set which part of the texture we're going to display
     float tex_x = tex_width_ * (float)(current_column_ - 1);
     float tex_y = 1.0f - tex_height_ * (float)(current_row_ - 1) - tex_height_;
 
+    Graphics::Quad quad = owner_object_->getQuad();
+    
     // draw the sprite
-    Graphics::drawSubTexQuad(image_.getTexture(), x, y, width, height,
-                                  tex_x, tex_y, tex_width_, tex_height_);
+    Graphics::drawSubTexQuad(image_.getTexture(), quad.x, quad.y,
+                             quad.width, quad.height,
+                             tex_x, tex_y,
+                             tex_width_, tex_height_);
 }
 

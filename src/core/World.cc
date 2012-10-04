@@ -5,28 +5,18 @@
  *      Author: Eliot J. Walker
  *---------------------------------------*/
  #include "World.h"
- #include "../deprecated/Sprite.h"
  #include "../components/Emitter.h"
  /*--------------------------------------*/
  #include <vector>
+ #include <boost/shared_ptr.hpp>
  /*--------------------------------------*/
  #include <GL/gl.h>
  /*--------------------------------------*/
 
-World::World()
+void World::addGameObject(GameObject* game_object)
 {
-    camera_follows_ = false;
-}
-
-void World::addSprite(Sprite sprite)
-{
-    sprites_.push_back(sprite);
-}
-
-void World::addCentralSprite(Sprite sprite, float x_offset, float y_offset)
-{
-    central_sprite_ = sprite;
-    camera_follows_ = true;
+    boost::shared_ptr<GameObject> new_go(game_object);
+    game_objects_.push_back(new_go);
 }
 
 void World::addEmitter(Emitter emitter)
@@ -36,11 +26,11 @@ void World::addEmitter(Emitter emitter)
 
 void World::update()
 {
-    // update sprites
-    for(std::vector<Sprite>::iterator current_sprite = sprites_.begin();
-    current_sprite != sprites_.end(); ++current_sprite)
+    // update game objects
+    for(govec_t::iterator current_go = game_objects_.begin();
+    current_go != game_objects_.end(); ++current_go)
     {
-        current_sprite->update();
+        current_go->get()->update();
     }
 
     // update emitters
@@ -49,16 +39,9 @@ void World::update()
     {
         current_emitter->update();
     }
-
-    // update camera, moving it to the central sprite if camera_follows_
-    if(camera_follows_)
-    {
-        central_sprite_.update();
-        cameraLookAt(central_sprite_.getX(), central_sprite_.getY());
-    }
 }
 
-void World::draw()
+void World::run()
 {
     glClear(GL_COLOR_BUFFER_BIT);
     // draw emitters
@@ -68,15 +51,10 @@ void World::draw()
         current_emitter->draw();
     }
 
-    for(std::vector<Sprite>::iterator current_sprite = sprites_.begin();
-    current_sprite != sprites_.end(); ++current_sprite)
+    for(govec_t::iterator current_go = game_objects_.begin();
+    current_go != game_objects_.end(); ++current_go)
     {
-        current_sprite->draw();
-    }
-
-    if (camera_follows_)
-    {
-        central_sprite_.draw();
+        current_go->get()->run();
     }
 
     SDL_GL_SwapBuffers();

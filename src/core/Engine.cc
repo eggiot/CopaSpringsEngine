@@ -46,8 +46,8 @@ void Engine::update()
     world_->update();
 }
 
-void Engine::draw()
+void Engine::run()
 {
-    world_->draw();
+    world_->run();
     window_.sleep(framerate_);
 }

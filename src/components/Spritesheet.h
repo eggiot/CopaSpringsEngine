@@ -9,6 +9,7 @@
 /*--------------------------------------*/
 #include "../media/Image.h"
 #include "../graphics/Graphics.h"
+#include "../core/GameObject.h"
 /*--------------------------------------*/
 #include <string>
 #include <vector>
@@ -23,8 +24,38 @@ If the spritesheet is set to ping pong it moves
 forwards through the range and then backwards; if not, it only
 moves forwards, jumping back to the beginning when it reaches the
 last sprite. */
-class Spritesheet
+class Spritesheet : public Component
 {
+    public:
+    /*Loads an image from filename and sets a number of parameters*/
+    Spritesheet(std::string filename, int num_columns, int num_rows, int first, int last, bool ping_pong) : Component("render_component")
+    {
+        // initialise some member variables
+        image_.load(filename);
+        num_columns_ = num_columns;
+        num_rows_ = num_rows;
+        ping_pong_ = ping_pong;
+        first_ = first;
+        last_ = last;
+        forwards_ = true;
+
+        // calculate how much of the image each sprite occupies
+        float subimage_width = (float)image_.getWidth() / (float)num_columns_;
+        float subimage_height = (float)image_.getHeight() / (float)num_rows_;
+
+        // calculate how much of the texture each sprite occupies
+        tex_width_ = subimage_width / image_.getWidth();
+        tex_height_ = subimage_height / image_.getHeight();
+
+        // finally, move to the first sprite
+        goToSprite(first_);
+    }
+
+    // updates the location of the next sprite to display from the spritesheet
+    void update();
+
+    // draws the current sprite
+    void run();
 private:
     // the range of sprites we want to display
     int first_, last_;
@@ -52,22 +83,6 @@ private:
 
     // Move to a sprite within the spritesheet
     void goToSprite(int sprite);
-public:
-
-    // the default constructor doesn't do anything
-    Spritesheet() {}
-
-    /*Loads an image from filename and sets a number of parameters*/
-    Spritesheet(std::string filename, int num_columns, int num_rows, int first, int last, bool ping_pong);
-
-    // updates the location of the next sprite to display from the spritesheet
-    void update();
-
-    // get the texture coordinates of the spritesheet
-    Graphics::TexCoord getTexCoords();
-
-    // draws the current sprite in immediate mode
-    void draw(float x, float y, float width, float height);
 };
 
 /*--------------------------------------*/
