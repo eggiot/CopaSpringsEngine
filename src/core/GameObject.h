@@ -29,7 +29,7 @@ public:
     typedef std::string component_id_t;
     Component() {}// : owner_object_(NULL) {}
     Component(component_id_t family_id);
-    virtual ~Component() {}
+    //virtual ~Component() {}
 
     // a unique id referring to this component instance
     component_id_t component_id;
@@ -65,6 +65,9 @@ public:
 
     // constructor
     GameObject(const gameobject_id_t& id);
+    
+    // destructor
+    ~GameObject();
 
     // the object's unique id
     gameobject_id_t id_;
@@ -77,7 +80,7 @@ public:
 
     // assignment functions
     void setID(const gameobject_id_t& id);
-    void setComponent(Component* new_component);
+    void addComponent(Component* new_component);
     void setTransform(float x, float y,
                       float width, float height,
                       float rotation);

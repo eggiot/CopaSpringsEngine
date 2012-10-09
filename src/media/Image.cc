@@ -19,6 +19,13 @@ Graphics::Image::Image(std::string filename)
     this->load(filename);
 }
 
+Graphics::Image::~Image()
+{
+    std::cout << "Destroying image" << std::endl;
+    delete image_data_;
+    image_data_ = NULL;
+}
+
 void Graphics::Image::load(std::string filename)
 {
     fipImage fip_image_data;

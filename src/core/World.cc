@@ -13,9 +13,10 @@
  #include <GL/gl.h>
  /*--------------------------------------*/
 
-void World::addGameObject(GameObject* game_object)
+void World::addGameObject(boost::shared_ptr<GameObject> game_object)
 {
-    game_objects_.push_back(game_object->shared_this_);
+    std::cout << "Adding GameObject to world." << std::endl;
+    game_objects_.push_back(game_object);
 }
 
 void World::addEmitter(Emitter emitter)

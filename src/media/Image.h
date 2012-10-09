@@ -25,7 +25,7 @@ public:
     // constructors
     Image() { }
     Image(std::string filename);
-    //~Image();
+    ~Image();
     // load an image from a filename
     void load(std::string filename);
     char* getPixels();

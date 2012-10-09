@@ -6,6 +6,7 @@
  *---------------------------------------*/
 #include "Engine.h"
 #include "../components/Camera.h"
+#include "SDL/SDL.h"
 /*--------------------------------------*/
 #include <iostream>
 /*--------------------------------------*/
@@ -18,6 +19,7 @@ Engine::Engine()
 Engine::~Engine()
 {
     world_ = NULL;
+    SDL_Quit();
 }
 
 void Engine::initWindow(int width, int height, std::string title)

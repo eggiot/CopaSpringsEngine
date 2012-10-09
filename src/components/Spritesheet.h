@@ -29,7 +29,7 @@ class Spritesheet : public Component
     public:
     /*Loads an image from filename and sets a number of parameters*/
     Spritesheet(std::string filename, int num_columns, int num_rows, int first, int last, bool ping_pong) : Component("render_component")
-    {
+    {        
         // initialise some member variables
         image_.load(filename);
         num_columns_ = num_columns;

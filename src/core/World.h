@@ -12,6 +12,7 @@
 #include "../components/Camera.h"
 /*--------------------------------------*/
 #include <vector>
+#include <memory>
 #include <boost/shared_ptr.hpp>
 /*--------------------------------------*/
 
@@ -20,7 +21,7 @@ class World
 public:
     typedef std::vector < boost::shared_ptr<GameObject> > govec_t;
     World() {}
-    void addGameObject(GameObject* game_object);
+    void addGameObject(boost::shared_ptr<GameObject> game_object);
     void addEmitter(Emitter emitter);
     void update();
     void run();
