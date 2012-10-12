@@ -7,6 +7,7 @@
 #include "Engine.h"
 #include "../components/Camera.h"
 #include "SDL/SDL.h"
+#include "../graphics/Graphics.h"
 /*--------------------------------------*/
 #include <iostream>
 /*--------------------------------------*/
@@ -30,6 +31,19 @@ void Engine::initWindow(int width, int height, std::string title)
 void Engine::initGraphics(float viewport_width, float viewport_height)
 {
     window_.initGraphics(viewport_width, viewport_height);
+}
+
+void Engine::enable(CSEngineFeature feature)
+{
+    switch(feature)
+    {
+        case CS_TRANSPARENCY:
+            Graphics::setGLBlend(CS_BLEND_SRC_OVER_DST);
+            break;
+        default:
+            break;
+    }
+
 }
 
 void Engine::setFramerate(int msecs)

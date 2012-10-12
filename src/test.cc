@@ -13,7 +13,6 @@
 #include "components/Spritesheet.h"
 /*--------------------------------------*/
 #include <iostream>
-#include <GL/gl.h>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 /*--------------------------------------*/
@@ -52,6 +51,8 @@ void testGameObjects()
     Engine engine;
     engine.initWindow(window_width, window_height, "Game Object Test");
     engine.initGraphics(viewport_width, viewport_height);
+    //engine.enable(CS_TRANSPARENCY);
+    Graphics::setGLBlend(CS_BLEND_SRC_INTO_DST);
     engine.setFramerate(framerate);
     
     World world;

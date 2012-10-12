@@ -14,6 +14,11 @@
 #include <string>
 /*--------------------------------------*/
 
+enum CSEngineFeature {
+    CS_TEXTURING = 0,
+    CS_TRANSPARENCY = 1
+};
+
 class Engine
 {
 private:
@@ -26,6 +31,7 @@ public:
     void setWorld(World& world);
     void initWindow(int width, int height, std::string title);
     void initGraphics(float viewport_width, float viewport_height);
+    void enable(CSEngineFeature feature);
     void setFramerate(int msecs);
     void update();
     void run();

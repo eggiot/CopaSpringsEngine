@@ -3,7 +3,7 @@
  *
  *  Created on: 21 Aug 2011
  *      Author: Eliot J. Walker
-
+8
  * based on:
  *  oglutils.cc
  *
@@ -19,6 +19,36 @@
 #include <iostream>
 /*--------------------------------------*/
 
+void Graphics::setGLBlend(CSBlendState state)
+{
+    switch(state)
+    {
+        case CS_BLEND_OFF:
+            glBlendFunc(GL_ONE, GL_ZERO);
+            glDisable(GL_BLEND);
+            break;
+        case CS_BLEND_ZERO_OVER_DST:
+            glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_BLEND);
+            break;
+        case CS_BLEND_SRC_INTO_DST:
+            glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_BLEND);
+            break;
+        case CS_BLEND_SRC_OVER_DST: default:
+            glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_BLEND);
+            break;
+    }
+}
+
+void Graphics::lookAt(float x, float y)
+{
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glTranslatef(-x, -y, 0.0);
+}
+
 // initialise OpenGL
 // TODO: Put this somewhere else - possibly in Engine class
 void Graphics::initGL(int window_width, int window_height,
@@ -28,8 +58,8 @@ void Graphics::initGL(int window_width, int window_height,
     glEnable(GL_TEXTURE_2D);
 
     // enable blending
-    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_BLEND);
+    setGLBlend(CS_BLEND_SRC_OVER_DST);
+    
     glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 
@@ -43,17 +73,15 @@ void Graphics::initGL(int window_width, int window_height,
     float aspect = (float)window_width / (float)window_height;
     gluOrtho2D(0.0, aspect*viewport_width, 0.0, viewport_height); //orthographic projection
 
-    // edit the model-view matrix
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity(); // clear
+    // sets GL_MODELVIEW and clears it
+    Graphics::lookAt(0.0, 0.0);
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(1.0f, 0.4f, 0.1f, 1.0f);
     glViewport(0, 0, window_width, window_height);
     glClear(GL_COLOR_BUFFER_BIT);
     glColor4f(1.0f,1.0f,1.0f, 1.0f);
-    glTranslatef(0.0f,0.0f,0.0f);
 }
 
 void Graphics::drawTexQuad(GLuint texture, float x, float y, float width, float height)

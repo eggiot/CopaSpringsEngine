@@ -6,12 +6,10 @@
  *---------------------------------------*/
  #include "Camera.h"
  /*--------------------------------------*/
- #include <GL/gl.h>
+ #include "../graphics/Graphics.h"
  /*--------------------------------------*/
 
 void cameraLookAt(float x, float y)
 {
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glTranslatef(-x, -y, 0.0);
+    Graphics::lookAt(x, y);
 }
